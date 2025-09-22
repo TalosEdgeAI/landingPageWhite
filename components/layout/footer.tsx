@@ -38,6 +38,16 @@ export function Footer() {
                   Consultoria em IA
                 </Link>
               </li>
+              <li>
+                <Link href="/servicos" className="hover:text-gray-900 transition-colors">
+                  Chatbots
+                </Link>
+              </li>
+              <li>
+                <Link href="/servicos" className="hover:text-gray-900 transition-colors">
+                  Automação & n8n
+                </Link>
+              </li>
             </ul>
           </div>
           <div>
@@ -68,15 +78,15 @@ export function Footer() {
           <div>
             <h4 className="font-normal text-gray-900 mb-6 text-lg">Contato</h4>
             <ul className="space-y-3 text-gray-600 font-light">
-              <li className="hover:text-gray-900 transition-colors">contato@aiboutique.com.br</li>
-              <li className="hover:text-gray-900 transition-colors">+55 (11) 9999-9999</li>
-              <li className="hover:text-gray-900 transition-colors">São Paulo, SP</li>
+              <li className="hover:text-gray-900 transition-colors">contato@talosai.com.br</li>
+              <li className="hover:text-gray-900 transition-colors">+55 (53) 9995-1170</li>
+              <li className="hover:text-gray-900 transition-colors">Pelotas, RS</li>
             </ul>
           </div>
         </div>
         <div className="border-t border-gray-100 mt-12 pt-8 text-center">
           <p className="text-gray-500 font-light">
-            &copy; 2024 AI Boutique. Todos os direitos reservados. Construindo o futuro com IA.
+            &copy; 2025 Talos AI. Todos os direitos reservados. Construindo o futuro com IA.
           </p>
         </div>
       </div>

@@ -1,52 +1,56 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Brain, Eye, Cpu, ArrowRight, CheckCircle, Star, Users, Award, Sparkles, Zap, Target } from "lucide-react"
+import Image from "next/image"
+
 
 export default function AIBoutiqueLanding() {
   return (
     <div className="min-h-screen bg-white text-gray-900 overflow-hidden">
       <header className="border-b border-gray-100 bg-white/80 backdrop-blur-xl supports-[backdrop-filter]:bg-white/60 sticky top-0 z-50">
         <div className="container mx-auto px-4 py-6 flex items-center justify-between">
-          <div className="flex items-center space-x-3">
-            <div className="relative">
-              <Brain className="h-10 w-10 text-gray-800" />
-              <div className="absolute -top-1 -right-1 w-3 h-3 bg-gray-400 rounded-full"></div>
-            </div>
-            <span className="text-2xl font-light text-gray-900">Talos</span>
+            <div className="flex items-center">
+            <Image
+              src="/talosnobg.png" // coloca o logo na pasta public/
+              alt="Talos Logo"
+              width={100}
+              height={65}
+              className="object-contain"
+            />
           </div>
           <nav className="hidden md:flex items-center space-x-12">
             <a
               href="/sobre"
-              className="text-gray-600 hover:text-gray-900 transition-all duration-300 font-normal text-sm tracking-wide"
+              className="text-gray-600 hover:text-gray-900 transition-all duration-300 font-normal text-lg tracking-wide"
             >
               Sobre
             </a>
             <a
               href="/servicos"
-              className="text-gray-600 hover:text-gray-900 transition-all duration-300 font-normal text-sm tracking-wide"
+              className="text-gray-600 hover:text-gray-900 transition-all duration-300 font-normal text-lg tracking-wide"
             >
               Serviços
             </a>
             <a
               href="/casos"
-              className="text-gray-600 hover:text-gray-900 transition-all duration-300 font-normal text-sm tracking-wide"
+              className="text-gray-600 hover:text-gray-900 transition-all duration-300 font-normal text-lg tracking-wide"
             >
               Cases
             </a>
             <a
               href="/planos"
-              className="text-gray-600 hover:text-gray-900 transition-all duration-300 font-normal text-sm tracking-wide"
+              className="text-gray-600 hover:text-gray-900 transition-all duration-300 font-normal text-lg tracking-wide"
             >
               Planos
             </a>
             <a
               href="/contato"
-              className="text-gray-600 hover:text-gray-900 transition-all duration-300 font-normal text-sm tracking-wide"
+              className="text-gray-600 hover:text-gray-900 transition-all duration-300 font-normal text-lg tracking-wide"
             >
               Contato
             </a>
           </nav>
-          <Button className="bg-gray-900 hover:bg-gray-800 text-white border-0 px-6 py-3 rounded-full font-normal text-sm transition-all duration-300">
+          <Button className="bg-gray-900 hover:bg-gray-800 text-white border-0 px-6 py-3 rounded-full font-normal text-base transition-all duration-300">
             Começar Agora
             <ArrowRight className="ml-2 h-4 w-4" />
           </Button>
@@ -461,15 +465,15 @@ export default function AIBoutiqueLanding() {
             <div>
               <h4 className="font-normal text-gray-900 mb-6 text-lg">Contato</h4>
               <ul className="space-y-3 text-gray-600 font-light">
-                <li className="hover:text-gray-900 transition-colors">contato@aiboutique.com.br</li>
-                <li className="hover:text-gray-900 transition-colors">+55 (11) 9999-9999</li>
-                <li className="hover:text-gray-900 transition-colors">São Paulo, SP</li>
+                <li className="hover:text-gray-900 transition-colors">contato@talosai.com.br</li>
+                <li className="hover:text-gray-900 transition-colors">+55 (53) 9995-1170</li>
+                <li className="hover:text-gray-900 transition-colors">Pelotas, RS</li>
               </ul>
             </div>
           </div>
           <div className="border-t border-gray-100 mt-12 pt-8 text-center">
             <p className="text-gray-500 font-light">
-              &copy; 2024 AI Boutique. Todos os direitos reservados. Construindo o futuro com IA.
+              &copy; 2025 Talos AI. Todos os direitos reservados. Construindo o futuro com IA.
             </p>
           </div>
         </div>
