@@ -1,283 +1,129 @@
-import { Header } from "@/components/layout/header"
-import { Footer } from "@/components/layout/footer"
 import { Button } from "@/components/ui/button"
-import Link from 'next/link';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Brain, Users, Award, Target, Zap, ArrowRight, Sparkles, Trophy, Lightbulb, Rocket } from "lucide-react"
+import { Brain, ShieldCheck, TrendingUp, BookOpen, Microscope, GraduationCap } from "lucide-react"
+import Link from "next/link"
 
 export default function SobrePage() {
   return (
-    <div className="min-h-screen bg-white text-gray-900 overflow-hidden">
-      <Header />
-
+    <div className="flex flex-col w-full bg-white">
       {/* Hero Section */}
-      <section className="relative py-40 px-4 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-gray-50 to-white"></div>
-
-        <div className="container mx-auto text-center relative z-10">
-          <div className="inline-flex items-center space-x-2 bg-gray-100 rounded-full px-4 py-2 mb-12">
-            <Brain className="h-4 w-4 text-gray-500" />
-            <span className="text-sm font-normal text-gray-600 tracking-wide">Nossa História</span>
-          </div>
-
-          <h1 className="text-6xl md:text-8xl font-thin mb-12 leading-tight tracking-tight">
-            <span className="block text-gray-900">Pioneiros em</span>
-            <span className="block text-gray-400 font-extralight">Inteligência</span>
-            <span className="block text-gray-900">Artificial</span>
-          </h1>
-
-          <p className="text-xl md:text-2xl text-gray-500 mb-16 max-w-4xl mx-auto leading-relaxed font-light">
-            Desde 2025, transformamos dados em vantagem competitiva através de soluções de IA personalizadas que
-            revolucionam negócios e criam o futuro.
+      <section className="py-24 bg-slate-50 border-b border-slate-100">
+        <div className="container mx-auto px-4 text-center max-w-4xl">
+          <h1 className="text-sm font-bold uppercase tracking-[0.2em] text-primary mb-6 block">Nossa Origem & Propósito</h1>
+          <h2 className="text-4xl md:text-6xl font-bold text-slate-900 mb-8 tracking-tight">
+            Ciência de Dados com Rigor Acadêmico.
+          </h2>
+          <p className="text-xl text-slate-600 font-light leading-relaxed">
+            Unimos o estado da arte da pesquisa em Inteligência Artificial à dinâmica crítica do mercado financeiro B2B.
           </p>
         </div>
       </section>
 
-      {/* Nossa Missão */}
-      <section className="py-32 px-4 relative bg-gray-50">
-        <div className="container mx-auto relative z-10">
-          <div className="grid lg:grid-cols-2 gap-20 items-center">
-            <div>
-              <div className="inline-flex items-center space-x-2 bg-white rounded-full px-4 py-2 mb-8 shadow-sm">
-                <Target className="h-4 w-4 text-gray-600" />
-                <span className="text-sm font-normal text-gray-600 tracking-wide">Nossa Missão</span>
-              </div>
-
-              <h2 className="text-5xl md:text-6xl font-thin text-gray-900 mb-8 leading-tight tracking-tight">
-                Democratizar o<span className="block text-gray-400 font-extralight">Poder da IA</span>
-              </h2>
-
-              <p className="text-xl text-gray-600 mb-12 leading-relaxed font-light">
-                Acreditamos que toda empresa, independente do tamanho, deve ter acesso às tecnologias mais avançadas de
-                Inteligência Artificial. Nossa missão é tornar isso realidade.
-              </p>
-
-              <div className="space-y-8">
-                <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 bg-gray-900 rounded-full flex items-center justify-center">
-                    <Lightbulb className="h-6 w-6 text-white" />
-                  </div>
-                  <span className="text-lg font-normal text-gray-900">Inovação constante e pesquisa de ponta</span>
-                </div>
-                <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 bg-gray-700 rounded-full flex items-center justify-center">
-                    <Users className="h-6 w-6 text-white" />
-                  </div>
-                  <span className="text-lg font-normal text-gray-900">Parcerias estratégicas de longo prazo</span>
-                </div>
-                <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 bg-gray-500 rounded-full flex items-center justify-center">
-                    <Rocket className="h-6 w-6 text-white" />
-                  </div>
-                  <span className="text-lg font-normal text-gray-900">Resultados mensuráveis e impacto real</span>
-                </div>
-              </div>
+      {/* Storytelling Section */}
+      <section className="py-24 bg-white">
+        <div className="container mx-auto grid md:grid-cols-2 gap-16 items-center max-w-6xl">
+          <div className="space-y-8">
+            <div className="inline-flex items-center space-x-2 text-primary">
+              <Microscope className="h-6 w-6" />
+              <span className="font-bold uppercase tracking-widest text-xs">A Narrativa de Origem</span>
             </div>
-
-            <div className="relative">
-              <img
-                src="/equipe-de-especialistas-em-ia-trabalhando-com-algo.jpg"
-                alt="Equipe AI Boutique"
-                className="rounded-3xl shadow-2xl hover:scale-105 transition-transform duration-500"
-              />
+            <h3 className="text-3xl md:text-4xl font-bold text-slate-900 leading-tight">
+              Nascidos na Academia. <br />
+              <span className="text-slate-400 font-light italic">Forjados para o Mercado.</span>
+            </h3>
+            <div className="space-y-6 text-lg text-slate-600 font-light leading-relaxed">
+              <p>
+                A Talos AI nasceu como uma spin-off de pesquisa dentro do ecossistema de Inteligência Artificial da <strong>Universidade de Tecnologia Aplicada</strong>.
+              </p>
+              <p>
+                Identificamos uma lacuna crítica entre o estado da arte da pesquisa científica e as ferramentas financeiras disponíveis no mercado. Enquanto a academia avançava em modelos de <strong>Deep Learning para séries temporais</strong>, o mercado corporativo ainda dependia de estatística linear básica.
+              </p>
+              <p className="italic border-l-4 border-primary pl-6 bg-slate-50 py-4">
+                "Nossa missão é fechar essa lacuna (Bridging the Gap). Transformamos teses validadas e publicações científicas em algoritmos robustos de proteção de receita, trazendo o rigor do laboratório para a dinâmica do fluxo de caixa."
+              </p>
+            </div>
+          </div>
+          <div className="relative group">
+            <div className="aspect-square bg-slate-900 rounded-3xl overflow-hidden shadow-2xl flex items-center justify-center p-12">
+              <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,_#ffffff_1px,transparent_1px)] [background-size:20px_20px]" />
+              <BookOpen className="h-32 w-32 text-primary opacity-20 group-hover:scale-110 transition-transform duration-700" />
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="h-64 w-64 border border-white/10 rounded-full animate-[spin_30s_linear_infinite]" />
+                <div className="h-48 w-48 border border-white/5 rounded-full animate-[spin_20s_linear_infinite_reverse]" />
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Nossa Equipe */}
-      <section className="py-32 px-4 relative bg-white">
-        <div className="container mx-auto relative z-10">
-          <div className="text-center mb-20">
-            <div className="inline-flex items-center space-x-2 bg-gray-100 rounded-full px-4 py-2 mb-8">
-              <Users className="h-4 w-4 text-gray-600" />
-              <span className="text-sm font-normal text-gray-600 tracking-wide">Nossa Equipe</span>
-            </div>
-            <h2 className="text-5xl md:text-6xl font-thin text-gray-900 mb-6 leading-tight tracking-tight">
-              Especialistas
-              <span className="block text-gray-400 font-extralight">de Elite</span>
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto font-light">
-              Pesquisadores, programadores e engenheiros com experiência em grandes corporações e startups unicórnio
-            </p>
+      {/* Pillars Section */}
+      <section className="py-24 bg-primary text-white">
+        <div className="container mx-auto text-center max-w-4xl">
+          <div className="text-center mb-16">
+            <h3 className="text-3xl font-bold mb-4">Nossos Pilares</h3>
+            <p className="text-slate-400 italic">Valores inegociáveis que sustentam nossa tecnologia.</p>
           </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            <Card className="bg-white border border-gray-200 hover:border-gray-300 transition-all duration-500 hover:shadow-xl rounded-3xl">
-              <CardHeader className="text-center pb-4 pt-8">
-                <div className="w-24 h-24 bg-gray-900 rounded-full mx-auto mb-6 flex items-center justify-center">
-                  <Brain className="h-12 w-12 text-white" />
-                </div>
-                <CardTitle className="text-2xl font-normal text-gray-900 mb-2">Murilo Costa Salem</CardTitle>
-                <CardDescription className="text-gray-600 text-lg font-normal">Head of Deep Learning & Computer Vision</CardDescription>
-              </CardHeader>
-              <CardContent className="text-center">
-                <p className="text-gray-600 mb-4 font-light">
-                  Cientista da Computação com atuação em Inteligência Artificial. Especialista em algoritmos de Deep Learning e Visão Computacional.
-                </p>
-                <div className="flex justify-center space-x-2">
-                  <div className="w-2 h-2 bg-gray-400 rounded-full"></div>
-                  <div className="w-2 h-2 bg-gray-400 rounded-full"></div>
-                  <div className="w-2 h-2 bg-gray-400 rounded-full"></div>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-white border border-gray-200 hover:border-gray-300 transition-all duration-500 hover:shadow-xl rounded-3xl">
-              <CardHeader className="text-center pb-4 pt-8">
-                <div className="w-24 h-24 bg-gray-700 rounded-full mx-auto mb-6 flex items-center justify-center">
-                  <Target className="h-12 w-12 text-white" />
-                </div>
-                <CardTitle className="text-2xl font-normal text-gray-900 mb-2">Daniel Henrique Pontes</CardTitle>
-                <CardDescription className="text-gray-600 text-lg font-normal">Head of Generative AI</CardDescription>
-              </CardHeader>
-              <CardContent className="text-center">
-                <p className="text-gray-600 mb-4 font-light">
-                  Cientista da Computação com atuação em Inteligência Artificial. Especialista em modelos generativos fluentes que convertem.
-                </p>
-                <div className="flex justify-center space-x-2">
-                  <div className="w-2 h-2 bg-gray-400 rounded-full"></div>
-                  <div className="w-2 h-2 bg-gray-400 rounded-full"></div>
-                  <div className="w-2 h-2 bg-gray-400 rounded-full"></div>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-white border border-gray-200 hover:border-gray-300 transition-all duration-500 hover:shadow-xl rounded-3xl">
-              <CardHeader className="text-center pb-4 pt-8">
-                <div className="w-24 h-24 bg-gray-700 rounded-full mx-auto mb-6 flex items-center justify-center">
-                  <Target className="h-12 w-12 text-white" />
-                </div>
-                <CardTitle className="text-2xl font-normal text-gray-900 mb-2">Marcos Lima Alves</CardTitle>
-                <CardDescription className="text-gray-600 text-lg font-normal">Head of Machine Learning</CardDescription>
-              </CardHeader>
-              <CardContent className="text-center">
-                <p className="text-gray-600 mb-4 font-light">
-                  Cientista da Computação com atuação em Inteligência Artificial. Especialista em modelos que convertem.
-                </p>
-                <div className="flex justify-center space-x-2">
-                  <div className="w-2 h-2 bg-gray-400 rounded-full"></div>
-                  <div className="w-2 h-2 bg-gray-400 rounded-full"></div>
-                  <div className="w-2 h-2 bg-gray-400 rounded-full"></div>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-white border border-gray-200 hover:border-gray-300 transition-all duration-500 hover:shadow-xl rounded-3xl">
-              <CardHeader className="text-center pb-4 pt-8">
-                <div className="w-24 h-24 bg-gray-500 rounded-full mx-auto mb-6 flex items-center justify-center">
-                  <Zap className="h-12 w-12 text-white" />
-                </div>
-                <CardTitle className="text-2xl font-normal text-gray-900 mb-2">João Carrett</CardTitle>
-                <CardDescription className="text-gray-600 text-lg font-normal">Head of MLOps</CardDescription>
-              </CardHeader>
-              <CardContent className="text-center">
-                <p className="text-gray-600 mb-4 font-light">
-                  Engenheiro da Computação com atuação em ML Operations. Especialista em escalar modelos de forma contínua e íntegra.
-                </p>
-                <div className="flex justify-center space-x-2">
-                  <div className="w-2 h-2 bg-gray-400 rounded-full"></div>
-                  <div className="w-2 h-2 bg-gray-400 rounded-full"></div>
-                  <div className="w-2 h-2 bg-gray-400 rounded-full"></div>
-                </div>
-              </CardContent>
-            </Card>
+          <div className="grid md:grid-cols-3 gap-12">
+            {[
+              {
+                title: "Rigor Científico",
+                desc: "Não utilizamos 'caixas pretas'. Cada modelo preditivo é construído sobre metodologias auditáveis e revisadas por pares.",
+                icon: <GraduationCap className="h-10 w-10 text-accent" />
+              },
+              {
+                title: "Ética de Dados",
+                desc: "A privacidade não é um recurso, é a base. Nossa arquitetura foi desenhada para processar inteligência sem comprometer o sigilo bancário.",
+                icon: <ShieldCheck className="h-10 w-10 text-accent" />
+              },
+              {
+                title: "Foco em ROI",
+                desc: "A tecnologia é apenas o meio. O fim é sempre a eficiência de capital e a redução de perdas financeiras.",
+                icon: <TrendingUp className="h-10 w-10 text-accent" />
+              }
+            ].map((pillar, i) => (
+              <div key={i} className="p-8 rounded-2xl border border-border bg-slate-50 flex flex-col items-center lg:items-start text-center lg:text-left">
+                <div className="mb-6">{pillar.icon}</div>
+                <h4 className="text-xl font-bold mb-4">{pillar.title}</h4>
+                <p className="text-slate-400 text-sm leading-relaxed italic">{pillar.desc}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Nossos Valores */}
-      <section className="py-32 px-4 relative overflow-hidden bg-gray-50">
-        <div className="container mx-auto relative z-10">
-          <div className="text-center mb-20">
-            <div className="inline-flex items-center space-x-2 bg-white rounded-full px-4 py-2 mb-8 shadow-sm">
-              <Award className="h-4 w-4 text-gray-600" />
-              <span className="text-sm font-normal text-gray-600 tracking-wide">Nossos Valores</span>
-            </div>
-            <h2 className="text-5xl md:text-6xl font-thin text-gray-900 mb-6 tracking-tight">
-              Princípios que
-              <span className="block text-gray-400 font-extralight">Nos Guiam</span>
-            </h2>
+      {/* Technical Council Section */}
+      <section className="py-24 bg-background">
+        <div className="container mx-auto px-4 max-w-4xl text-center">
+          <div className="inline-block p-4 bg-slate-50 rounded-full mb-8">
+            <Brain className="h-8 w-8 text-primary" />
           </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
-            <div className="text-center">
-              <div className="w-20 h-20 bg-gray-900 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                <Trophy className="h-10 w-10 text-white" />
-              </div>
-              <h3 className="text-2xl font-normal text-gray-900 mb-4">Excelência</h3>
-              <p className="text-gray-600 font-light">
-                Buscamos sempre a perfeição técnica e resultados excepcionais em cada projeto.
-              </p>
-            </div>
-
-            <div className="text-center">
-              <div className="w-20 h-20 bg-gray-700 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                <Lightbulb className="h-10 w-10 text-white" />
-              </div>
-              <h3 className="text-2xl font-normal text-gray-900 mb-4">Inovação</h3>
-              <p className="text-gray-600 font-light">
-                Estamos sempre na vanguarda das tecnologias emergentes e metodologias disruptivas.
-              </p>
-            </div>
-
-            <div className="text-center">
-              <div className="w-20 h-20 bg-gray-500 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                <Users className="h-10 w-10 text-white" />
-              </div>
-              <h3 className="text-2xl font-normal text-gray-900 mb-4">Parceria</h3>
-              <p className="text-gray-600 font-light">
-                Construímos relacionamentos duradouros baseados em confiança e resultados mútuos.
-              </p>
-            </div>
-
-            <div className="text-center">
-              <div className="w-20 h-20 bg-gray-400 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                <Rocket className="h-10 w-10 text-white" />
-              </div>
-              <h3 className="text-2xl font-normal text-gray-900 mb-4">Impacto</h3>
-              <p className="text-gray-600 font-light">
-                Focamos em soluções que geram transformação real e valor mensurável para nossos clientes.
-              </p>
-            </div>
-          </div>
+          <h3 className="text-3xl font-bold text-slate-900 mb-12 italic">Corpo Técnico & Pesquisa</h3>
+          <ul className="space-y-6 text-left max-w-2xl mx-auto">
+            {[
+              "Pesquisadores com publicações internacionais em conferências de IA (NeurIPS, ICML).",
+              "Especialistas em Modelagem Estocástica e Séries Temporais de alta frequência.",
+              "Membros ativos de grupos de pesquisa em Inteligência Artificial aplicada às finanças.",
+              "Doutores e Mestres em Ciência da Computação e Engenharia de Software."
+            ].map((item, i) => (
+              <li key={i} className="flex items-center space-x-4 border-b border-slate-100 pb-4 last:border-0 hover:pl-2 transition-all group">
+                <div className="h-2 w-2 bg-primary rounded-full group-hover:scale-150 transition-transform" />
+                <span className="text-slate-700 font-medium">{item}</span>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-32 px-4 relative overflow-hidden bg-white">
-        <div className="container mx-auto text-center relative z-10">
-          <h2 className="text-5xl md:text-7xl font-thin text-gray-900 mb-8 leading-tight tracking-tight">
-            Vamos Construir o<span className="block text-gray-400 font-extralight">Futuro Juntos?</span>
+      <section className="py-24 bg-slate-50 border-t border-slate-100">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-3xl font-bold text-primary mb-8">
+            Interessado no rigor por trás dos nossos números?
           </h2>
-          <p className="text-xl md:text-2xl text-gray-600 mb-16 max-w-4xl mx-auto leading-relaxed font-light">
-            Conheça nossa equipe e descubra como podemos transformar sua visão em realidade!
-          </p>
-          <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <Link href="/contato">
-            <Button
-              size="lg"         
-              className="bg-gray-900 hover:bg-gray-800 text-white border-0 px-12 py-5 rounded-full font-normal text-xl transition-all duration-300"
-            >
-              Agendar Reunião
-              <Sparkles className="ml-3 h-6 w-6" />
-            </Button>
-            </Link>
-            <Link href={"/casos"}>
-            <Button
-              size="lg"
-              variant="outline"
-              className="border border-gray-300 text-gray-900 hover:bg-gray-100 bg-transparent px-12 py-5 rounded-full font-normal text-xl transition-all duration-300"
-            >
-              Ver Nossos Cases
-              <ArrowRight className="ml-3 h-6 w-6" />
-            </Button>
-            </Link>
-          </div>
+          <Button asChild size="lg" className="bg-primary text-white hover:bg-primary px-12 h-14 text-lg">
+            <Link href="/contato">Agendar Diálogo Técnico</Link>
+          </Button>
         </div>
       </section>
-
-      <Footer />
     </div>
   )
 }

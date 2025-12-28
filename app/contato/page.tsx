@@ -1,252 +1,320 @@
-import { Header } from "@/components/layout/header"
-import { Footer } from "@/components/layout/footer"
+"use client"
+
+import { useState } from "react"
+import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { Brain, CheckCircle2, Loader2, ShieldCheck, Mail, Building2, User } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Label } from "@/components/ui/label"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Brain, Mail, Phone, MapPin, Clock, Sparkles, ArrowRight, MessageCircle, Calendar, Zap } from "lucide-react"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import { Checkbox } from "@/components/ui/checkbox"
+import { contactFormSchema, type ContactFormData } from "@/lib/schemas"
+import { submitContactForm } from "@/app/actions/contact"
+import { useToast } from "@/hooks/use-toast"
 
 export default function ContatoPage() {
-  return (
-    <div className="min-h-screen bg-white text-gray-900 overflow-hidden">
-      <Header />
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isSuccess, setIsSuccess] = useState(false)
+  const { toast } = useToast()
 
-      {/* Hero Section */}
-      <section className="relative py-32 px-4 overflow-hidden">
-        <div className="container mx-auto text-center relative z-10">
-          <div className="inline-flex items-center space-x-2 bg-gray-100 border border-gray-200 rounded-full px-4 py-2 mb-8">
-            <MessageCircle className="h-4 w-4 text-gray-600" />
-            <span className="text-sm font-medium text-gray-600">Fale Conosco</span>
+  const form = useForm<ContactFormData>({
+    resolver: zodResolver(contactFormSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      empresa: "",
+      volumeClientes: undefined,
+      desafios: [],
+      outroDesafio: "",
+      message: "",
+    },
+  })
+
+  const selectedDesafios = form.watch("desafios")
+  const showOutroInput = selectedDesafios.includes("Outro")
+
+  async function onSubmit(values: ContactFormData) {
+    setIsSubmitting(true)
+    try {
+      const result = await submitContactForm(values)
+      if (result.success) {
+        setIsSuccess(true)
+        toast({
+          title: "Sinal recebido.",
+          description: "Nossos especialistas analisarão seus dados e entrarão em contato.",
+        })
+      } else {
+        toast({
+          variant: "destructive",
+          title: "Erro ao enviar",
+          description: result.message,
+        })
+      }
+    } catch (error) {
+      toast({
+        variant: "destructive",
+        title: "Erro inesperado",
+        description: "Tente novamente mais tarde.",
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
+  const challenges = [
+    { id: "Inadimplência", label: "Inadimplência" },
+    { id: "Churn", label: "Churn / Cancelamento" },
+    { id: "LTV", label: "Expansão de LTV / Upsell" },
+    { id: "Outro", label: "Outro" },
+  ]
+
+  if (isSuccess) {
+    return (
+      <div className="container mx-auto py-12 md:py-24 flex flex-col items-center justify-center text-center space-y-8 min-h-[60vh]">
+        <div className="h-20 w-20 bg-accent/20 rounded-full flex items-center justify-center text-accent">
+          <CheckCircle2 className="h-12 w-12" />
+        </div>
+        <h1 className="text-4xl font-bold text-primary">Diagnóstico Solicitado com Sucesso.</h1>
+        <p className="text-xl text-muted-foreground max-w-2xl">
+          Nossa equipe técnica fará uma pré-análise baseada nas informações enviadas.
+          Aguarde nosso contato nas próximas 24 horas.
+        </p>
+        <Button asChild className="bg-primary text-white">
+          <a href="/">Voltar para Home</a>
+        </Button>
+      </div>
+    )
+  }
+
+  return (
+    <div className="flex flex-col lg:flex-row min-h-screen bg-background">
+      {/* Sidebar Info */}
+      <div className="lg:w-2/5 bg-primary text-white p-12 lg:p-24 flex flex-col justify-between">
+        <div className="space-y-12">
+          <div className="space-y-4">
+            <div className="flex items-center space-x-2 text-accent">
+              <Brain className="h-6 w-6" />
+              <span className="font-bold uppercase tracking-widest text-xs">Diagnóstico Técnico</span>
+            </div>
+            <h1 className="text-4xl lg:text-5xl font-bold leading-tight">
+              Agende uma conversa com nossos especialistas.
+            </h1>
+            <p className="text-slate-400 text-lg font-light leading-relaxed">
+              Não é uma conversa de vendas. É um diagnóstico técnico sobre o potencial de recuperação de receita da sua carteira ativa.
+            </p>
           </div>
 
-          <h1 className="text-5xl md:text-8xl font-thin mb-8 leading-tight">
-            <span className="block text-gray-900">Vamos</span>
-            <span className="block text-gray-500">Conversar?</span>
-          </h1>
+          <div className="space-y-8">
+            <div className="flex items-start space-x-4">
+              <div className="h-10 w-10 bg-white/5 rounded-lg border border-white/10 flex items-center justify-center flex-shrink-0">
+                <ShieldCheck className="h-6 w-6 text-accent" />
+              </div>
+              <div>
+                <h4 className="font-bold">Privacidade Total</h4>
+                <p className="text-sm text-slate-400">Seus dados corporativos são tratados sob rigoroso NDA automático.</p>
+              </div>
+            </div>
+            <div className="flex items-start space-x-4">
+              <div className="h-10 w-10 bg-white/5 rounded-lg border border-white/10 flex items-center justify-center flex-shrink-0">
+                <CheckCircle2 className="h-6 w-6 text-accent" />
+              </div>
+              <div>
+                <h4 className="font-bold">ROI Estimado</h4>
+                <p className="text-sm text-slate-400">Ao final da conversa, entregaremos uma estimativa real de impacto financeiro.</p>
+              </div>
+            </div>
+          </div>
+        </div>
 
-          <p className="text-xl md:text-2xl text-gray-600 mb-12 max-w-4xl mx-auto leading-relaxed font-light">
-            Pronto para transformar seu negócio com IA? Nossa equipe de especialistas está aqui para criar a solução
-            perfeita para você.
+        <div className="pt-12 border-t border-white/10 text-sm text-slate-500">
+          São Paulo, Brasil | Worldwide Delivery
+        </div>
+      </div>
+
+      {/* Form Area */}
+      <div className="lg:w-3/5 p-8 lg:p-24">
+        <div className="max-w-2xl mx-auto space-y-10">
+          <div className="space-y-2">
+            <h2 className="text-2xl font-bold text-primary italic">Formulário de Qualificação</h2>
+            <p className="text-muted-foreground italic text-sm text-slate-500">Preencha os campos abaixo para contextualizar seu cenário.</p>
+          </div>
+
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+              <div className="grid md:grid-cols-2 gap-6">
+                <FormField
+                  control={form.control}
+                  name="name"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Nome Completo</FormLabel>
+                      <FormControl>
+                        <div className="relative">
+                          <User className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
+                          <Input placeholder="Seu nome" className="pl-10" {...field} />
+                        </div>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>E-mail Corporativo</FormLabel>
+                      <FormControl>
+                        <div className="relative">
+                          <Mail className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
+                          <Input placeholder="exemplo@empresa.com" className="pl-10" {...field} />
+                        </div>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-6">
+                <FormField
+                  control={form.control}
+                  name="empresa"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Nome da Empresa</FormLabel>
+                      <FormControl>
+                        <div className="relative">
+                          <Building2 className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
+                          <Input placeholder="Empresa S.A." className="pl-10" {...field} />
+                        </div>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="volumeClientes"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Volume de Clientes</FormLabel>
+                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Selecione o volume" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          <SelectItem value="<1k">Menos de 1.000 clientes</SelectItem>
+                          <SelectItem value="1k-10k">1.000 a 10.000 clientes</SelectItem>
+                          <SelectItem value="10k+">Mais de 10.000 clientes</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+
+              <FormField
+                control={form.control}
+                name="desafios"
+                render={() => (
+                  <FormItem>
+                    <div className="mb-4 text-sm font-semibold">Qual seu maior desafio atual?</div>
+                    <div className="grid grid-cols-2 gap-4">
+                      {challenges.map((challenge) => (
+                        <FormField
+                          key={challenge.id}
+                          control={form.control}
+                          name="desafios"
+                          render={({ field }) => {
+                            return (
+                              <FormItem
+                                key={challenge.id}
+                                className="flex flex-row items-start space-x-3 space-y-0 rounded-lg border p-4 hover:bg-slate-50 transition-colors"
+                              >
+                                <FormControl>
+                                  <Checkbox
+                                    checked={field.value?.includes(challenge.id)}
+                                    onCheckedChange={(checked) => {
+                                      return checked
+                                        ? field.onChange([...field.value, challenge.id])
+                                        : field.onChange(
+                                          field.value?.filter(
+                                            (value) => value !== challenge.id
+                                          )
+                                        )
+                                    }}
+                                  />
+                                </FormControl>
+                                <FormLabel className="text-sm font-normal cursor-pointer w-full">
+                                  {challenge.label}
+                                </FormLabel>
+                              </FormItem>
+                            )
+                          }}
+                        />
+                      ))}
+                    </div>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              {showOutroInput && (
+                <FormField
+                  control={form.control}
+                  name="outroDesafio"
+                  render={({ field }) => (
+                    <FormItem className="animate-in fade-in slide-in-from-top-2 duration-300">
+                      <FormLabel>Descreva seu desafio</FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="Fale brevemente sobre sua necessidade..."
+                          {...field}
+                          className="bg-slate-50 border-accent/20 focus:border-accent"
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              )}
+
+              <Button type="submit" className="w-full bg-primary text-white py-8 text-lg font-bold shadow-2xl shadow-primary/20 transition-all hover:scale-[1.01]" disabled={isSubmitting}>
+                {isSubmitting ? (
+                  <>
+                    <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                    Processando...
+                  </>
+                ) : (
+                  "Solicitar Diagnóstico Técnico"
+                )}
+              </Button>
+            </form>
+          </Form>
+
+          <p className="text-center text-xs text-slate-400 font-light italic">
+            Ao enviar este formulário, você concorda que a Talos AI processará seus dados para fins de agendamento diagnósitico sob conformidade com a LGPD.
           </p>
         </div>
-      </section>
-
-      {/* Formulário de Contato */}
-      <section className="py-32 px-4 relative">
-        <div className="container mx-auto relative z-10">
-          <div className="grid lg:grid-cols-2 gap-16">
-            {/* Formulário */}
-            <div>
-              <div className="inline-flex items-center space-x-2 bg-gray-100 border border-gray-200 rounded-full px-4 py-2 mb-6">
-                <Sparkles className="h-4 w-4 text-gray-600" />
-                <span className="text-sm font-medium text-gray-600">Prospectar Orçamento</span>
-              </div>
-
-              <h2 className="text-4xl md:text-5xl font-thin text-gray-900 mb-6 leading-tight">
-                Conte-nos sobre
-                <span className="block text-gray-500">Seu Projeto</span>
-              </h2>
-
-              <p className="text-xl text-gray-600 mb-8 leading-relaxed font-light">
-                Preencha o formulário e receba uma análise personalizada de como a IA pode revolucionar seu negócio.
-              </p>
-
-              <Card className="bg-white border border-gray-200 rounded-3xl shadow-lg">
-                <CardContent className="p-8">
-                  <form className="space-y-6">
-                    <div className="grid md:grid-cols-2 gap-6">
-                      <div className="space-y-2">
-                        <Label htmlFor="nome" className="text-gray-900 font-medium">
-                          Nome Completo
-                        </Label>
-                        <Input
-                          id="nome"
-                          placeholder="Seu nome"
-                          className="bg-gray-50 border-gray-200 text-gray-900 placeholder:text-gray-500 focus:border-gray-400 rounded-xl"
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="empresa" className="text-gray-900 font-medium">
-                          Empresa
-                        </Label>
-                        <Input
-                          id="empresa"
-                          placeholder="Nome da empresa"
-                          className="bg-gray-50 border-gray-200 text-gray-900 placeholder:text-gray-500 focus:border-gray-400 rounded-xl"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="grid md:grid-cols-2 gap-6">
-                      <div className="space-y-2">
-                        <Label htmlFor="email" className="text-gray-900 font-medium">
-                          E-mail
-                        </Label>
-                        <Input
-                          id="email"
-                          type="email"
-                          placeholder="seu@email.com"
-                          className="bg-gray-50 border-gray-200 text-gray-900 placeholder:text-gray-500 focus:border-gray-400 rounded-xl"
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="telefone" className="text-gray-900 font-medium">
-                          Telefone
-                        </Label>
-                        <Input
-                          id="telefone"
-                          placeholder="(11) 99999-9999"
-                          className="bg-gray-50 border-gray-200 text-gray-900 placeholder:text-gray-500 focus:border-gray-400 rounded-xl"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="space-y-2">
-                      <Label htmlFor="servico" className="text-gray-900 font-medium">
-                        Serviço de Interesse
-                      </Label>
-                      <Select>
-                        <SelectTrigger className="bg-gray-50 border-gray-200 text-gray-900 rounded-xl">
-                          <SelectValue placeholder="Selecione um serviço" />
-                        </SelectTrigger>
-                        <SelectContent className="bg-white border-gray-200">
-                          <SelectItem value="machine-learning">Machine Learning</SelectItem>
-                          <SelectItem value="deep-learning">Deep Learning</SelectItem>
-                          <SelectItem value="visao-computacional">Visão Computacional</SelectItem>
-                          <SelectItem value="consultoria">Chatbots</SelectItem>
-                          <SelectItem value="consultoria">Automação e n8n</SelectItem>
-                          <SelectItem value="consultoria">Consultoria em IA</SelectItem>
-                          <SelectItem value="todos">Todos os Serviços</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-
-                    <div className="space-y-2">
-                      <Label htmlFor="orcamento" className="text-gray-900 font-medium">
-                        Orçamento Estimado
-                      </Label>
-                      <Select>
-                        <SelectTrigger className="bg-gray-50 border-gray-200 text-gray-900 rounded-xl">
-                          <SelectValue placeholder="Selecione uma faixa" />
-                        </SelectTrigger>
-                        <SelectContent className="bg-white border-gray-200">
-                          <SelectItem value="1k-5k">R$ 1k - 5k</SelectItem>
-                          <SelectItem value="5k-10k">R$ 5k - 10k</SelectItem>
-                          <SelectItem value="10k-20k">R$ 10k - 20k</SelectItem>
-                          <SelectItem value="20k-50k">R$ 20k - 50k</SelectItem>
-                          <SelectItem value="50k-100k">R$ 50k - 100k</SelectItem>
-                          <SelectItem value="100k+">R$ 100k+</SelectItem>
-                          <SelectItem value="nao-sei">Não tenho certeza</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-
-                    <div className="space-y-2">
-                      <Label htmlFor="mensagem" className="text-gray-900 font-medium">
-                        Descreva seu Projeto
-                      </Label>
-                      <Textarea
-                        id="mensagem"
-                        placeholder="Conte-nos sobre seu desafio, objetivos e como podemos ajudar..."
-                        rows={5}
-                        className="bg-gray-50 border-gray-200 text-gray-900 placeholder:text-gray-500 focus:border-gray-400 resize-none rounded-xl"
-                      />
-                    </div>
-
-                    <Button
-                      type="submit"
-                      size="lg"
-                      className="w-full bg-gray-900 hover:bg-gray-800 text-white border-0 py-4 rounded-full font-light text-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
-                    >
-                      Enviar Solicitação
-                      <Zap className="ml-2 h-5 w-5" />
-                    </Button>
-                  </form>
-                </CardContent>
-              </Card>
-            </div>
-
-            {/* Informações de Contato */}
-            <div className="space-y-8">
-              <div className="inline-flex items-center space-x-2 bg-gray-100 border border-gray-200 rounded-full px-4 py-2 mb-6">
-                <Brain className="h-4 w-4 text-gray-600" />
-                <span className="text-sm font-medium text-gray-600">Informações</span>
-              </div>
-
-              <h3 className="text-3xl md:text-4xl font-thin text-gray-900 mb-6">
-                Outras Formas de
-                <span className="block text-gray-500">Contato</span>
-              </h3>
-
-              <div className="space-y-6">
-                <Card className="bg-white border border-gray-200 hover:border-gray-300 transition-all duration-500 hover:shadow-lg group rounded-3xl">
-                  <CardContent className="p-6">
-                    <div className="flex items-center space-x-4">
-                      <div className="w-12 h-12 bg-gray-900 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                        <Mail className="h-6 w-6 text-white" />
-                      </div>
-                      <div>
-                        <h4 className="text-lg font-medium text-gray-900">E-mail</h4>
-                        <p className="text-gray-600">contato@talosai.com.br</p>
-                        <p className="text-gray-500 text-sm font-light">Resposta em até 2 horas</p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                <Card className="bg-white border border-gray-200 hover:border-gray-300 transition-all duration-500 hover:shadow-lg group rounded-3xl">
-                  <CardContent className="p-6">
-                    <div className="flex items-center space-x-4">
-                      <div className="w-12 h-12 bg-gray-900 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                        <Phone className="h-6 w-6 text-white" />
-                      </div>
-                      <div>
-                        <h4 className="text-lg font-medium text-gray-900">Telefone</h4>
-                        <p className="text-gray-600">+55 (53) 9995-1170</p>
-                        <p className="text-gray-500 text-sm font-light">WhatsApp disponível</p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                <Card className="bg-white border border-gray-200 hover:border-gray-300 transition-all duration-500 hover:shadow-lg group rounded-3xl">
-                  <CardContent className="p-6">
-                    <div className="flex items-center space-x-4">
-                      <div className="w-12 h-12 bg-gray-900 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                        <MapPin className="h-6 w-6 text-white" />
-                      </div>
-                      <div>
-                        <h4 className="text-lg font-medium text-gray-900">Escritório</h4>
-                        <p className="text-gray-600">Pelotas, RS</p>
-                        <p className="text-gray-500 text-sm font-light">Reuniões remotas</p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                <Card className="bg-white border border-gray-200 hover:border-gray-300 transition-all duration-500 hover:shadow-lg group rounded-3xl">
-                  <CardContent className="p-6">
-                    <div className="flex items-center space-x-4">
-                      <div className="w-12 h-12 bg-gray-900 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                        <Clock className="h-6 w-6 text-white" />
-                      </div>
-                      <div>
-                        <h4 className="text-lg font-medium text-gray-900">Horário</h4>
-                        <p className="text-gray-600">Segunda a Sexta: 9h às 18h</p>
-                        <p className="text-gray-500 text-sm font-light">Suporte 24/7 para clientes</p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
-              </div>
-            </div>
-          </div>
-      </section>
-
-      <Footer />
+      </div>
     </div>
   )
 }
