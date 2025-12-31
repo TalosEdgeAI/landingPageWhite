@@ -137,7 +137,7 @@ export default function LaboratorioPage() {
                   <span className="text-[10px] uppercase font-bold text-slate-300">Tradicional</span>
                 </div>
                 <div className="flex flex-col items-center space-y-4">
-                  <div className="w-16 bg-primary rounded-t-2xl shadow-[0_0_30px_rgba(var(--primary-rgb),0.3)] h-48" />
+                  <div className="w-16 bg-[#CEFF05] rounded-t-2xl shadow-[0_0_30px_rgba(206,255,5,0.3)] h-48" />
                   <span className="text-[10px] uppercase font-bold text-white">Modelo Talos</span>
                 </div>
               </div>
@@ -224,14 +224,14 @@ export default function LaboratorioPage() {
       <section className="py-32 bg-slate-50">
         <div className="container mx-auto px-4">
           <div className="max-w-5xl mx-auto bg-slate-950 rounded-[4rem] text-white p-12 md:p-24 flex flex-col items-center text-center space-y-10 relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/20 blur-[150px] -translate-y-1/2 translate-x-1/2" />
+            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#CEFF05]/10 blur-[150px] -translate-y-1/2 translate-x-1/2" />
 
-            <Badge variant="outline" className="px-6 py-2 border-primary/20 text-primary bg-primary/5 uppercase tracking-[0.4em] font-black pointer-events-none">
+            <Badge variant="outline" className="px-6 py-2 border-[#CEFF05]/30 text-[#CEFF05] bg-[#CEFF05]/5 uppercase tracking-[0.4em] font-black pointer-events-none">
               Inscrições Restritas
             </Badge>
 
             <div className="space-y-6 relative">
-              <h2 className="text-4xl md:text-6xl font-extrabold tracking-tight">Programa <span className="text-primary italic">Early Adopter</span> Talos</h2>
+              <h2 className="text-4xl md:text-6xl font-extrabold tracking-tight">Programa <span className="text-[#CEFF05] italic">Early Adopter</span> Talos</h2>
               <p className="text-xl text-slate-200 font-light leading-relaxed max-w-2xl mx-auto">
                 Selecionamos operações recorrentes complexas para participar do nosso programa de validação avançada. Acesso prioritário à nossa ciência de dados e acompanhamento direto do time executivo.
               </p>
