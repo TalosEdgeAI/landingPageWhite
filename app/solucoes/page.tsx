@@ -30,33 +30,13 @@ export default function SolucoesPage() {
       impact: "Redução direta de perdas financeiras, diminuição do DSO e proteção imediata do fluxo de caixa.",
       icon: <ShieldAlert className="h-10 w-10 text-primary" />,
       visual: (
-        <div className="relative w-full h-full bg-slate-900 rounded-3xl border border-slate-800 p-8 shadow-2xl overflow-hidden group">
-          <div className="absolute top-0 right-0 p-4">
-            <div className="h-2 w-2 rounded-full bg-red-500 animate-pulse" />
-          </div>
-          <div className="space-y-6">
-            <div className="flex justify-between items-center">
-              <div className="h-6 w-32 bg-slate-800 rounded-full" />
-              <Badge variant="outline" className="text-red-400 border-red-400/30">High Risk Detected</Badge>
-            </div>
-            <div className="space-y-3">
-              {[1, 2, 3].map((i) => (
-                <div key={i} className="flex items-center justify-between p-4 bg-slate-800/50 rounded-xl border border-white/5">
-                  <div className="flex items-center gap-3">
-                    <div className="h-8 w-8 rounded-full bg-slate-700" />
-                    <div className="h-3 w-20 bg-slate-700 rounded" />
-                  </div>
-                  <div className="h-3 w-12 bg-red-500/20 rounded" />
-                </div>
-              ))}
-            </div>
-            <div className="pt-4 border-t border-white/5">
-              <div className="flex justify-between text-xs text-slate-500 uppercase tracking-widest font-bold">
-                <span>Loss Prevention Rate</span>
-                <span className="text-emerald-400">+12.4%</span>
-              </div>
-            </div>
-          </div>
+        <div className="relative w-full h-full rounded-3xl overflow-hidden shadow-2xl border border-slate-200 group">
+          <img
+            src="/images/solucoes/inadimplencia.png"
+            alt="Visualização de Previsão de Inadimplência"
+            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent" />
         </div>
       )
     },
@@ -68,17 +48,13 @@ export default function SolucoesPage() {
       impact: "Redução de churn, aumento do LTV e blindagem da carteira de clientes recorrentes.",
       icon: <UserMinus className="h-10 w-10 text-primary" />,
       visual: (
-        <div className="relative w-full h-full bg-slate-50 rounded-3xl border border-slate-200 p-8 shadow-xl flex items-center justify-center overflow-hidden">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,_var(--tw-gradient-stops))] from-primary/5 via-transparent to-transparent" />
-          <div className="relative w-48 h-48 border border-slate-200 rounded-full flex items-center justify-center">
-            <div className="absolute inset-0 border border-primary/20 rounded-full animate-ping" />
-            <div className="w-32 h-32 border border-primary/40 rounded-full flex items-center justify-center">
-              <TrendingUp className="h-10 w-10 text-primary animate-pulse" />
-            </div>
-            <div className="absolute -top-2 left-1/2 -translate-x-1/2 bg-white px-3 py-1 rounded-full border border-slate-200 shadow-sm text-[10px] font-bold text-slate-500 uppercase">
-              Retention Alert
-            </div>
-          </div>
+        <div className="relative w-full h-full rounded-3xl overflow-hidden shadow-2xl border border-slate-200 group">
+          <img
+            src="/images/solucoes/churn_prediction.png"
+            alt="Visualização de Previsão de Churn"
+            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-900/20 to-transparent" />
         </div>
       )
     },
@@ -90,28 +66,13 @@ export default function SolucoesPage() {
       impact: "Visibilidade imediata de gargalos operacionais e preparação do terreno para escala com segurança.",
       icon: <Search className="h-10 w-10 text-primary" />,
       visual: (
-        <div className="relative w-full h-full bg-white rounded-3xl border border-slate-200 p-8 shadow-lg overflow-hidden">
-          <div className="grid grid-cols-2 gap-4 h-full">
-            <div className="bg-slate-50 rounded-2xl p-4 flex flex-col justify-between border border-slate-100">
-              <div className="h-2 w-12 bg-slate-200 rounded" />
-              <div className="text-2xl font-bold text-primary">94%</div>
-              <div className="text-[10px] uppercase text-slate-400 font-bold">Data Quality</div>
-            </div>
-            <div className="bg-slate-50 rounded-2xl p-4 flex flex-col justify-between border border-slate-100">
-              <div className="h-2 w-12 bg-slate-200 rounded" />
-              <div className="text-2xl font-bold text-primary">A+</div>
-              <div className="text-[10px] uppercase text-slate-400 font-bold">Governance</div>
-            </div>
-            <div className="col-span-2 bg-slate-900 rounded-2xl p-4 flex items-center justify-between">
-              <div className="space-y-2">
-                <div className="h-2 w-20 bg-slate-700 rounded" />
-                <div className="h-2 w-16 bg-slate-700 rounded" />
-              </div>
-              <div className="h-8 w-8 rounded-full bg-primary/20 flex items-center justify-center">
-                <ShieldCheck className="h-4 w-4 text-primary" />
-              </div>
-            </div>
-          </div>
+        <div className="relative w-full h-full rounded-3xl overflow-hidden shadow-2xl border border-slate-200 group">
+          <img
+            src="/images/solucoes/data_maturity.png"
+            alt="Visualização de Auditoria de Dados"
+            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-900/20 to-transparent" />
         </div>
       )
     }
@@ -255,33 +216,72 @@ export default function SolucoesPage() {
         </div>
       </section>
 
-      {/* 9. Resumo executivo */}
-      <section className="py-24 bg-white">
-        <div className="container mx-auto px-4 max-w-4xl">
-          <div className="p-10 md:p-16 bg-slate-900 rounded-[3rem] text-white relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-primary/20 blur-[100px] -translate-y-1/2 translate-x-1/2" />
-            <div className="relative space-y-10">
-              <h2 className="text-2xl md:text-3xl font-bold">O ecossistema Talos foi desenhado para:</h2>
-              <div className="grid sm:grid-cols-2 gap-8">
+      {/* 9. Resumo executivo - Ciclo Completo */}
+      <section className="py-24 bg-white overflow-hidden">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="p-10 md:p-20 bg-slate-900 rounded-[3rem] text-white relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/20 blur-[120px] -translate-y-1/2 translate-x-1/2 opacity-50" />
+            <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-primary/10 blur-[120px] translate-y-1/2 -translate-x-1/2 opacity-30" />
+
+            <div className="relative space-y-16">
+              <div className="text-center max-w-3xl mx-auto space-y-4">
+                <h2 className="text-3xl md:text-5xl font-bold tracking-tight">O ciclo completo da <span className="text-primary italic">inteligência de receita</span></h2>
+                <p className="text-slate-400 text-lg font-light">
+                  Da prevenção de perdas à expansão sustentável, com decisões orientadas por dados.
+                </p>
+              </div>
+
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 relative">
+                {/* Visual Connector Line (Desktop) */}
+                <div className="hidden lg:block absolute top-12 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+
                 {[
-                  { label: "Proteger receita", desc: "Inadimplência e Churn" },
-                  { label: "Expandir receita", desc: "LTV, NBO e precificação" },
-                  { label: "Aumentar maturidade analítica", desc: "Dados, personas e scoring" },
-                  { label: "Garantir evolução contínua", desc: "ROI sustentável" }
+                  {
+                    num: "01",
+                    label: "Proteger receita",
+                    desc: "Antes de crescer, é preciso estancar perdas invisíveis. Inadimplência e churn previstos antes do impacto no caixa."
+                  },
+                  {
+                    num: "02",
+                    label: "Aumentar maturidade analítica",
+                    desc: "IA só funciona bem quando os dados estão prontos. Dados, personas e scoring como base sólida de decisão."
+                  },
+                  {
+                    num: "03",
+                    label: "Expandir receita",
+                    desc: "Crescer com eficiência é crescer com inteligência. LTV, NBO e precificação orientada por comportamento."
+                  },
+                  {
+                    num: "04",
+                    label: "Garantir evolução contínua",
+                    desc: "Resultados consistentes exigem adaptação contínua. ROI sustentável com acompanhamento estratégico."
+                  }
                 ].map((item, i) => (
-                  <div key={i} className="flex gap-4">
-                    <div className="mt-1 h-5 w-5 rounded-full bg-primary/20 flex items-center justify-center shrink-0">
-                      <CheckCircle2 className="h-3 w-3 text-primary" />
+                  <div key={i} className="flex flex-col items-center text-center space-y-6 group relative">
+                    <div className="relative">
+                      <div className="h-20 w-20 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-2xl font-black text-primary group-hover:bg-primary group-hover:text-slate-900 transition-all duration-500 scale-100 group-hover:scale-110 shadow-xl group-hover:shadow-primary/20">
+                        {item.num}
+                      </div>
+                      {/* Suble flow indicator for mobile/tablet */}
+                      <div className="md:hidden absolute -bottom-6 left-1/2 -translate-x-1/2 text-white/20">
+                        <ArrowRight className="h-4 w-4 rotate-90" />
+                      </div>
                     </div>
-                    <div>
-                      <h4 className="font-bold text-lg mb-1">{item.label}</h4>
-                      <p className="text-slate-400 text-sm">{item.desc}</p>
+                    <div className="space-y-3">
+                      <h4 className="font-bold text-xl text-white group-hover:text-primary transition-colors">{item.label}</h4>
+                      <p className="text-slate-400 text-sm font-light leading-relaxed">{item.desc}</p>
                     </div>
                   </div>
                 ))}
               </div>
-              <div className="pt-6 border-t border-white/10 uppercase tracking-widest text-[10px] font-black text-slate-500 text-center">
-                Talos Intelligence Ecosystem
+
+              <div className="pt-12 border-t border-white/5 flex flex-col items-center space-y-2">
+                <div className="uppercase tracking-[0.4em] text-[10px] font-black text-slate-600">
+                  Talos Intelligence Ecosystem
+                </div>
+                <div className="text-xs italic text-slate-500 font-light">
+                  Um sistema vivo, não um conjunto de ferramentas.
+                </div>
               </div>
             </div>
           </div>

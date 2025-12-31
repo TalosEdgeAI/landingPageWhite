@@ -1,129 +1,200 @@
 import { Button } from "@/components/ui/button"
-import { Brain, ShieldCheck, TrendingUp, BookOpen, Microscope, GraduationCap } from "lucide-react"
+import { Brain, ShieldCheck, TrendingUp, BookOpen, Microscope, GraduationCap, Target, Cpu } from "lucide-react"
 import Link from "next/link"
 
 export default function SobrePage() {
   return (
-    <div className="flex flex-col w-full bg-white">
-      {/* Hero Section */}
-      <section className="py-24 bg-slate-50 border-b border-slate-100">
-        <div className="container mx-auto px-4 text-center max-w-4xl">
-          <h1 className="text-sm font-bold uppercase tracking-[0.2em] text-primary mb-6 block">Nossa Origem & Propósito</h1>
-          <h2 className="text-4xl md:text-6xl font-bold text-slate-900 mb-8 tracking-tight">
-            Ciência de Dados com Rigor Acadêmico.
-          </h2>
-          <p className="text-xl text-slate-600 font-light leading-relaxed">
-            Unimos o estado da arte da pesquisa em Inteligência Artificial à dinâmica crítica do mercado financeiro B2B.
+    <div className="flex flex-col w-full bg-white font-sans selection:bg-primary/30 selection:text-slate-900">
+
+      {/* 🔹 Bloco 1 — Origem & Propósito (Hero Section) */}
+      <section className="relative pt-32 pb-20 bg-slate-50 border-b border-slate-100 overflow-hidden text-center">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_50%_0%,_rgba(var(--primary-rgb),0.05)_0%,transparent_50%)]" />
+        <div className="container mx-auto px-4 max-w-4xl relative">
+          <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-primary mb-6 block">Nossa Origem & Propósito</span>
+          <h1 className="text-4xl md:text-7xl font-extrabold text-slate-900 mb-8 tracking-tight">
+            Ciência de Dados Aplicada à <span className="text-primary italic">Receita</span>.
+          </h1>
+          <p className="text-xl md:text-2xl text-slate-600 font-light leading-relaxed max-w-3xl mx-auto">
+            Operacionalizamos pesquisa avançada em Inteligência Artificial para resolver os desafios críticos de fluxo de caixa e expansão de mercado.
           </p>
+          <div className="mt-12 h-px w-24 bg-primary/20 mx-auto" />
         </div>
       </section>
 
-      {/* Storytelling Section */}
-      <section className="py-24 bg-white">
-        <div className="container mx-auto grid md:grid-cols-2 gap-16 items-center max-w-6xl">
-          <div className="space-y-8">
+      {/* 🔹 Bloco 2 — Narrativa de Origem (Origem em Pesquisa Aplicada) */}
+      <section className="py-24 bg-white overflow-hidden">
+        <div className="container mx-auto px-4 grid md:grid-cols-2 gap-20 items-center max-w-6xl relative">
+          <div className="space-y-10 relative">
             <div className="inline-flex items-center space-x-2 text-primary">
-              <Microscope className="h-6 w-6" />
-              <span className="font-bold uppercase tracking-widest text-xs">A Narrativa de Origem</span>
+              <Cpu className="h-5 w-5" />
+              <span className="font-bold uppercase tracking-[0.2em] text-[10px]">Origem em Pesquisa Aplicada</span>
             </div>
-            <h3 className="text-3xl md:text-4xl font-bold text-slate-900 leading-tight">
-              Nascidos na Academia. <br />
-              <span className="text-slate-400 font-light italic">Forjados para o Mercado.</span>
-            </h3>
-            <div className="space-y-6 text-lg text-slate-600 font-light leading-relaxed">
-              <p>
-                A Talos AI nasceu como uma spin-off de pesquisa dentro do ecossistema de Inteligência Artificial da <strong>Universidade de Tecnologia Aplicada</strong>.
-              </p>
-              <p>
-                Identificamos uma lacuna crítica entre o estado da arte da pesquisa científica e as ferramentas financeiras disponíveis no mercado. Enquanto a academia avançava em modelos de <strong>Deep Learning para séries temporais</strong>, o mercado corporativo ainda dependia de estatística linear básica.
-              </p>
-              <p className="italic border-l-4 border-primary pl-6 bg-slate-50 py-4">
-                "Nossa missão é fechar essa lacuna (Bridging the Gap). Transformamos teses validadas e publicações científicas em algoritmos robustos de proteção de receita, trazendo o rigor do laboratório para a dinâmica do fluxo de caixa."
+
+            <div className="space-y-6">
+              <h3 className="text-3xl md:text-5xl font-bold text-slate-900 tracking-tight leading-tight">
+                A ciência a serviço do <br />
+                <span className="text-slate-400 font-light italic">impacto financeiro.</span>
+              </h3>
+
+              <div className="space-y-6 text-lg text-slate-600 font-light leading-relaxed">
+                <p>
+                  A Talos IA nasce da vivência direta com pesquisa avançada em Inteligência Artificial, mas foi estruturada desde o primeiro dia para produção, escala e impacto financeiro real.
+                </p>
+                <p>
+                  Identificamos que enquanto a ciência avançava em modelos de <strong>Deep Learning para séries temporais</strong>, o mercado ainda operava sob ferramentas reativas. Nossa existência é a resposta a essa lacuna: operacionalizar o estado da arte para proteger e expandir a receita corporativa.
+                </p>
+              </div>
+            </div>
+
+            {/* 🔹 Bloco 3 — Missão (Operacional) */}
+            <div className="p-10 bg-slate-50 rounded-[3rem] border-l-8 border-primary relative group">
+              <div className="absolute top-0 right-0 p-4 opacity-10">
+                <Target className="h-12 w-12 text-primary" />
+              </div>
+              <p className="text-xl text-slate-900 font-medium leading-relaxed italic">
+                "Transformamos pesquisa científica validada em modelos preditivos auditáveis que atuam diretamente sobre inadimplência, churn e eficiência de capital."
               </p>
             </div>
           </div>
-          <div className="relative group">
-            <div className="aspect-square bg-slate-900 rounded-3xl overflow-hidden shadow-2xl flex items-center justify-center p-12">
-              <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,_#ffffff_1px,transparent_1px)] [background-size:20px_20px]" />
-              <BookOpen className="h-32 w-32 text-primary opacity-20 group-hover:scale-110 transition-transform duration-700" />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="h-64 w-64 border border-white/10 rounded-full animate-[spin_30s_linear_infinite]" />
-                <div className="h-48 w-48 border border-white/5 rounded-full animate-[spin_20s_linear_infinite_reverse]" />
+
+          <div className="relative justify-self-center lg:justify-self-end">
+            <div className="aspect-square w-full max-w-md bg-slate-900 rounded-[4rem] overflow-hidden shadow-2xl flex items-center justify-center p-16 relative">
+              <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,_#ffffff_1px,transparent_1px)] [background-size:24px_24px]" />
+              <BookOpen className="h-32 w-32 text-primary opacity-30 group-hover:scale-110 transition-transform duration-700" />
+              <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                <div className="h-80 w-80 border border-white/5 rounded-full animate-[spin_40s_linear_infinite]" />
+                <div className="h-64 w-64 border border-white/10 rounded-full animate-[spin_25s_linear_infinite_reverse]" />
+              </div>
+              <div className="absolute bottom-10 left-10 p-6 bg-white/5 backdrop-blur-md rounded-2xl border border-white/10 text-white space-y-2">
+                <div className="text-[10px] font-black uppercase tracking-widest text-primary">Validado</div>
+                <div className="text-xs font-light">Modelagem de Séries Temporais</div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Pillars Section */}
-      <section className="py-24 bg-primary text-white">
-        <div className="container mx-auto text-center max-w-4xl">
-          <div className="text-center mb-16">
-            <h3 className="text-3xl font-bold mb-4">Nossos Pilares</h3>
-            <p className="text-slate-400 italic">Valores inegociáveis que sustentam nossa tecnologia.</p>
+      {/* 🔹 Bloco 4 — Pilares (Affirmation + Consequence) */}
+      <section className="py-32 bg-slate-950 text-white selection:bg-primary selection:text-slate-950">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="text-center mb-24 space-y-4">
+            <h3 className="text-3xl md:text-5xl font-bold tracking-tight">Valores Inegociáveis</h3>
+            <p className="text-slate-500 font-light italic">A base de nossa confiança técnica e ética.</p>
           </div>
+
           <div className="grid md:grid-cols-3 gap-12">
             {[
               {
                 title: "Rigor Científico",
-                desc: "Não utilizamos 'caixas pretas'. Cada modelo preditivo é construído sobre metodologias auditáveis e revisadas por pares.",
-                icon: <GraduationCap className="h-10 w-10 text-accent" />
+                affirmation: "Modelos Auditáveis",
+                consequence: "Decisões totalmente explicáveis para times financeiros, técnicos e jurídicos.",
+                icon: <GraduationCap className="h-10 w-10 text-white" />
               },
               {
                 title: "Ética de Dados",
-                desc: "A privacidade não é um recurso, é a base. Nossa arquitetura foi desenhada para processar inteligência sem comprometer o sigilo bancário.",
-                icon: <ShieldCheck className="h-10 w-10 text-accent" />
+                affirmation: "Arquitetura Segura",
+                consequence: "Processamento de inteligência em conformidade total com sigilo e governança corporativa.",
+                icon: <ShieldCheck className="h-10 w-10 text-white" />
               },
               {
                 title: "Foco em ROI",
-                desc: "A tecnologia é apenas o meio. O fim é sempre a eficiência de capital e a redução de perdas financeiras.",
-                icon: <TrendingUp className="h-10 w-10 text-accent" />
+                affirmation: "Eficiência de Capital",
+                consequence: "A tecnologia como meio para redução direta de perdas e expansão de margem.",
+                icon: <TrendingUp className="h-10 w-10 text-white" />
               }
             ].map((pillar, i) => (
-              <div key={i} className="p-8 rounded-2xl border border-border bg-slate-50 flex flex-col items-center lg:items-start text-center lg:text-left">
-                <div className="mb-6">{pillar.icon}</div>
-                <h4 className="text-xl font-bold mb-4">{pillar.title}</h4>
-                <p className="text-slate-400 text-sm leading-relaxed italic">{pillar.desc}</p>
+              <div key={i} className="p-10 rounded-[3rem] border border-white/10 bg-white/5 space-y-8 group hover:bg-white/10 transition-all duration-500">
+                <div className="h-16 w-16 rounded-2xl bg-white/5 flex items-center justify-center group-hover:bg-primary group-hover:scale-110 transition-all duration-500">
+                  <div className="group-hover:text-slate-950 transition-colors">
+                    {pillar.icon}
+                  </div>
+                </div>
+                <div className="space-y-4">
+                  <h4 className="text-2xl font-bold">{pillar.title}</h4>
+                  <div className="space-y-2">
+                    <p className="text-white font-bold text-xs uppercase tracking-widest opacity-80">{pillar.affirmation}</p>
+                    <p className="text-slate-400 text-sm font-light leading-relaxed">{pillar.consequence}</p>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Technical Council Section */}
-      <section className="py-24 bg-background">
-        <div className="container mx-auto px-4 max-w-4xl text-center">
-          <div className="inline-block p-4 bg-slate-50 rounded-full mb-8">
-            <Brain className="h-8 w-8 text-primary" />
+      {/* 🔹 Bloco 5 — Corpo Técnico & Pesquisa (Institutional Credentials) */}
+      <section className="py-32 bg-white">
+        <div className="container mx-auto px-4 max-w-5xl">
+          <div className="grid lg:grid-cols-2 gap-20 items-center">
+            <div className="space-y-12">
+              <div className="space-y-4">
+                <div className="h-12 w-12 bg-slate-900 rounded-2xl flex items-center justify-center mb-8 shadow-xl">
+                  <Brain className="h-6 w-6 text-primary" />
+                </div>
+                <h3 className="text-3xl md:text-5xl font-bold text-slate-900 tracking-tight italic">Corpo Técnico & <br />Credenciais</h3>
+              </div>
+
+              <div className="space-y-8">
+                <p className="text-lg text-slate-500 font-light leading-relaxed">
+                  Nosso time combina experiência acumulada em modelagem estocástica e IA avançada, com atuação estratégica em desafios críticos de mercado.
+                </p>
+                <ul className="space-y-4">
+                  {[
+                    "Especialistas em Modelagem Estocástica e Séries Temporais.",
+                    "Experiência com implementações de IA em operações financeiras e SaaS.",
+                    "Domínio de protocolos de Governança de Dados e Compliance.",
+                    "Foco em explicabilidade e auditoria de modelos preditivos."
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-center space-x-4 p-4 rounded-2xl bg-slate-50 border border-slate-100 group hover:border-primary/20 transition-all">
+                      <div className="h-2 w-2 bg-primary rounded-full group-hover:scale-150 transition-transform shadow-[0_0_10px_rgba(var(--primary-rgb),0.5)]" />
+                      <span className="text-slate-700 font-medium text-sm">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            <div className="p-12 bg-slate-50 border border-slate-100 rounded-[4rem] relative overflow-hidden text-center space-y-8">
+              <div className="absolute top-0 right-0 w-48 h-48 bg-primary/5 blur-3xl" />
+              <div className="relative z-10 space-y-4">
+                <div className="text-5xl font-black text-slate-900 tracking-tighter">Science<span className="text-primary">.</span></div>
+                <div className="text-[10px] font-bold uppercase tracking-[0.4em] text-slate-400">Validada por rigor e prática</div>
+              </div>
+              <p className="text-sm text-slate-400 font-light italic relative z-10 px-6">
+                Combinamos o rigor das publicações internacionais com a pragmática do fluxo de caixa enterprise.
+              </p>
+            </div>
           </div>
-          <h3 className="text-3xl font-bold text-slate-900 mb-12 italic">Corpo Técnico & Pesquisa</h3>
-          <ul className="space-y-6 text-left max-w-2xl mx-auto">
-            {[
-              "Pesquisadores com publicações internacionais em conferências de IA (NeurIPS, ICML).",
-              "Especialistas em Modelagem Estocástica e Séries Temporais de alta frequência.",
-              "Membros ativos de grupos de pesquisa em Inteligência Artificial aplicada às finanças.",
-              "Doutores e Mestres em Ciência da Computação e Engenharia de Software."
-            ].map((item, i) => (
-              <li key={i} className="flex items-center space-x-4 border-b border-slate-100 pb-4 last:border-0 hover:pl-2 transition-all group">
-                <div className="h-2 w-2 bg-primary rounded-full group-hover:scale-150 transition-transform" />
-                <span className="text-slate-700 font-medium">{item}</span>
-              </li>
-            ))}
-          </ul>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-24 bg-slate-50 border-t border-slate-100">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold text-primary mb-8">
-            Interessado no rigor por trás dos nossos números?
-          </h2>
-          <Button asChild size="lg" className="bg-primary text-white hover:bg-primary px-12 h-14 text-lg">
+      {/* 🔹 Bloco 6 — CTA Section (Agendar Diálogo Técnico) */}
+      <section className="py-32 bg-slate-50 border-t border-slate-200">
+        <div className="container mx-auto px-4 max-w-4xl text-center space-y-12 relative">
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-primary/5 blur-[100px] pointer-events-none" />
+
+          <div className="space-y-6 relative">
+            <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight">
+              Interessado no rigor por trás <br />dos nossos <span className="text-primary italic">resultados?</span>
+            </h2>
+            <p className="text-lg text-slate-500 font-light max-w-2xl mx-auto">
+              Inicie um diálogo técnico para entender como nossos modelos podem ser auditados e integrados à sua infraestrutura de dados.
+            </p>
+          </div>
+
+          <Button asChild size="lg" className="bg-primary text-white font-bold hover:bg-primary/90 px-12 h-16 text-lg rounded-full shadow-2xl shadow-primary/20 transition-transform hover:scale-105">
             <Link href="/contato">Agendar Diálogo Técnico</Link>
           </Button>
+
+          <div className="pt-8 text-[10px] font-black uppercase tracking-[0.4em] text-slate-400">
+            Talos Intelligence &copy; 2025 | Corporate Governance
+          </div>
         </div>
       </section>
     </div>
   )
+}
+
+function cn(...inputs: any[]) {
+  return inputs.filter(Boolean).join(" ")
 }
