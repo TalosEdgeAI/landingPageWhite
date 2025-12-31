@@ -19,18 +19,18 @@ export function Footer() {
             <h4 className="font-semibold text-primary mb-4">Soluções</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li>
-                <Link href="/solucoes" className="hover:text-primary transition-colors">
-                  Proteção de Receita
+                <Link href="/solucoes#inadimplencia" className="hover:text-primary transition-colors">
+                  Previsão de Inadimplência
                 </Link>
               </li>
               <li>
-                <Link href="/solucoes" className="hover:text-primary transition-colors">
-                  Retenção & Fidelidade
+                <Link href="/solucoes#churn" className="hover:text-primary transition-colors">
+                  Previsão de Churn
                 </Link>
               </li>
               <li>
-                <Link href="/solucoes" className="hover:text-primary transition-colors">
-                  Revenue Growth
+                <Link href="/solucoes#auditoria" className="hover:text-primary transition-colors">
+                  Auditoria de Dados
                 </Link>
               </li>
             </ul>

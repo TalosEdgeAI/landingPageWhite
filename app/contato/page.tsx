@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { Brain, CheckCircle2, Loader2, ShieldCheck, Mail, Building2, User } from "lucide-react"
+import { CheckCircle2, Loader2, ShieldCheck, Mail, Building2, User, DollarSign, Target, HeartHandshake } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
   Form,
@@ -21,10 +21,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { Checkbox } from "@/components/ui/checkbox"
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { contactFormSchema, type ContactFormData } from "@/lib/schemas"
 import { submitContactForm } from "@/app/actions/contact"
 import { useToast } from "@/hooks/use-toast"
+import Link from "next/link"
 
 export default function ContatoPage() {
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -37,15 +38,11 @@ export default function ContatoPage() {
       name: "",
       email: "",
       empresa: "",
-      volumeClientes: undefined,
-      desafios: [],
-      outroDesafio: "",
-      message: "",
+      tamanhoOperacao: undefined,
+      ticketMedio: undefined,
+      dorPrincipal: undefined,
     },
   })
-
-  const selectedDesafios = form.watch("desafios")
-  const showOutroInput = selectedDesafios.includes("Outro")
 
   async function onSubmit(values: ContactFormData) {
     setIsSubmitting(true)
@@ -75,244 +72,254 @@ export default function ContatoPage() {
     }
   }
 
-  const challenges = [
-    { id: "Inadimplência", label: "Inadimplência" },
-    { id: "Churn", label: "Churn / Cancelamento" },
-    { id: "LTV", label: "Expansão de LTV / Upsell" },
-    { id: "Outro", label: "Outro" },
-  ]
-
   if (isSuccess) {
     return (
       <div className="container mx-auto py-12 md:py-24 flex flex-col items-center justify-center text-center space-y-8 min-h-[60vh]">
-        <div className="h-20 w-20 bg-accent/20 rounded-full flex items-center justify-center text-accent">
+        <div className="h-20 w-20 bg-emerald-100 rounded-full flex items-center justify-center text-emerald-600">
           <CheckCircle2 className="h-12 w-12" />
         </div>
-        <h1 className="text-4xl font-bold text-primary">Diagnóstico Solicitado com Sucesso.</h1>
-        <p className="text-xl text-muted-foreground max-w-2xl">
+        <h1 className="text-4xl font-bold text-slate-900 tracking-tight">Diagnóstico Solicitado com Sucesso.</h1>
+        <p className="text-xl text-slate-500 max-w-2xl font-light">
           Nossa equipe técnica fará uma pré-análise baseada nas informações enviadas.
           Aguarde nosso contato nas próximas 24 horas.
         </p>
-        <Button asChild className="bg-primary text-white">
-          <a href="/">Voltar para Home</a>
+        <Button asChild size="lg" className="bg-primary text-white px-10 rounded-full">
+          <Link href="/">Voltar para Home</Link>
         </Button>
       </div>
     )
   }
 
   return (
-    <div className="flex flex-col lg:flex-row min-h-screen bg-background">
-      {/* Sidebar Info */}
-      <div className="lg:w-2/5 bg-primary text-white p-12 lg:p-24 flex flex-col justify-between">
-        <div className="space-y-12">
-          <div className="space-y-4">
-            <div className="flex items-center space-x-2 text-accent">
-              <Brain className="h-6 w-6" />
-              <span className="font-bold uppercase tracking-widest text-xs">Diagnóstico Técnico</span>
-            </div>
-            <h1 className="text-4xl lg:text-5xl font-bold leading-tight">
-              Agende uma conversa com nossos especialistas.
+    <div className="flex flex-col lg:flex-row min-h-screen bg-white">
+      {/* 2. Coluna esquerda: narrativa, confiança, posicionamento */}
+      <div className="lg:w-[45%] bg-slate-900 text-white p-12 lg:p-24 flex flex-col justify-between relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_0%_0%,_rgba(var(--primary-rgb),0.1)_0%,transparent_50%)]" />
+
+        <div className="space-y-16 relative">
+          <div className="space-y-6">
+            <h1 className="text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight">
+              Agende uma conversa com nossos especialistas
             </h1>
-            <p className="text-slate-400 text-lg font-light leading-relaxed">
-              Não é uma conversa de vendas. É um diagnóstico técnico sobre o potencial de recuperação de receita da sua carteira ativa.
+            <p className="text-slate-400 text-lg md:text-xl font-light leading-relaxed">
+              Não é uma conversa de vendas. É um diagnóstico técnico sobre o potencial de recuperação e expansão de receita da sua operação.
             </p>
           </div>
 
-          <div className="space-y-8">
-            <div className="flex items-start space-x-4">
-              <div className="h-10 w-10 bg-white/5 rounded-lg border border-white/10 flex items-center justify-center flex-shrink-0">
-                <ShieldCheck className="h-6 w-6 text-accent" />
+          <div className="space-y-10">
+            {/* Bloco Privacidade */}
+            <div className="flex items-start space-x-5 group">
+              <div className="h-12 w-12 bg-white/5 rounded-2xl border border-white/10 flex items-center justify-center shrink-0 group-hover:bg-primary/20 transition-colors">
+                <ShieldCheck className="h-6 w-6 text-primary" />
               </div>
-              <div>
-                <h4 className="font-bold">Privacidade Total</h4>
-                <p className="text-sm text-slate-400">Seus dados corporativos são tratados sob rigoroso NDA automático.</p>
+              <div className="space-y-1">
+                <h4 className="font-bold text-lg">Privacidade Total</h4>
+                <p className="text-sm text-slate-400 font-light">Seus dados corporativos são tratados sob NDA automático.</p>
               </div>
             </div>
-            <div className="flex items-start space-x-4">
-              <div className="h-10 w-10 bg-white/5 rounded-lg border border-white/10 flex items-center justify-center flex-shrink-0">
-                <CheckCircle2 className="h-6 w-6 text-accent" />
+
+            {/* Bloco ROI */}
+            <div className="flex items-start space-x-5 group">
+              <div className="h-12 w-12 bg-white/5 rounded-2xl border border-white/10 flex items-center justify-center shrink-0 group-hover:bg-primary/20 transition-colors">
+                <Target className="h-6 w-6 text-primary" />
               </div>
-              <div>
-                <h4 className="font-bold">ROI Estimado</h4>
-                <p className="text-sm text-slate-400">Ao final da conversa, entregaremos uma estimativa real de impacto financeiro.</p>
+              <div className="space-y-1">
+                <h4 className="font-bold text-lg">ROI Estimado</h4>
+                <p className="text-sm text-slate-400 font-light">Ao final da conversa, entregamos uma estimativa real de impacto financeiro.</p>
+              </div>
+            </div>
+
+            {/* Bloco Diagnóstico */}
+            <div className="flex items-start space-x-5 group">
+              <div className="h-12 w-12 bg-white/5 rounded-2xl border border-white/10 flex items-center justify-center shrink-0 group-hover:bg-primary/20 transition-colors">
+                <HeartHandshake className="h-6 w-6 text-primary" />
+              </div>
+              <div className="space-y-1">
+                <h4 className="font-bold text-lg">Foco em Resultado</h4>
+                <p className="text-sm text-slate-400 font-light">Conversa direta com especialistas que entendem de operação e IA.</p>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="pt-12 border-t border-white/10 text-sm text-slate-500">
+        <div className="pt-12 border-t border-white/10 text-[10px] uppercase tracking-[0.2em] font-bold text-slate-500">
           São Paulo, Brasil | Worldwide Delivery
         </div>
       </div>
 
-      {/* Form Area */}
-      <div className="lg:w-3/5 p-8 lg:p-24">
-        <div className="max-w-2xl mx-auto space-y-10">
-          <div className="space-y-2">
-            <h2 className="text-2xl font-bold text-primary italic">Formulário de Qualificação</h2>
-            <p className="text-muted-foreground italic text-sm text-slate-500">Preencha os campos abaixo para contextualizar seu cenário.</p>
+      {/* 4. Estrutura do formulário (coluna direita) */}
+      <div className="lg:w-[55%] p-8 lg:p-24 bg-white">
+        <div className="max-w-xl mx-auto space-y-12">
+          <div className="space-y-3">
+            <h2 className="text-2xl font-bold text-slate-900 italic tracking-tight underline decoration-primary underline-offset-8">Diagnóstico de Maturidade</h2>
+            <p className="text-slate-500 font-light italic text-sm">Preencha os campos abaixo para contextualizar seu cenário em menos de 2 minutos.</p>
           </div>
 
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-              <div className="grid md:grid-cols-2 gap-6">
-                <FormField
-                  control={form.control}
-                  name="name"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Nome Completo</FormLabel>
-                      <FormControl>
-                        <div className="relative">
-                          <User className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
-                          <Input placeholder="Seu nome" className="pl-10" {...field} />
-                        </div>
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="email"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>E-mail Corporativo</FormLabel>
-                      <FormControl>
-                        <div className="relative">
-                          <Mail className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
-                          <Input placeholder="exemplo@empresa.com" className="pl-10" {...field} />
-                        </div>
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-10">
+              <div className="space-y-8">
+                {/* 4.1 Campos básicos (obrigatórios) */}
+                <div className="grid md:grid-cols-2 gap-8">
+                  <FormField
+                    control={form.control}
+                    name="name"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-xs font-bold uppercase tracking-widest text-slate-400">Nome Completo</FormLabel>
+                        <FormControl>
+                          <div className="relative group">
+                            <User className="absolute left-0 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-300 group-focus-within:text-primary transition-colors" />
+                            <Input placeholder="Seu nome" className="pl-8 border-0 border-b-2 rounded-none border-slate-100 focus-visible:ring-0 focus-visible:border-primary transition-all pr-0" {...field} />
+                          </div>
+                        </FormControl>
+                        <FormMessage className="text-[10px]" />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-xs font-bold uppercase tracking-widest text-slate-400">E-mail Corporativo</FormLabel>
+                        <FormControl>
+                          <div className="relative group">
+                            <Mail className="absolute left-0 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-300 group-focus-within:text-primary transition-colors" />
+                            <Input placeholder="exemplo@empresa.com" className="pl-8 border-0 border-b-2 rounded-none border-slate-100 focus-visible:ring-0 focus-visible:border-primary transition-all pr-0" {...field} />
+                          </div>
+                        </FormControl>
+                        <FormMessage className="text-[10px]" />
+                      </FormItem>
+                    )}
+                  />
+                </div>
 
-              <div className="grid md:grid-cols-2 gap-6">
                 <FormField
                   control={form.control}
                   name="empresa"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Nome da Empresa</FormLabel>
+                      <FormLabel className="text-xs font-bold uppercase tracking-widest text-slate-400">Nome da Empresa</FormLabel>
                       <FormControl>
-                        <div className="relative">
-                          <Building2 className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
-                          <Input placeholder="Empresa S.A." className="pl-10" {...field} />
+                        <div className="relative group">
+                          <Building2 className="absolute left-0 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-300 group-focus-within:text-primary transition-colors" />
+                          <Input placeholder="Sua empresa S.A." className="pl-8 border-0 border-b-2 rounded-none border-slate-100 focus-visible:ring-0 focus-visible:border-primary transition-all pr-0" {...field} />
                         </div>
                       </FormControl>
-                      <FormMessage />
+                      <FormMessage className="text-[10px]" />
                     </FormItem>
                   )}
                 />
+
+                {/* 4.2 Qualificação de porte (obrigatória) */}
                 <FormField
                   control={form.control}
-                  name="volumeClientes"
+                  name="tamanhoOperacao"
+                  render={({ field }) => (
+                    <FormItem className="space-y-4">
+                      <FormLabel className="text-xs font-bold uppercase tracking-widest text-slate-400">Tamanho da Operação (MRR aproximado)</FormLabel>
+                      <FormControl>
+                        <RadioGroup
+                          onValueChange={field.onChange}
+                          defaultValue={field.value}
+                          className="grid md:grid-cols-2 gap-4"
+                        >
+                          {["Até R$100 mil", "R$100 mil – R$500 mil", "R$500 mil – R$2 milhões", "Acima de R$2 milhões"].map((option) => (
+                            <FormItem key={option} className="flex items-center space-x-3 space-y-0 p-4 border rounded-xl hover:bg-slate-50 transition-colors cursor-pointer border-slate-100 has-[:checked]:border-primary has-[:checked]:bg-primary/5">
+                              <FormControl>
+                                <RadioGroupItem value={option} />
+                              </FormControl>
+                              <FormLabel className="font-medium text-sm text-slate-600 cursor-pointer w-full">
+                                {option}
+                              </FormLabel>
+                            </FormItem>
+                          ))}
+                        </RadioGroup>
+                      </FormControl>
+                      <FormMessage className="text-[10px]" />
+                    </FormItem>
+                  )}
+                />
+
+                {/* 4.3 Contexto econômico (Opcional) */}
+                <FormField
+                  control={form.control}
+                  name="ticketMedio"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Volume de Clientes</FormLabel>
+                      <FormLabel className="text-xs font-bold uppercase tracking-widest text-slate-400">Ticket Médio Mensal por Cliente (Opcional)</FormLabel>
                       <Select onValueChange={field.onChange} defaultValue={field.value}>
                         <FormControl>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Selecione o volume" />
+                          <SelectTrigger className="border-0 border-b-2 rounded-none border-slate-100 px-0 focus:ring-0 focus:border-primary">
+                            <SelectValue placeholder="Selecione o ticket médio" />
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                          <SelectItem value="<1k">Menos de 1.000 clientes</SelectItem>
-                          <SelectItem value="1k-10k">1.000 a 10.000 clientes</SelectItem>
-                          <SelectItem value="10k+">Mais de 10.000 clientes</SelectItem>
+                          <SelectItem value="Até R$100">Até R$100</SelectItem>
+                          <SelectItem value="R$100 – R$500">R$100 – R$500</SelectItem>
+                          <SelectItem value="R$500 – R$2.000">R$500 – R$2.000</SelectItem>
+                          <SelectItem value="Acima de R$2.000">Acima de R$2.000</SelectItem>
                         </SelectContent>
                       </Select>
-                      <FormMessage />
+                      <FormMessage className="text-[10px]" />
+                    </FormItem>
+                  )}
+                />
+
+                {/* 4.4 Dor principal (campo estratégico) */}
+                <FormField
+                  control={form.control}
+                  name="dorPrincipal"
+                  render={({ field }) => (
+                    <FormItem className="space-y-4">
+                      <FormLabel className="text-xs font-bold uppercase tracking-widest text-slate-400">Qual dor mais impacta sua receita hoje?</FormLabel>
+                      <FormControl>
+                        <RadioGroup
+                          onValueChange={field.onChange}
+                          defaultValue={field.value}
+                          className="space-y-3"
+                        >
+                          {[
+                            "Inadimplência / atrasos recorrentes",
+                            "Cancelamento de clientes (churn)",
+                            "Crescer receita na base atual (LTV / Upsell)",
+                            "Não sei exatamente — preciso de um diagnóstico"
+                          ].map((option) => (
+                            <FormItem key={option} className="flex items-center space-x-3 space-y-0 p-4 border rounded-xl hover:bg-slate-50 transition-colors cursor-pointer border-slate-100 has-[:checked]:border-primary has-[:checked]:bg-primary/5">
+                              <FormControl>
+                                <RadioGroupItem value={option} />
+                              </FormControl>
+                              <FormLabel className="font-medium text-sm text-slate-600 cursor-pointer w-full">
+                                {option}
+                              </FormLabel>
+                            </FormItem>
+                          ))}
+                        </RadioGroup>
+                      </FormControl>
+                      <FormMessage className="text-[10px]" />
                     </FormItem>
                   )}
                 />
               </div>
 
-              <FormField
-                control={form.control}
-                name="desafios"
-                render={() => (
-                  <FormItem>
-                    <div className="mb-4 text-sm font-semibold">Qual seu maior desafio atual?</div>
-                    <div className="grid grid-cols-2 gap-4">
-                      {challenges.map((challenge) => (
-                        <FormField
-                          key={challenge.id}
-                          control={form.control}
-                          name="desafios"
-                          render={({ field }) => {
-                            return (
-                              <FormItem
-                                key={challenge.id}
-                                className="flex flex-row items-start space-x-3 space-y-0 rounded-lg border p-4 hover:bg-slate-50 transition-colors"
-                              >
-                                <FormControl>
-                                  <Checkbox
-                                    checked={field.value?.includes(challenge.id)}
-                                    onCheckedChange={(checked) => {
-                                      return checked
-                                        ? field.onChange([...field.value, challenge.id])
-                                        : field.onChange(
-                                          field.value?.filter(
-                                            (value) => value !== challenge.id
-                                          )
-                                        )
-                                    }}
-                                  />
-                                </FormControl>
-                                <FormLabel className="text-sm font-normal cursor-pointer w-full">
-                                  {challenge.label}
-                                </FormLabel>
-                              </FormItem>
-                            )
-                          }}
-                        />
-                      ))}
-                    </div>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              {showOutroInput && (
-                <FormField
-                  control={form.control}
-                  name="outroDesafio"
-                  render={({ field }) => (
-                    <FormItem className="animate-in fade-in slide-in-from-top-2 duration-300">
-                      <FormLabel>Descreva seu desafio</FormLabel>
-                      <FormControl>
-                        <Input
-                          placeholder="Fale brevemente sobre sua necessidade..."
-                          {...field}
-                          className="bg-slate-50 border-accent/20 focus:border-accent"
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
+              <div className="space-y-6">
+                <Button type="submit" className="w-full bg-slate-900 text-white py-10 text-xl font-bold rounded-2xl shadow-xl hover:bg-primary transition-all hover:scale-[1.01]" disabled={isSubmitting}>
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="mr-2 h-6 w-6 animate-spin" />
+                      Analisando Perfil...
+                    </>
+                  ) : (
+                    "Agendar Diagnóstico Técnico"
                   )}
-                />
-              )}
+                </Button>
 
-              <Button type="submit" className="w-full bg-primary text-white py-8 text-lg font-bold shadow-2xl shadow-primary/20 transition-all hover:scale-[1.01]" disabled={isSubmitting}>
-                {isSubmitting ? (
-                  <>
-                    <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                    Processando...
-                  </>
-                ) : (
-                  "Solicitar Diagnóstico Técnico"
-                )}
-              </Button>
+                <p className="text-center text-[10px] text-slate-400 font-light leading-relaxed">
+                  Esta é uma conversa estritamente técnica. Ao solicitar, você concorda que a Talos AI processará seus dados para fins de agendamento diagnósitico sob conformidade com a LGPD e NDA corporativo.
+                </p>
+              </div>
             </form>
           </Form>
-
-          <p className="text-center text-xs text-slate-400 font-light italic">
-            Ao enviar este formulário, você concorda que a Talos AI processará seus dados para fins de agendamento diagnósitico sob conformidade com a LGPD.
-          </p>
         </div>
       </div>
     </div>
