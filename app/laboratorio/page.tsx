@@ -26,9 +26,9 @@ export default function LaboratorioPage() {
           </div>
           <h1 className="text-4xl md:text-7xl font-extrabold text-white tracking-tight leading-[1.1]">
             Ciência Validada em <br />
-            <span className="text-primary italic">Cenários Reais</span>
+            <span className="text-white italic">Cenários Reais</span>
           </h1>
-          <p className="text-lg md:text-2xl text-slate-400 font-light leading-relaxed max-w-3xl mx-auto">
+          <p className="text-lg md:text-2xl text-slate-200 font-light leading-relaxed max-w-3xl mx-auto">
             Modelos não são validados em condições ideais. O foco do Laboratório Talos é robustez, estresse e resiliência em cenários adversos. Performance só importa quando o risco é máximo.
           </p>
           <div className="pt-10 flex justify-center">
@@ -71,16 +71,16 @@ export default function LaboratorioPage() {
               }
             ].map((step, i) => (
               <div key={i} className="p-8 bg-slate-50 rounded-[2.5rem] border border-slate-100 space-y-6 hover:shadow-xl hover:shadow-slate-200/50 transition-all duration-500 group">
-                <div className="h-14 w-14 rounded-2xl bg-white flex items-center justify-center border border-slate-100 shadow-sm group-hover:scale-110 group-hover:bg-primary transition-all duration-500">
-                  <div className="group-hover:text-slate-950 transition-colors">
+                <div className="h-14 w-14 rounded-2xl bg-primary/10 flex items-center justify-center border border-primary/20 shadow-sm group-hover:scale-110 group-hover:bg-primary transition-all duration-500">
+                  <div className="text-primary group-hover:text-slate-950 transition-colors">
                     {step.icon}
                   </div>
                 </div>
                 <h4 className="text-xl font-bold text-slate-900">{step.title}</h4>
                 <ul className="space-y-3">
                   {step.details.map((detail, j) => (
-                    <li key={j} className="flex items-center space-x-2 text-sm text-slate-500 font-light">
-                      <div className="h-1 w-1 rounded-full bg-primary/40" />
+                    <li key={j} className="flex items-center space-x-2 text-sm text-slate-700 font-medium">
+                      <div className="h-1 w-1 rounded-full bg-primary/60" />
                       <span>{detail}</span>
                     </li>
                   ))}
@@ -102,21 +102,21 @@ export default function LaboratorioPage() {
                 <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-primary">Benchmark Bancário</span>
                 <h3 className="text-3xl md:text-5xl font-bold tracking-tight leading-tight">
                   Recuperação de Crédito sob <br />
-                  <span className="text-primary italic">Estresse Financeiro</span>
+                  <span className="text-white italic">Estresse Financeiro</span>
                 </h3>
               </div>
-              <p className="text-slate-400 font-light text-lg leading-relaxed italic">
+              <p className="text-slate-200 font-light text-lg leading-relaxed italic">
                 Simulação baseada em datasets públicos de instituições financeiras de médio porte. Ambiente com alta volatilidade econômica. Objetivo: antecipar risco sem aumentar agressividade de cobrança.
               </p>
 
               <div className="grid grid-cols-2 gap-8 pt-6">
                 <div className="space-y-2">
-                  <div className="text-4xl font-black text-primary">+15%</div>
-                  <div className="text-[10px] uppercase font-bold tracking-widest text-slate-500">Ganho incremental</div>
+                  <div className="text-4xl font-black text-white">+15%</div>
+                  <div className="text-[10px] uppercase font-bold tracking-widest text-primary">Ganho incremental</div>
                 </div>
-                <div className="space-y-2 text-slate-400">
-                  <div className="text-sm font-bold uppercase tracking-widest border-l border-primary/30 pl-4">Risco</div>
-                  <div className="text-xs font-light italic pl-4">Identificação antes do atraso explícito</div>
+                <div className="space-y-2 text-slate-300">
+                  <div className="text-sm font-bold uppercase tracking-widest border-l border-primary/50 pl-4">Risco</div>
+                  <div className="text-xs font-light italic pl-4 text-slate-400">Identificação antes do atraso explícito</div>
                 </div>
               </div>
 
@@ -134,11 +134,11 @@ export default function LaboratorioPage() {
               <div className="flex items-end space-x-6 h-64 relative z-10">
                 <div className="flex flex-col items-center space-y-4">
                   <div className="w-16 bg-slate-800 rounded-t-2xl transition-all duration-700 h-32 group-hover:h-24" />
-                  <span className="text-[10px] uppercase font-bold text-slate-500">Tradicional</span>
+                  <span className="text-[10px] uppercase font-bold text-slate-300">Tradicional</span>
                 </div>
                 <div className="flex flex-col items-center space-y-4">
                   <div className="w-16 bg-primary rounded-t-2xl shadow-[0_0_30px_rgba(var(--primary-rgb),0.3)] h-48" />
-                  <span className="text-[10px] uppercase font-bold text-primary">Modelo Talos</span>
+                  <span className="text-[10px] uppercase font-bold text-white">Modelo Talos</span>
                 </div>
               </div>
             </div>
@@ -151,21 +151,21 @@ export default function LaboratorioPage() {
                 <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-primary">Benchmark SaaS</span>
                 <h3 className="text-3xl md:text-5xl font-bold tracking-tight leading-tight">
                   Previsão de Churn em <br />
-                  <span className="text-primary italic">Operações Recorrentes</span>
+                  <span className="text-white italic">Operações Recorrentes</span>
                 </h3>
               </div>
-              <p className="text-slate-400 font-light text-lg leading-relaxed italic">
+              <p className="text-slate-200 font-light text-lg leading-relaxed italic">
                 Avaliação em contratos SMB e Enterprise. Foco em churn silencioso (queda de engajamento, sinais indiretos). Inteligência que gera score acionável, não apenas alertas.
               </p>
 
               <div className="grid grid-cols-2 gap-8 pt-6">
                 <div className="space-y-2">
-                  <div className="text-4xl font-black text-primary">85%</div>
-                  <div className="text-[10px] uppercase font-bold tracking-widest text-slate-500">Acurácia Média</div>
+                  <div className="text-4xl font-black text-[#CEFF05] drop-shadow-[0_0_15px_rgba(206,255,5,0.3)]">85%</div>
+                  <div className="text-[10px] uppercase font-bold tracking-widest text-white">Acurácia Média</div>
                 </div>
                 <div className="space-y-2">
-                  <div className="text-4xl font-black text-primary">60 dias</div>
-                  <div className="text-[10px] uppercase font-bold tracking-widest text-slate-500">Antecedência</div>
+                  <div className="text-4xl font-black text-[#CEFF05] drop-shadow-[0_0_15px_rgba(206,255,5,0.3)]">60 dias</div>
+                  <div className="text-[10px] uppercase font-bold tracking-widest text-white">Antecedência</div>
                 </div>
               </div>
 
@@ -182,12 +182,12 @@ export default function LaboratorioPage() {
               {/* Timeline Visual */}
               <div className="space-y-12 relative z-10 pt-4 w-full">
                 <div className="flex justify-between items-center px-4">
-                  <span className="text-[10px] font-bold uppercase text-slate-500 tracking-tighter">Hoje</span>
-                  <span className="text-[10px] font-bold uppercase text-slate-500 tracking-tighter">+30 dias</span>
+                  <span className="text-[10px] font-bold uppercase text-slate-200 tracking-tighter">Hoje</span>
+                  <span className="text-[10px] font-bold uppercase text-slate-200 tracking-tighter">+30 dias</span>
                   <span className="text-[10px] font-bold uppercase text-primary tracking-tighter">+60 dias</span>
                 </div>
-                <div className="relative h-4 bg-slate-800 rounded-full overflow-hidden">
-                  <div className="absolute top-0 left-0 h-full w-[85%] bg-gradient-to-r from-slate-900 via-primary to-primary shadow-[0_0_20px_rgba(var(--primary-rgb),0.5)]" />
+                <div className="relative h-4 bg-white/10 rounded-full border border-white/20 overflow-hidden shadow-inner">
+                  <div className="absolute top-0 left-0 h-full w-[85%] bg-gradient-to-r from-primary/50 via-primary to-primary shadow-[0_0_20px_rgba(var(--primary-rgb),0.5)]" />
                 </div>
                 <div className="bg-primary/5 border border-primary/20 p-6 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4">
                   <div className="flex items-center space-x-4">
@@ -232,19 +232,19 @@ export default function LaboratorioPage() {
 
             <div className="space-y-6 relative">
               <h2 className="text-4xl md:text-6xl font-extrabold tracking-tight">Programa <span className="text-primary italic">Early Adopter</span> Talos</h2>
-              <p className="text-xl text-slate-400 font-light leading-relaxed max-w-2xl mx-auto">
+              <p className="text-xl text-slate-200 font-light leading-relaxed max-w-2xl mx-auto">
                 Selecionamos operações recorrentes complexas para participar do nosso programa de validação avançada. Acesso prioritário à nossa ciência de dados e acompanhamento direto do time executivo.
               </p>
             </div>
 
-            <Button asChild size="lg" className="h-16 px-12 bg-primary text-slate-950 font-bold text-lg rounded-full shadow-2xl shadow-primary/20 hover:scale-105 transition-all">
+            <Button asChild size="lg" className="h-16 px-12 bg-[#CEFF05] text-slate-950 font-bold text-lg rounded-full shadow-2xl shadow-primary/20 hover:bg-[#CEFF05]/90 hover:scale-105 transition-all">
               <Link href="/contato">
                 Candidatar minha Operação
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
             </Button>
 
-            <div className="pt-8 border-t border-white/5 w-full flex flex-col md:flex-row justify-center gap-8 md:gap-16 text-[10px] font-black uppercase tracking-[0.3em] text-slate-600">
+            <div className="pt-8 border-t border-white/5 w-full flex flex-col md:flex-row justify-center gap-8 md:gap-16 text-[10px] font-black uppercase tracking-[0.3em] text-slate-300">
               <span>Scientific Rigor</span>
               <span>Data Privacy first</span>
               <span>Financial Impact</span>
