@@ -320,9 +320,23 @@ export default function GoogleAdsLandingPage() {
                                 </div>
 
                                 <div className="pt-10 border-t border-white/10">
-                                    <p className="text-xs text-slate-500 uppercase tracking-widest">
-                                        Tempo médio de resposta: <span className="text-white font-bold">2 horas</span>
-                                    </p>
+                                    <div className="flex items-center gap-4">
+                                        {/* Avatares Empilhados para dar sensação de comunidade */}
+                                        <div className="flex -space-x-3">
+                                            <div className="h-10 w-10 rounded-full ring-2 ring-white/20 bg-gradient-to-br from-blue-500 to-blue-700 grid place-items-center text-[11px] font-extrabold text-white shadow-lg relative z-30 leading-none text-center">JD</div>
+                                            <div className="h-10 w-10 rounded-full ring-2 ring-white/20 bg-gradient-to-br from-purple-500 to-purple-700 grid place-items-center text-[11px] font-extrabold text-white shadow-lg relative z-20 leading-none text-center">MA</div>
+                                            <div className="h-10 w-10 rounded-full ring-2 ring-white/20 bg-gradient-to-br from-pink-500 to-pink-700 grid place-items-center text-[11px] font-extrabold text-white shadow-lg relative z-10 leading-none text-center">RK</div>
+                                        </div>
+
+                                        <div className="flex flex-col">
+                                            <p className="text-xs text-slate-300 font-medium">
+                                                <span className="text-[#CEFF05] font-bold">3 empresas</span> já enviaram o formulário de diagnóstico hoje.
+                                            </p>
+                                            <p className="text-[10px] text-slate-500 uppercase tracking-wider font-bold">
+                                                Última solicitação: há 14 min
+                                            </p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
