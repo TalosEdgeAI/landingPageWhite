@@ -46,6 +46,8 @@ import { cn } from "@/lib/utils"
 import { contactFormSchema, type ContactFormData } from "@/lib/schemas"
 import { submitContactForm } from "@/app/actions/contact"
 import { useToast } from "@/hooks/use-toast"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faBuilding } from "@fortawesome/free-regular-svg-icons"
 
 export default function GoogleAdsLandingPage() {
     const [isSubmitting, setIsSubmitting] = useState(false)
@@ -323,9 +325,15 @@ export default function GoogleAdsLandingPage() {
                                     <div className="flex items-center gap-4">
                                         {/* Avatares Empilhados para dar sensação de comunidade */}
                                         <div className="flex -space-x-3">
-                                            <div className="h-10 w-10 rounded-full ring-2 ring-white/20 bg-gradient-to-br from-blue-500 to-blue-700 grid place-items-center text-[11px] font-extrabold text-white shadow-lg relative z-30 leading-none text-center">JD</div>
-                                            <div className="h-10 w-10 rounded-full ring-2 ring-white/20 bg-gradient-to-br from-purple-500 to-purple-700 grid place-items-center text-[11px] font-extrabold text-white shadow-lg relative z-20 leading-none text-center">MA</div>
-                                            <div className="h-10 w-10 rounded-full ring-2 ring-white/20 bg-gradient-to-br from-pink-500 to-pink-700 grid place-items-center text-[11px] font-extrabold text-white shadow-lg relative z-10 leading-none text-center">RK</div>
+                                            <div className="h-10 w-10 rounded-full ring-2 ring-white/20 bg-gradient-to-br from-blue-500 to-blue-700 grid place-items-center text-white shadow-lg relative z-30">
+                                                <FontAwesomeIcon icon={faBuilding} className="h-5 w-5" />
+                                            </div>
+                                            <div className="h-10 w-10 rounded-full ring-2 ring-white/20 bg-gradient-to-br from-purple-500 to-purple-700 grid place-items-center text-white shadow-lg relative z-20">
+                                                <FontAwesomeIcon icon={faBuilding} className="h-5 w-5" />
+                                            </div>
+                                            <div className="h-10 w-10 rounded-full ring-2 ring-white/20 bg-gradient-to-br from-pink-500 to-pink-700 grid place-items-center text-white shadow-lg relative z-10">
+                                                <FontAwesomeIcon icon={faBuilding} className="h-5 w-5" />
+                                            </div>
                                         </div>
 
                                         <div className="flex flex-col">
