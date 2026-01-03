@@ -68,7 +68,7 @@ export default function TecnologiaPage() {
 
                         {[
                             { step: "01", icon: <Database />, label: "Conexão Segura", sub: "Ingestão via API ou Batch." },
-                            { step: "02", icon: <Binary />, label: "Processamento IA", sub: "Modelagem e Validação." },
+                            { step: "02", icon: <Binary />, label: "Processamento IA e Estatístico", sub: "Modelagem e Validação." },
                             { step: "03", icon: <BarChart3 />, label: "Dashboard & Alertas", sub: "Entrega de Valor e ROI." },
                         ].map((item, i) => (
                             <div key={i} className="relative z-10 flex flex-col items-center bg-primary p-8 rounded-2xl border border-white/20 w-full md:w-1/3">

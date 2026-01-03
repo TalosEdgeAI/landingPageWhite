@@ -8,8 +8,7 @@ export function Footer() {
         <div className="grid md:grid-cols-4 gap-12 mb-12">
           <div className="space-y-6">
             <Link href="/" className="flex items-center space-x-2">
-              <Brain className="h-6 w-6 text-primary" />
-              <span className="text-lg font-bold text-primary">Talos AI</span>
+              <img src="/TALOS.png" alt="Talos AI" className="h-10 w-auto" />
             </Link>
             <p className="text-muted-foreground text-sm leading-relaxed">
               Transformando dados financeiros em caixa livre através de inteligência artificial preditiva e ciência de dados de alta precisão.
