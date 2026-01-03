@@ -21,8 +21,9 @@ export function Header() {
     <header className="border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
       <div className="container mx-auto py-4 flex items-center justify-between">
         <Link href="/" className="flex items-center space-x-2">
-          <Brain className="h-8 w-8 text-primary" />
-          <span className="text-xl font-bold text-primary tracking-tight">Talos AI</span>
+          {/* <Brain className="h-8 w-8 text-primary" />
+          <span className="text-xl font-bold text-primary tracking-tight">Talos AI</span> */}
+          <img src="/TALOS.png" alt="Talos AI" className="h-12 w-auto" />
         </Link>
         <nav className="hidden md:flex items-center space-x-8">
           {navLinks.map((link) => (

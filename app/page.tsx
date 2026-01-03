@@ -39,7 +39,7 @@ export default function HomePage() {
         <div className="container mx-auto">
           <div className="flex flex-col lg:flex-row items-center gap-16">
             <div className="lg:w-1/2 space-y-8 text-center lg:text-left">
-              <h2 className="text-sm font-bold uppercase tracking-[0.2em] text-primary">Seção: O Problema (Problem Aware)</h2>
+              <h2 className="text-sm font-bold uppercase tracking-[0.2em] text-primary">O Problema (Problem Aware)</h2>
               <h3 className="text-3xl md:text-5xl font-bold text-slate-900 leading-tight">
                 O custo invisível da cobrança reativa.
               </h3>

@@ -79,9 +79,9 @@ export function Footer() {
           </div>
         </div>
         <div className="border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-muted-foreground">
-          <p>&copy; {new Date().getFullYear()} Talos AI. Todos os direitos reservados.</p>
+          <p>&copy; {new Date().getFullYear()} Talos Edge AI. Todos os direitos reservados.</p>
           <div className="flex space-x-6 mt-4 md:mt-0">
-            <span>São Paulo, SP</span>
+            <span>Pelotas, RS</span>
           </div>
         </div>
       </div>

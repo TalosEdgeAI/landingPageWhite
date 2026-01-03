@@ -3,6 +3,7 @@ import { z } from "zod"
 export const contactFormSchema = z.object({
     name: z.string().min(2, { message: "Nome completo é obrigatório" }),
     email: z.string().email({ message: "E-mail corporativo inválido" }),
+    phone: z.string().min(10, { message: "Telefone inválido" }),
     empresa: z.string().min(2, { message: "Nome da empresa é obrigatório" }),
     tamanhoOperacao: z.enum(["Até R$100 mil", "R$100 mil – R$500 mil", "R$500 mil – R$2 milhões", "Acima de R$2 milhões"], {
         required_error: "Selecione o tamanho da operação",

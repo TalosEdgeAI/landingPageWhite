@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { CheckCircle2, Loader2, ShieldCheck, Mail, Building2, User, DollarSign, Target, HeartHandshake } from "lucide-react"
+import { CheckCircle2, Loader2, ShieldCheck, Mail, Building2, User, DollarSign, Target, HeartHandshake, Phone } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
   Form,
@@ -37,6 +37,7 @@ export default function ContatoPage() {
     defaultValues: {
       name: "",
       email: "",
+      phone: "",
       empresa: "",
       tamanhoOperacao: undefined,
       ticketMedio: undefined,
@@ -143,7 +144,7 @@ export default function ContatoPage() {
         </div>
 
         <div className="pt-12 border-t border-white/10 text-[10px] uppercase tracking-[0.2em] font-bold text-slate-500">
-          São Paulo, Brasil | Worldwide Delivery
+          Pelotas, Brasil | Worldwide Delivery
         </div>
       </div>
 
@@ -151,8 +152,8 @@ export default function ContatoPage() {
       <div className="lg:w-[55%] p-8 lg:p-24 bg-white">
         <div className="max-w-xl mx-auto space-y-12">
           <div className="space-y-3">
-            <h2 className="text-2xl font-bold text-slate-900 italic tracking-tight underline decoration-primary underline-offset-8">Diagnóstico de Maturidade</h2>
-            <p className="text-slate-500 font-light italic text-sm">Preencha os campos abaixo para contextualizar seu cenário em menos de 2 minutos.</p>
+            <h2 className="text-2xl font-bold text-slate-900 italic tracking-tight underline decoration-primary underline-offset-8">Auditoria de Receita em Risco</h2>
+            <p className="text-slate-500 font-bold text-sm">Preencha os campos abaixo para contextualizar seu cenário em menos de 2 minutos.</p>
           </div>
 
           <Form {...form}>
@@ -194,22 +195,41 @@ export default function ContatoPage() {
                   />
                 </div>
 
-                <FormField
-                  control={form.control}
-                  name="empresa"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-xs font-bold uppercase tracking-widest text-slate-400">Nome da Empresa</FormLabel>
-                      <FormControl>
-                        <div className="relative group">
-                          <Building2 className="absolute left-0 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-300 group-focus-within:text-primary transition-colors" />
-                          <Input placeholder="Sua empresa S.A." className="pl-8 border-0 border-b-2 rounded-none border-slate-100 focus-visible:ring-0 focus-visible:border-primary transition-all pr-0" {...field} />
-                        </div>
-                      </FormControl>
-                      <FormMessage className="text-[10px]" />
-                    </FormItem>
-                  )}
-                />
+                <div className="grid md:grid-cols-2 gap-8">
+                  <FormField
+                    control={form.control}
+                    name="empresa"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-xs font-bold uppercase tracking-widest text-slate-400">Nome da Empresa</FormLabel>
+                        <FormControl>
+                          <div className="relative group">
+                            <Building2 className="absolute left-0 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-300 group-focus-within:text-primary transition-colors" />
+                            <Input placeholder="Sua empresa S.A." className="pl-8 border-0 border-b-2 rounded-none border-slate-100 focus-visible:ring-0 focus-visible:border-primary transition-all pr-0" {...field} />
+                          </div>
+                        </FormControl>
+                        <FormMessage className="text-[10px]" />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="phone"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-xs font-bold uppercase tracking-widest text-slate-400">Telefone / WhatsApp</FormLabel>
+                        <FormControl>
+                          <div className="relative group">
+                            <Phone className="absolute left-0 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-300 group-focus-within:text-primary transition-colors" />
+                            <Input placeholder="(00) 00000-0000" className="pl-8 border-0 border-b-2 rounded-none border-slate-100 focus-visible:ring-0 focus-visible:border-primary transition-all pr-0" {...field} />
+                          </div>
+                        </FormControl>
+                        <FormMessage className="text-[10px]" />
+                      </FormItem>
+                    )}
+                  />
+                </div>
 
                 {/* 4.2 Qualificação de porte (obrigatória) */}
                 <FormField
