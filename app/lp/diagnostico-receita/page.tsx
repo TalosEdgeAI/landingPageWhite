@@ -72,9 +72,25 @@ export default function GoogleAdsLandingPage() {
     async function onSubmit(values: ContactFormData) {
         setIsSubmitting(true)
         try {
-            const result = await submitContactForm(values)
-            if (result.success) {
+            // Call the API to send email via Resend
+            const response = await fetch('/api/send-email', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(values),
+            })
+
+            const result = await response.json()
+
+            if (response.ok && result.success) {
                 setIsSuccess(true)
+                form.reset() // Reset form on success
+                toast({
+                    title: "Sucesso!",
+                    description: "Sua solicitação foi enviada. Entraremos em contato em breve!",
+                })
+
                 // Disparar evento de conversão do Google Ads aqui
                 if (typeof window !== 'undefined' && (window as any).gtag) {
                     (window as any).gtag('event', 'conversion', {
@@ -82,10 +98,19 @@ export default function GoogleAdsLandingPage() {
                     });
                 }
             } else {
-                toast({ title: "Erro", description: "Tente novamente.", variant: "destructive" })
+                toast({
+                    title: "Erro",
+                    description: result.error || "Tente novamente.",
+                    variant: "destructive"
+                })
             }
         } catch (error) {
-            toast({ title: "Erro", description: "Erro inesperado.", variant: "destructive" })
+            console.error('Form submission error:', error)
+            toast({
+                title: "Erro",
+                description: "Erro ao enviar formulário. Tente novamente.",
+                variant: "destructive"
+            })
         } finally {
             setIsSubmitting(false)
         }
@@ -532,7 +557,7 @@ export default function GoogleAdsLandingPage() {
                                         <CheckCircle2 className="h-12 w-12" />
                                     </div>
                                     <h3 className="text-2xl font-bold text-slate-900">Solicitação Recebida!</h3>
-                                    <p className="text-slate-500">Nossa equipe de inteligência entrará em contato em breve para agendar a apresentação do diagnóstico.</p>
+                                    <p className="text-slate-500">Nossa equipe de inteligência entrará em contato em breve para agendar a reunião.</p>
                                     <Button variant="outline" onClick={() => setIsSuccess(false)}>Enviar outro contato</Button>
                                 </div>
                             ) : (
