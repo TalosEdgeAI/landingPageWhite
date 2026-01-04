@@ -289,7 +289,7 @@ export default function GoogleAdsLandingPage() {
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 0.8, delay: 0.2 }}
                     >
-                        Sua operação está vazando <br className="hidden md:block" />
+                        Sua operação está perdendo <br className="hidden md:block" />
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-purple-600">Dinheiro Invisível?</span>
                     </motion.h1>
 
