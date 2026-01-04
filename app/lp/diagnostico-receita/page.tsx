@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { motion } from "framer-motion"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import {
@@ -48,6 +49,8 @@ import { submitContactForm } from "@/app/actions/contact"
 import { useToast } from "@/hooks/use-toast"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faBuilding } from "@fortawesome/free-regular-svg-icons"
+import FinancialImpactChart from "@/components/FinancialImpactChart"
+import HeroRadarAnimation from "@/components/HeroRadarAnimation"
 
 export default function GoogleAdsLandingPage() {
     const [isSubmitting, setIsSubmitting] = useState(false)
@@ -110,43 +113,173 @@ export default function GoogleAdsLandingPage() {
                 </div>
             </header>
 
-            {/* 2. Hero Section: Foco em Dor e Promessa */}
-            <section className="pt-32 pb-20 lg:pt-40 lg:pb-32 relative overflow-hidden bg-slate-50">
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_50%_0%,_rgba(var(--primary-rgb),0.05)_0%,transparent_60%)]" />
 
-                <div className="container mx-auto px-4 text-center relative z-10 max-w-4xl">
-                    <div className="inline-flex items-center space-x-2 bg-white border border-slate-200 shadow-sm px-4 py-1.5 rounded-full mb-8">
+            {/* 2. Hero Section: Foco em Dor e Promessa (Layout: Command Center) */}
+            <section className="pt-32 pb-20 lg:pt-48 lg:pb-40 relative overflow-hidden bg-slate-50 flex flex-col items-center">
+
+                {/* Background: Gradiente Neural Sutil */}
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_50%_0%,_rgba(var(--primary-rgb),0.05)_0%,transparent_60%)] pointer-events-none" />
+
+                {/* --- SATÉLITES FLUTUANTES (Desktop Only) --- */}
+                {/* Lógica: Absolute positioning para não afetar o fluxo do texto central */}
+
+                {/* Satélite Esquerdo: O Risco (Storytelling: O Problema) */}
+                <motion.div
+                    className="hidden lg:block absolute left-[5%] top-[40%] xl:top-[45%] z-20 w-64 p-4 rounded-2xl bg-white/80 border border-red-100 shadow-xl backdrop-blur-md"
+                    initial={{ opacity: 0, x: -100, rotate: -10 }}
+                    animate={{ opacity: 1, x: 0, rotate: -3 }}
+                    transition={{ duration: 0.8, delay: 0.5, type: "spring", stiffness: 50 }}
+                >
+                    {/* Header do Card */}
+                    <div className="flex items-center gap-3 mb-3">
+                        <div className="p-2 bg-red-100 rounded-lg text-red-600 shadow-sm">
+                            <ShieldAlert className="w-5 h-5" />
+                        </div>
+                        <div>
+                            <p className="text-[10px] font-bold uppercase text-slate-500 tracking-wider">Alerta Crítico</p>
+                            <p className="text-xs font-bold text-slate-900">Cliente #4922</p>
+                        </div>
+                    </div>
+                    {/* Dado Crítico */}
+                    <div className="flex justify-between items-center text-xs bg-red-50 p-2 rounded-lg border border-red-100">
+                        <span className="text-slate-600 font-medium">Risco de Churn:</span>
+                        <span className="text-red-600 font-black text-sm">94%</span>
+                    </div>
+                </motion.div>
+
+                {/* Satélite Direito: A Solução (Storytelling: A Resolução) */}
+                <motion.div
+                    className="hidden lg:block absolute right-[5%] top-[50%] xl:top-[55%] z-20 w-72 p-5 rounded-3xl bg-[#0B0F19]/95 border border-[#CEFF05]/30 shadow-2xl shadow-[#CEFF05]/10 backdrop-blur-md"
+                    initial={{ opacity: 0, x: 100, rotate: 10 }}
+                    animate={{ opacity: 1, x: 0, rotate: 3 }}
+                    transition={{ duration: 0.8, delay: 1.2, type: "spring", stiffness: 60 }}
+                >
+                    {/* Header do Card */}
+                    <div className="flex items-center justify-between mb-4">
+                        <div className="flex items-center gap-2">
+                            <div className="p-1.5 bg-[#CEFF05] rounded-full text-slate-900 shadow-[0_0_10px_rgba(206,255,5,0.4)]">
+                                <Zap className="w-4 h-4" />
+                            </div>
+                            <span className="text-[10px] font-bold uppercase text-[#CEFF05] tracking-widest">Ação Automática</span>
+                        </div>
+                        {/* Status Indicator */}
+                        <div className="flex items-center gap-1.5">
+                            <span className="relative flex h-2 w-2">
+                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                                <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                            </span>
+                            <span className="text-[10px] font-bold text-green-500">Ativo</span>
+                        </div>
+                    </div>
+                    {/* Dado de Valor */}
+                    <div className="space-y-1">
+                        <p className="text-xs text-slate-400 font-medium">Receita Retida (Mês):</p>
+                        <p className="text-3xl font-mono font-bold text-white tracking-tight">
+                            R$ 14.250<span className="text-slate-500 text-lg">,00</span>
+                        </p>
+                    </div>
+                </motion.div>
+
+                {/* Satélite Esquerdo Inferior: Credit Risk (Storytelling: Outro Problema) */}
+                <motion.div
+                    className="hidden lg:block absolute left-[8%] top-[60%] xl:top-[65%] z-20 w-64 p-4 rounded-2xl bg-white/80 border border-orange-100 shadow-xl backdrop-blur-md"
+                    initial={{ opacity: 0, y: 50, rotate: 5 }}
+                    animate={{
+                        opacity: 1,
+                        y: 0,
+                        rotate: 2,
+                    }}
+                    transition={{ duration: 0.8, delay: 0.9, type: "spring", stiffness: 50 }}
+                    whileHover={{ y: -5, transition: { duration: 0.3 } }}
+                >
+                    {/* Header do Card */}
+                    <div className="flex items-center gap-3 mb-3">
+                        <div className="p-2 bg-orange-100 rounded-lg text-orange-600 shadow-sm">
+                            <ShieldAlert className="w-5 h-5" />
+                        </div>
+                        <div>
+                            <p className="text-[10px] font-bold uppercase text-slate-500 tracking-wider">Risco de Crédito</p>
+                            <p className="text-xs font-bold text-slate-900">Empresa #7834</p>
+                        </div>
+                    </div>
+                    {/* Dado Crítico */}
+                    <div className="space-y-1.5">
+                        <div className="flex justify-between items-center text-xs bg-orange-50 p-2 rounded-lg border border-orange-100">
+                            <span className="text-slate-600 font-medium">Score de Crédito:</span>
+                            <span className="text-orange-600 font-black text-sm">320</span>
+                        </div>
+                        <div className="flex justify-between items-center text-[10px] text-slate-500">
+                            <span>Prob. Inadimplência:</span>
+                            <span className="font-bold text-orange-600">78%</span>
+                        </div>
+                    </div>
+                </motion.div>
+
+
+                {/* --- CONTEÚDO CENTRAL (Texto & CTA) --- */}
+                <div className="container mx-auto px-4 relative z-10 max-w-4xl text-center">
+
+                    {/* 1. Badge (Pulsante) */}
+                    <motion.div
+                        className="inline-flex items-center space-x-2 bg-white border border-slate-200 shadow-sm px-4 py-1.5 rounded-full mb-8"
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5 }}
+                    >
                         <span className="relative flex h-2 w-2">
                             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
                             <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
                         </span>
                         <span className="text-xs font-bold uppercase tracking-wider text-slate-600">Pare de perder receita hoje</span>
-                    </div>
+                    </motion.div>
 
-                    <h1 className="text-4xl md:text-7xl font-extrabold text-slate-900 mb-8 leading-[1.1] tracking-tight">
-                        Sua operação está vazando <br />
+                    {/* 2. Título Principal (H1) */}
+                    <motion.h1
+                        className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-slate-900 mb-8 leading-[1.1] tracking-tight"
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.8, delay: 0.2 }}
+                    >
+                        Sua operação está vazando <br className="hidden md:block" />
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-purple-600">Dinheiro Invisível?</span>
-                    </h1>
+                    </motion.h1>
 
-                    <p className="text-xl text-slate-600 mb-10 max-w-2xl mx-auto font-light leading-relaxed">
+                    {/* 3. Subtítulo (P) */}
+                    <motion.p
+                        className="text-lg md:text-xl text-slate-600 mb-10 max-w-2xl mx-auto font-light leading-relaxed"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.8, delay: 0.4 }}
+                    >
                         Nossa <strong>IA preditiva</strong> identifica <strong>Inadimplência</strong> e <strong>Churn</strong> antes que eles impactem seu caixa.
                         Sem caixas pretas, <strong>focado exclusivamente em ROI.</strong>
-                    </p>
+                    </motion.p>
 
-                    <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                        <Button onClick={scrollToForm} size="lg" className="bg-[#CEFF05] text-slate-950 hover:bg-[#CEFF05]/90 text-lg px-8 py-7 h-auto rounded-full font-bold shadow-xl shadow-[#CEFF05]/20 hover:scale-105 transition-all w-full sm:w-auto">
+                    {/* 4. Botões (CTA) */}
+                    <motion.div
+                        className="flex flex-col sm:flex-row items-center justify-center gap-4"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, delay: 0.6 }}
+                    >
+                        <Button
+                            onClick={scrollToForm}
+                            size="lg"
+                            className="bg-[#CEFF05] text-slate-950 hover:bg-[#CEFF05]/90 text-lg px-8 py-7 h-auto rounded-full font-bold shadow-xl shadow-[#CEFF05]/20 hover:scale-105 transition-all w-full sm:w-auto"
+                        >
                             Simular Economia Agora
                             <ArrowRight className="ml-2 h-5 w-5" />
                         </Button>
+
                         <div className="flex items-center space-x-2 text-sm text-slate-500 font-medium px-4">
                             <ShieldCheck className="h-4 w-4 text-primary" />
                             <span>Dados 100% Blindados (LGPD)</span>
                         </div>
-                    </div>
+                    </motion.div>
                 </div>
             </section>
 
-            {/* 3. The Visual Problem (Timeline Component - Reused for Impact) */}
+            {/* 3. The Visual Problem (Financial Alligator Chart) */}
             <section className="py-20 bg-white border-y border-slate-100">
                 <div className="container mx-auto px-4">
                     <div className="text-center mb-16">
@@ -154,53 +287,28 @@ export default function GoogleAdsLandingPage() {
                         <h3 className="text-3xl md:text-4xl font-bold text-slate-900">Por que esperar o vencimento é um erro caro.</h3>
                     </div>
 
-                    {/* Visual Timeline (Simplificado para Mobile/Desktop) */}
-                    <div className="max-w-5xl mx-auto bg-slate-50 p-6 md:p-12 rounded-[2.5rem] border border-slate-200 shadow-2xl relative overflow-hidden">
-                        {/* Aqui inserimos a estrutura visual da Timeline que você já tem no Home, 
-                    mas focada na comparação visual rápida. */}
-                        <div className="space-y-12">
-                            {/* Régua Reativa */}
-                            <div className="opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
-                                <div className="flex justify-between text-xs font-bold uppercase text-slate-400 mb-2">
-                                    <span>Dia -15</span>
-                                    <span className="text-red-500">Vencimento (Dia 0)</span>
-                                    <span>Dia +15</span>
-                                </div>
-                                <div className="h-12 bg-slate-200 rounded-xl relative overflow-hidden flex items-center">
-                                    <div className="w-1/2 h-full border-r-2 border-red-500/50 relative">
-                                        <span className="absolute right-2 top-1/2 -translate-y-1/2 text-[10px] text-slate-500 font-medium">Silêncio...</span>
-                                    </div>
-                                    <div className="flex-1 h-full bg-red-100 flex items-center pl-4">
-                                        <span className="text-xs font-bold text-red-600 flex items-center gap-2">
-                                            <ShieldAlert className="h-4 w-4" /> Cobrança Tardia
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
+                    {/* New Financial Impact Chart Component */}
+                    <div className="max-w-6xl mx-auto">
+                        <FinancialImpactChart />
+                    </div>
 
-                            {/* Régua Talos */}
-                            <div className="relative transform md:scale-105 transition-transform">
-                                <div className="absolute -left-4 top-1/2 -translate-y-1/2 -rotate-90 text-[10px] font-black uppercase text-[#CEFF05] bg-slate-900 px-3 py-1 rounded-md shadow-lg hidden md:block">
-                                    Talos AI
-                                </div>
-                                <div className="h-20 bg-slate-900 rounded-2xl relative overflow-hidden flex items-center shadow-2xl shadow-primary/20 border border-primary/20">
-                                    {/* Zona de IA */}
-                                    <div className="absolute left-[15%] w-[35%] h-[80%] bg-[#CEFF05]/10 border border-[#CEFF05]/30 rounded-xl flex flex-col items-center justify-center text-center">
-                                        <Zap className="h-4 w-4 text-[#CEFF05] mb-1 animate-pulse" />
-                                        <span className="text-[10px] font-bold text-[#CEFF05] uppercase leading-tight">Intervenção<br />Preventiva</span>
-                                    </div>
-
-                                    {/* Linha do tempo */}
-                                    <div className="w-full h-px bg-white/10 absolute top-1/2" />
-                                    <div className="absolute left-1/2 h-full w-px bg-white/20" /> {/* Dia 0 */}
-
-                                    <div className="absolute right-10 text-right">
-                                        <span className="text-white font-bold text-sm block">Receita Salva</span>
-                                        <span className="text-xs text-slate-400">Antes do problema escalar</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    {/* CTA Button - Outside Chart */}
+                    <div className="mt-12 flex justify-center">
+                        <motion.button
+                            onClick={scrollToForm}
+                            className="px-8 py-4 text-lg font-bold bg-[#CEFF05] text-slate-900 hover:bg-[#CEFF05]/80 rounded-xl shadow-xl shadow-[#CEFF05]/20 transition-colors"
+                            animate={{
+                                scale: [1, 1.03, 1],
+                            }}
+                            transition={{
+                                duration: 3,
+                                repeat: Infinity,
+                                ease: "easeInOut"
+                            }}
+                            whileHover={{ scale: 1.05 }}
+                        >
+                            Parar de Perder Dinheiro
+                        </motion.button>
                     </div>
                 </div>
             </section>
@@ -460,8 +568,8 @@ export default function GoogleAdsLandingPage() {
                                             )}
                                         />
 
-                                        <Button type="submit" disabled={isSubmitting} className="w-full h-14 text-lg font-bold bg-[#CEFF05] text-slate-900 hover:bg-[#CEFF05]/80 rounded-xl shadow-xl shadow-[#CEFF05]/20 mt-4">
-                                            {isSubmitting ? <Loader2 className="animate-spin" /> : "Solicitar Análise Gratuita"}
+                                        <Button type="submit" disabled={isSubmitting} className="w-full h-14 text-lg font-bold bg-[#CEFF05] text-slate-900 hover:bg-[#CEFF05]/80 rounded-xl shadow-xl shadow-[#CEFF05]/20 mt-4 transition-all hover:scale-[1.02]">
+                                            {isSubmitting ? <Loader2 className="animate-spin" /> : "Parar de Perder Dinheiro"}
                                         </Button>
                                     </form>
                                 </Form>
