@@ -378,7 +378,7 @@ export default function GoogleAdsLandingPage() {
                             <ul className="space-y-4 pt-4">
                                 {[
                                     "Recuperação +15% superior à régua tradicional.",
-                                    "Predição de Churn com 60 dias de antecedência.",
+                                    "Predição de Churn com 15 a 30 dias de antecedência.",
                                     "Redução drástica de False Positives na cobrança."
                                 ].map((item, i) => (
                                     <li key={i} className="flex items-center space-x-3">
@@ -447,7 +447,7 @@ export default function GoogleAdsLandingPage() {
                                 </div>
                                 <div>
                                     <h3 className="text-lg font-bold text-slate-900 mb-2">Retenção Inteligente</h3>
-                                    <p className="text-sm text-slate-500">Identifique <strong>risco de cancelamento</strong> com <strong>60 dias de antecedência</strong>.</p>
+                                    <p className="text-sm text-slate-500">Identifique <strong>risco de cancelamento</strong> com <strong>15 a 30 dias de antecedência</strong>.</p>
                                 </div>
                             </div>
                         </div>
