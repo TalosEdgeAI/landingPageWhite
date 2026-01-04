@@ -51,6 +51,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faBuilding } from "@fortawesome/free-regular-svg-icons"
 import FinancialImpactChart from "@/components/FinancialImpactChart"
 import HeroRadarAnimation from "@/components/HeroRadarAnimation"
+import DashboardShowcase from "@/components/DashboardShowcase"
 
 export default function GoogleAdsLandingPage() {
     const [isSubmitting, setIsSubmitting] = useState(false)
@@ -481,6 +482,9 @@ export default function GoogleAdsLandingPage() {
                     </div>
                 </div>
             </section>
+
+            {/* Novo: Dashboard Showcase (Visibilidade Total) */}
+            <DashboardShowcase />
 
             {/* 6. FORMULÁRIO DE CONVERSÃO (O Grande Final) */}
             <section id="diagnostico-form" className="py-24 bg-white relative overflow-hidden">
