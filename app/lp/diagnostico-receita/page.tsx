@@ -127,8 +127,20 @@ export default function GoogleAdsLandingPage() {
                 <motion.div
                     className="hidden lg:block absolute left-[5%] top-[40%] xl:top-[45%] z-20 w-64 p-4 rounded-2xl bg-white/80 border border-red-100 shadow-xl backdrop-blur-md"
                     initial={{ opacity: 0, x: -100, rotate: -10 }}
-                    animate={{ opacity: 1, x: 0, rotate: -3 }}
-                    transition={{ duration: 0.8, delay: 0.5, type: "spring", stiffness: 50 }}
+                    animate={{
+                        opacity: 1,
+                        x: [0, 5, 0, -5, 0],
+                        y: [0, -5, 0, 5, 0],
+                        rotate: -3,
+                        scale: [1, 1.02, 1, 1.02, 1],
+                    }}
+                    transition={{
+                        opacity: { duration: 0.8, delay: 0.5 },
+                        x: { duration: 8, repeat: Infinity, ease: "easeInOut" },
+                        y: { duration: 8, repeat: Infinity, ease: "easeInOut" },
+                        scale: { duration: 4, repeat: Infinity, ease: "easeInOut" },
+                        rotate: { duration: 0.8, delay: 0.5, type: "spring", stiffness: 50 },
+                    }}
                 >
                     {/* Header do Card */}
                     <div className="flex items-center gap-3 mb-3">
@@ -151,8 +163,20 @@ export default function GoogleAdsLandingPage() {
                 <motion.div
                     className="hidden lg:block absolute right-[5%] top-[50%] xl:top-[55%] z-20 w-72 p-5 rounded-3xl bg-[#0B0F19]/95 border border-[#CEFF05]/30 shadow-2xl shadow-[#CEFF05]/10 backdrop-blur-md"
                     initial={{ opacity: 0, x: 100, rotate: 10 }}
-                    animate={{ opacity: 1, x: 0, rotate: 3 }}
-                    transition={{ duration: 0.8, delay: 1.2, type: "spring", stiffness: 60 }}
+                    animate={{
+                        opacity: 1,
+                        x: [0, -6, 0, 6, 0],
+                        y: [0, 6, 0, -6, 0],
+                        rotate: 3,
+                        scale: [1, 1.02, 1, 1.02, 1],
+                    }}
+                    transition={{
+                        opacity: { duration: 0.8, delay: 1.2 },
+                        x: { duration: 9, repeat: Infinity, ease: "easeInOut" },
+                        y: { duration: 9, repeat: Infinity, ease: "easeInOut" },
+                        scale: { duration: 5, repeat: Infinity, ease: "easeInOut" },
+                        rotate: { duration: 0.8, delay: 1.2, type: "spring", stiffness: 60 },
+                    }}
                 >
                     {/* Header do Card */}
                     <div className="flex items-center justify-between mb-4">
