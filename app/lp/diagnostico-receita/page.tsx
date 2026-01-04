@@ -107,7 +107,7 @@ export default function GoogleAdsLandingPage() {
                         {/* <div className="h-8 w-8 bg-slate-900 rounded-lg flex items-center justify-center text-[#CEFF05] font-black">T</div>
              <span className="text-xl font-bold text-slate-900 tracking-tight">Talos<span className="text-primary">.AI</span></span> */}
                     </div>
-                    <Button onClick={scrollToForm} className="bg-slate-900 text-white hover:bg-primary hover:scale-105 transition-all rounded-full font-bold px-6">
+                    <Button onClick={scrollToForm} className="bg-[#CEFF05] text-slate-950 hover:bg-[#CEFF05]/90 hover:scale-105 transition-all rounded-full font-bold px-6 shadow-lg shadow-[#CEFF05]/20">
                         Solicitar Diagnóstico
                     </Button>
                 </div>
@@ -115,7 +115,7 @@ export default function GoogleAdsLandingPage() {
 
 
             {/* 2. Hero Section: Foco em Dor e Promessa (Layout: Command Center) */}
-            <section className="pt-32 pb-20 lg:pt-48 lg:pb-40 relative overflow-hidden bg-slate-50 flex flex-col items-center">
+            <section className="pt-20 pb-20 lg:pt-20 lg:pb-40 relative overflow-hidden bg-slate-50 flex flex-col items-center">
 
                 {/* Background: Gradiente Neural Sutil */}
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_50%_0%,_rgba(var(--primary-rgb),0.05)_0%,transparent_60%)] pointer-events-none" />
@@ -388,28 +388,71 @@ export default function GoogleAdsLandingPage() {
                 </div>
             </section>
 
-            {/* 5. Soluções Cards (Simplificado para Leads) */}
-            <section className="py-24 bg-slate-50">
+            {/* 5. Soluções Cards (Grid 2x2 - Motor de Inteligência) */}
+            <section className="py-16 bg-slate-50">
                 <div className="container mx-auto px-4 max-w-6xl">
-                    <div className="text-center mb-16">
-                        <h2 className="text-3xl font-bold text-slate-900">O que a Talos resolve para você</h2>
+                    <div className="text-center mb-12">
+                        <h2 className="text-3xl font-bold text-slate-900">O Motor de Inteligência Talos</h2>
+                        <p className="text-slate-500 mt-3 max-w-2xl mx-auto">
+                            Uma suíte completa para proteger e expandir sua receita recorrente.
+                        </p>
                     </div>
-                    <div className="grid md:grid-cols-3 gap-8">
-                        <div className="bg-white p-8 rounded-3xl shadow-sm border border-slate-100 hover:border-primary/50 transition-colors group">
-                            <ShieldAlert className="h-10 w-10 text-primary mb-6 group-hover:scale-110 transition-transform" />
-                            <h3 className="text-xl font-bold text-slate-900 mb-3">Previsão de Inadimplência</h3>
-                            <p className="text-slate-500 leading-relaxed">Antecipe quem vai atrasar e aja preventivamente sem atrito desnecessário.</p>
+
+                    {/* Grid 2x2 para Desktop, 1 coluna para Mobile */}
+                    <div className="grid md:grid-cols-2 gap-4">
+
+                        {/* 1. Inadimplência (Defesa) */}
+                        <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:border-red-200 transition-colors group">
+                            <div className="flex items-start gap-4">
+                                <div className="h-10 w-10 bg-red-50 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                                    <ShieldAlert className="h-5 w-5 text-red-500" />
+                                </div>
+                                <div>
+                                    <h3 className="text-lg font-bold text-slate-900 mb-2">Blindagem de Caixa</h3>
+                                    <p className="text-sm text-slate-500">Antecipe inadimplência com <strong>scores de risco</strong> e aja <strong>antes do vencimento</strong>.</p>
+                                </div>
+                            </div>
                         </div>
-                        <div className="bg-white p-8 rounded-3xl shadow-sm border border-slate-100 hover:border-primary/50 transition-colors group">
-                            <UserMinus className="h-10 w-10 text-primary mb-6 group-hover:scale-110 transition-transform" />
-                            <h3 className="text-xl font-bold text-slate-900 mb-3">Retenção (Churn)</h3>
-                            <p className="text-slate-500 leading-relaxed">Identifique o risco silencioso de cancelamento antes que o cliente vá embora.</p>
+
+                        {/* 2. Churn (Defesa) */}
+                        <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:border-orange-200 transition-colors group">
+                            <div className="flex items-start gap-4">
+                                <div className="h-10 w-10 bg-orange-50 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                                    <UserMinus className="h-5 w-5 text-orange-500" />
+                                </div>
+                                <div>
+                                    <h3 className="text-lg font-bold text-slate-900 mb-2">Retenção Inteligente</h3>
+                                    <p className="text-sm text-slate-500">Identifique <strong>risco de cancelamento</strong> com <strong>60 dias de antecedência</strong>.</p>
+                                </div>
+                            </div>
                         </div>
-                        <div className="bg-white p-8 rounded-3xl shadow-sm border border-slate-100 hover:border-primary/50 transition-colors group">
-                            <Database className="h-10 w-10 text-primary mb-6 group-hover:scale-110 transition-transform" />
-                            <h3 className="text-xl font-bold text-slate-900 mb-3">Auditoria de Dados</h3>
-                            <p className="text-slate-500 leading-relaxed">Descubra se seus dados estão prontos para IA e onde estão as falhas de governança.</p>
+
+                        {/* 3. Growth (Ataque) - NBO/Pricing */}
+                        <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:border-[#CEFF05] transition-colors group">
+                            <div className="flex items-start gap-4">
+                                <div className="h-10 w-10 bg-[#CEFF05]/20 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                                    <Zap className="h-5 w-5 text-slate-900" />
+                                </div>
+                                <div>
+                                    <h3 className="text-lg font-bold text-slate-900 mb-2">Expansão de Receita</h3>
+                                    <p className="text-sm text-slate-500">Sugere <strong>Preço Ideal</strong> de renovação e <strong>Upsell (NBO)</strong> personalizado.</p>
+                                </div>
+                            </div>
                         </div>
+
+                        {/* 4. Save List (Inteligência) */}
+                        <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:border-blue-200 transition-colors group">
+                            <div className="flex items-start gap-4">
+                                <div className="h-10 w-10 bg-blue-50 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                                    <BarChart3 className="h-5 w-5 text-blue-600" />
+                                </div>
+                                <div>
+                                    <h3 className="text-lg font-bold text-slate-900 mb-2">Priorização por ROI</h3>
+                                    <p className="text-sm text-slate-500">Receba a <strong>"Save List"</strong> ordenada por <strong>impacto financeiro real</strong>.</p>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </section>
