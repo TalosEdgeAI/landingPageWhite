@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 import { motion } from "framer-motion"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -54,8 +55,8 @@ import HeroRadarAnimation from "@/components/HeroRadarAnimation"
 import DashboardShowcase from "@/components/DashboardShowcase"
 
 export default function GoogleAdsLandingPage() {
+    const router = useRouter()
     const [isSubmitting, setIsSubmitting] = useState(false)
-    const [isSuccess, setIsSuccess] = useState(false)
     const { toast } = useToast()
 
     const form = useForm<ContactFormData>({
@@ -85,19 +86,10 @@ export default function GoogleAdsLandingPage() {
             const result = await response.json()
 
             if (response.ok && result.success) {
-                setIsSuccess(true)
-                form.reset() // Reset form on success
-                toast({
-                    title: "Sucesso!",
-                    description: "Sua solicitação foi enviada. Entraremos em contato em breve!",
-                })
-
-                // Disparar evento de conversão do Google Ads aqui
-                if (typeof window !== 'undefined' && (window as any).gtag) {
-                    (window as any).gtag('event', 'conversion', {
-                        'send_to': 'AW-SEU_ID_AQUI/LABEL_CONVERSAO_AQUI'
-                    });
-                }
+                form.reset()
+                // Redirecionar para página de obrigado (conversão)
+                router.push('/lp/diagnostico-receita/obrigado')
+                return
             } else {
                 toast({
                     title: "Erro",
@@ -555,121 +547,110 @@ export default function GoogleAdsLandingPage() {
 
                         {/* Lado Direito: O Formulário */}
                         <div className="lg:w-3/5 bg-white p-8 lg:p-16">
-                            {isSuccess ? (
-                                <div className="h-full flex flex-col items-center justify-center text-center space-y-6 animate-in fade-in duration-500">
-                                    <div className="h-24 w-24 bg-green-100 rounded-full flex items-center justify-center text-green-600 mb-4">
-                                        <CheckCircle2 className="h-12 w-12" />
+                            <Form {...form}>
+                                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                                    <div className="grid md:grid-cols-2 gap-6">
+                                        <FormField
+                                            control={form.control}
+                                            name="name"
+                                            render={({ field }) => (
+                                                <FormItem>
+                                                    <FormLabel className="text-xs font-bold uppercase text-slate-400">Nome</FormLabel>
+                                                    <FormControl><Input placeholder="Seu nome" className="bg-slate-50 border-0" {...field} /></FormControl>
+                                                    <FormMessage />
+                                                </FormItem>
+                                            )}
+                                        />
+                                        <FormField
+                                            control={form.control}
+                                            name="phone"
+                                            render={({ field }) => (
+                                                <FormItem>
+                                                    <FormLabel className="text-xs font-bold uppercase text-slate-400">WhatsApp</FormLabel>
+                                                    <FormControl><Input placeholder="(00) 00000-0000" className="bg-slate-50 border-0" {...field} /></FormControl>
+                                                    <FormMessage />
+                                                </FormItem>
+                                            )}
+                                        />
                                     </div>
-                                    <h3 className="text-2xl font-bold text-slate-900">Solicitação Recebida!</h3>
-                                    <p className="text-slate-500">Nossa equipe de inteligência entrará em contato em breve para agendar a reunião.</p>
-                                    <Button variant="outline" onClick={() => setIsSuccess(false)}>Enviar outro contato</Button>
-                                </div>
-                            ) : (
-                                <Form {...form}>
-                                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                                        <div className="grid md:grid-cols-2 gap-6">
-                                            <FormField
-                                                control={form.control}
-                                                name="name"
-                                                render={({ field }) => (
-                                                    <FormItem>
-                                                        <FormLabel className="text-xs font-bold uppercase text-slate-400">Nome</FormLabel>
-                                                        <FormControl><Input placeholder="Seu nome" className="bg-slate-50 border-0" {...field} /></FormControl>
-                                                        <FormMessage />
-                                                    </FormItem>
-                                                )}
-                                            />
-                                            <FormField
-                                                control={form.control}
-                                                name="phone"
-                                                render={({ field }) => (
-                                                    <FormItem>
-                                                        <FormLabel className="text-xs font-bold uppercase text-slate-400">WhatsApp</FormLabel>
-                                                        <FormControl><Input placeholder="(00) 00000-0000" className="bg-slate-50 border-0" {...field} /></FormControl>
-                                                        <FormMessage />
-                                                    </FormItem>
-                                                )}
-                                            />
-                                        </div>
 
+                                    <FormField
+                                        control={form.control}
+                                        name="email"
+                                        render={({ field }) => (
+                                            <FormItem>
+                                                <FormLabel className="text-xs font-bold uppercase text-slate-400">E-mail Corporativo</FormLabel>
+                                                <FormControl><Input placeholder="voce@empresa.com" className="bg-slate-50 border-0" {...field} /></FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
+
+                                    <div className="grid md:grid-cols-2 gap-6">
                                         <FormField
                                             control={form.control}
-                                            name="email"
+                                            name="empresa"
                                             render={({ field }) => (
                                                 <FormItem>
-                                                    <FormLabel className="text-xs font-bold uppercase text-slate-400">E-mail Corporativo</FormLabel>
-                                                    <FormControl><Input placeholder="voce@empresa.com" className="bg-slate-50 border-0" {...field} /></FormControl>
+                                                    <FormLabel className="text-xs font-bold uppercase text-slate-400">Empresa</FormLabel>
+                                                    <FormControl><Input placeholder="Nome da Empresa" className="bg-slate-50 border-0" {...field} /></FormControl>
                                                     <FormMessage />
                                                 </FormItem>
                                             )}
                                         />
-
-                                        <div className="grid md:grid-cols-2 gap-6">
-                                            <FormField
-                                                control={form.control}
-                                                name="empresa"
-                                                render={({ field }) => (
-                                                    <FormItem>
-                                                        <FormLabel className="text-xs font-bold uppercase text-slate-400">Empresa</FormLabel>
-                                                        <FormControl><Input placeholder="Nome da Empresa" className="bg-slate-50 border-0" {...field} /></FormControl>
-                                                        <FormMessage />
-                                                    </FormItem>
-                                                )}
-                                            />
-                                            <FormField
-                                                control={form.control}
-                                                name="tamanhoOperacao"
-                                                render={({ field }) => (
-                                                    <FormItem>
-                                                        <FormLabel className="text-xs font-bold uppercase text-slate-400">Tamanho (MRR)</FormLabel>
-                                                        <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                                            <FormControl>
-                                                                <SelectTrigger className="bg-slate-50 border-0">
-                                                                    <SelectValue placeholder="Selecione" />
-                                                                </SelectTrigger>
-                                                            </FormControl>
-                                                            <SelectContent>
-                                                                <SelectItem value="Até R$100 mil">Até R$100 mil</SelectItem>
-                                                                <SelectItem value="R$100 mil – R$500 mil">R$100 mil – R$500 mil</SelectItem>
-                                                                <SelectItem value="R$500 mil – R$2 milhões">R$500 mil – R$2 milhões</SelectItem>
-                                                                <SelectItem value="Acima de R$2 milhões">Acima de R$2 milhões</SelectItem>
-                                                            </SelectContent>
-                                                        </Select>
-                                                        <FormMessage />
-                                                    </FormItem>
-                                                )}
-                                            />
-                                        </div>
-
                                         <FormField
                                             control={form.control}
-                                            name="dorPrincipal"
+                                            name="tamanhoOperacao"
                                             render={({ field }) => (
                                                 <FormItem>
-                                                    <FormLabel className="text-xs font-bold uppercase text-slate-400 mb-3 block">Maior desafio hoje</FormLabel>
-                                                    <FormControl>
-                                                        <RadioGroup onValueChange={field.onChange} defaultValue={field.value} className="grid grid-cols-1 gap-3">
-                                                            {["Inadimplência / atrasos recorrentes", "Cancelamento de clientes (churn)", "Crescer receita na base atual (LTV / Upsell)"].map((opt) => (
-                                                                <FormItem key={opt} className="flex items-center space-x-3 space-y-0 p-3 rounded-lg border border-slate-100 cursor-pointer hover:bg-slate-50 [&:has(:checked)]:border-primary [&:has(:checked)]:bg-primary/5">
-                                                                    <FormControl>
-                                                                        <RadioGroupItem value={opt} />
-                                                                    </FormControl>
-                                                                    <FormLabel className="font-normal cursor-pointer w-full text-slate-700 text-sm">{opt}</FormLabel>
-                                                                </FormItem>
-                                                            ))}
-                                                        </RadioGroup>
-                                                    </FormControl>
+                                                    <FormLabel className="text-xs font-bold uppercase text-slate-400">Tamanho (MRR)</FormLabel>
+                                                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                                        <FormControl>
+                                                            <SelectTrigger className="bg-slate-50 border-0">
+                                                                <SelectValue placeholder="Selecione" />
+                                                            </SelectTrigger>
+                                                        </FormControl>
+                                                        <SelectContent>
+                                                            <SelectItem value="Até R$100 mil">Até R$100 mil</SelectItem>
+                                                            <SelectItem value="R$100 mil – R$500 mil">R$100 mil – R$500 mil</SelectItem>
+                                                            <SelectItem value="R$500 mil – R$2 milhões">R$500 mil – R$2 milhões</SelectItem>
+                                                            <SelectItem value="Acima de R$2 milhões">Acima de R$2 milhões</SelectItem>
+                                                        </SelectContent>
+                                                    </Select>
                                                     <FormMessage />
                                                 </FormItem>
                                             )}
                                         />
+                                    </div>
 
-                                        <Button type="submit" disabled={isSubmitting} className="w-full h-14 text-lg font-bold bg-[#CEFF05] text-slate-900 hover:bg-[#CEFF05]/80 rounded-xl shadow-xl shadow-[#CEFF05]/20 mt-4 transition-all hover:scale-[1.02]">
-                                            {isSubmitting ? <Loader2 className="animate-spin" /> : "Parar de Perder Dinheiro"}
-                                        </Button>
-                                    </form>
-                                </Form>
-                            )}
+                                    <FormField
+                                        control={form.control}
+                                        name="dorPrincipal"
+                                        render={({ field }) => (
+                                            <FormItem>
+                                                <FormLabel className="text-xs font-bold uppercase text-slate-400 mb-3 block">Maior desafio hoje</FormLabel>
+                                                <FormControl>
+                                                    <RadioGroup onValueChange={field.onChange} defaultValue={field.value} className="grid grid-cols-1 gap-3">
+                                                        {["Inadimplência / atrasos recorrentes", "Cancelamento de clientes (churn)", "Crescer receita na base atual (LTV / Upsell)"].map((opt) => (
+                                                            <FormItem key={opt} className="flex items-center space-x-3 space-y-0 p-3 rounded-lg border border-slate-100 cursor-pointer hover:bg-slate-50 [&:has(:checked)]:border-primary [&:has(:checked)]:bg-primary/5">
+                                                                <FormControl>
+                                                                    <RadioGroupItem value={opt} />
+                                                                </FormControl>
+                                                                <FormLabel className="font-normal cursor-pointer w-full text-slate-700 text-sm">{opt}</FormLabel>
+                                                            </FormItem>
+                                                        ))}
+                                                    </RadioGroup>
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
+
+                                    <Button type="submit" disabled={isSubmitting} className="w-full h-14 text-lg font-bold bg-[#CEFF05] text-slate-900 hover:bg-[#CEFF05]/80 rounded-xl shadow-xl shadow-[#CEFF05]/20 mt-4 transition-all hover:scale-[1.02]">
+                                        {isSubmitting ? <Loader2 className="animate-spin" /> : "Parar de Perder Dinheiro"}
+                                    </Button>
+                                </form>
+                            </Form>
                         </div>
                     </div>
                 </div>
