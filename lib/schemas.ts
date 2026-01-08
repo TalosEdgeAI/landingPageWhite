@@ -5,7 +5,13 @@ export const contactFormSchema = z.object({
     email: z.string().email({ message: "E-mail corporativo inválido" }),
     phone: z.string().min(10, { message: "Telefone inválido" }),
     empresa: z.string().min(2, { message: "Nome da empresa é obrigatório" }),
-    tamanhoOperacao: z.enum(["Até R$100 mil", "R$100 mil – R$500 mil", "R$500 mil – R$2 milhões", "Acima de R$2 milhões"], {
+    tamanhoOperacao: z.enum([
+        "Até R$100 mil",
+        "R$100 mil – R$500 mil",
+        "R$500 mil – R$2 milhões",
+        "Acima de R$500 mil",
+        "Acima de R$2 milhões"
+    ], {
         required_error: "Selecione o tamanho da operação",
     }),
     ticketMedio: z.enum(["Até R$100", "R$100 – R$500", "R$500 – R$2.000", "Acima de R$2.000"]).optional(),
@@ -13,7 +19,11 @@ export const contactFormSchema = z.object({
         "Inadimplência / atrasos recorrentes",
         "Cancelamento de clientes (churn)",
         "Crescer receita na base atual (LTV / Upsell)",
-        "Não sei exatamente — preciso de um diagnóstico"
+        "Não sei exatamente — preciso de um diagnóstico",
+        "Processos Financeiros (Boletos/Notas)",
+        "Processos Comerciais (CRM/Leads)",
+        "Integração de Sistemas (API/Banco)",
+        "Agentes de IA / Atendimento"
     ], {
         required_error: "Selecione a dor principal",
     }),
