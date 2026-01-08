@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect } from "react"
+import Script from "next/script"
 import { motion } from "framer-motion"
 import { CheckCircle2, ArrowRight } from "lucide-react"
 import Link from "next/link"
@@ -9,6 +10,20 @@ import { Button } from "@/components/ui/button"
 export default function ObrigadoPage() {
     return (
         <div className="flex min-h-screen flex-col items-center justify-center bg-slate-950 text-white p-4 relative overflow-hidden">
+
+            {/* --- BLOCO DE CONVERSÃO --- */}
+            <Script id="google-conversion" strategy="afterInteractive">
+                {`
+                    if (typeof gtag === 'function') {
+                        gtag('event', 'conversion', {
+                            'send_to': 'AW-17848976773/X8hgCN2uq98bEIWLh79C',
+                            'value': 1.0,
+                            'currency': 'BRL'
+                        });
+                    }
+                `}
+            </Script>
+            {/* ------------------------- */} 
 
             {/* Background Effects */}
             <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_0%,_rgba(206,255,5,0.1)_0%,transparent_70%)] pointer-events-none" />

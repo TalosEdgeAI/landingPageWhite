@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { useRouter } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 import { motion } from "framer-motion"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -55,8 +55,21 @@ import { faBuilding } from "@fortawesome/free-regular-svg-icons"
 // Para este exemplo, usarei placeholders visuais caso os componentes originais sejam muito específicos financeiramente
 import AutomationDashboardShowcase from "@/components/AutomationDashboardShowcase"
 
+import { Suspense } from "react"
+// ...
+
 export default function AutomationLandingPage() {
+    return (
+        <Suspense fallback={<div>Carregando...</div>}>
+            <AutomationLandingPageContent />
+        </Suspense>
+    )
+}
+
+function AutomationLandingPageContent() {
     const router = useRouter()
+    const searchParams = useSearchParams()
+    // ...
     const [isSubmitting, setIsSubmitting] = useState(false)
     const { toast } = useToast()
     const isMobile = useIsMobile()
@@ -77,7 +90,19 @@ export default function AutomationLandingPage() {
         setIsSubmitting(true)
         try {
             // Ajustar o endpoint ou adicionar um campo 'source' para saber que veio da LP de Automação
-            const payload = { ...values, source: "lp-automacao-n8n" }
+            // Ajustar o endpoint ou adicionar um campo 'source' para saber que veio da LP de Automação
+            const trackingData = {
+                utm_source: searchParams.get("utm_source"),
+                utm_medium: searchParams.get("utm_medium"),
+                utm_campaign: searchParams.get("utm_campaign"),
+                oferta_origem: searchParams.get("oferta"),
+            }
+
+            const payload = {
+                ...values,
+                source: "lp-automacao-n8n",
+                tracking: trackingData
+            }
 
             const response = await fetch('/api/send-email', {
                 method: 'POST',
