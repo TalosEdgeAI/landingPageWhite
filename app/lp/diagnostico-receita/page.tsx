@@ -43,6 +43,7 @@ import {
 } from "@/components/ui/select"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { cn } from "@/lib/utils"
+import { useIsMobile } from "@/hooks/use-mobile"
 
 // Importe seu schema e action reais aqui
 import { contactFormSchema, type ContactFormData } from "@/lib/schemas"
@@ -58,6 +59,7 @@ export default function GoogleAdsLandingPage() {
     const router = useRouter()
     const [isSubmitting, setIsSubmitting] = useState(false)
     const { toast } = useToast()
+    const isMobile = useIsMobile()
 
     const form = useForm<ContactFormData>({
         resolver: zodResolver(contactFormSchema),
@@ -140,122 +142,126 @@ export default function GoogleAdsLandingPage() {
 
                 {/* --- SATÉLITES FLUTUANTES (Desktop Only) --- */}
                 {/* Lógica: Absolute positioning para não afetar o fluxo do texto central */}
-
-                {/* Satélite Esquerdo: O Risco (Storytelling: O Problema) */}
-                <motion.div
-                    className="hidden lg:block absolute left-[5%] top-[40%] xl:top-[45%] z-20 w-64 p-4 rounded-2xl bg-white/80 border border-red-100 shadow-xl backdrop-blur-md"
-                    initial={{ opacity: 0, x: -100, rotate: -10 }}
-                    animate={{
-                        opacity: 1,
-                        x: [0, 5, 0, -5, 0],
-                        y: [0, -5, 0, 5, 0],
-                        rotate: -3,
-                        scale: [1, 1.02, 1, 1.02, 1],
-                    }}
-                    transition={{
-                        opacity: { duration: 0.8, delay: 0.5 },
-                        x: { duration: 8, repeat: Infinity, ease: "easeInOut" },
-                        y: { duration: 8, repeat: Infinity, ease: "easeInOut" },
-                        scale: { duration: 4, repeat: Infinity, ease: "easeInOut" },
-                        rotate: { duration: 0.8, delay: 0.5, type: "spring", stiffness: 50 },
-                    }}
-                >
-                    {/* Header do Card */}
-                    <div className="flex items-center gap-3 mb-3">
-                        <div className="p-2 bg-red-100 rounded-lg text-red-600 shadow-sm">
-                            <ShieldAlert className="w-5 h-5" />
-                        </div>
-                        <div>
-                            <p className="text-[10px] font-bold uppercase text-slate-500 tracking-wider">Alerta Crítico</p>
-                            <p className="text-xs font-bold text-slate-900">Cliente #4922</p>
-                        </div>
-                    </div>
-                    {/* Dado Crítico */}
-                    <div className="flex justify-between items-center text-xs bg-red-50 p-2 rounded-lg border border-red-100">
-                        <span className="text-slate-600 font-medium">Risco de Churn:</span>
-                        <span className="text-red-600 font-black text-sm">94%</span>
-                    </div>
-                </motion.div>
-
-                {/* Satélite Direito: A Solução (Storytelling: A Resolução) */}
-                <motion.div
-                    className="hidden lg:block absolute right-[5%] top-[50%] xl:top-[55%] z-20 w-72 p-5 rounded-3xl bg-[#0B0F19]/95 border border-[#CEFF05]/30 shadow-2xl shadow-[#CEFF05]/10 backdrop-blur-md"
-                    initial={{ opacity: 0, x: 100, rotate: 10 }}
-                    animate={{
-                        opacity: 1,
-                        x: [0, -6, 0, 6, 0],
-                        y: [0, 6, 0, -6, 0],
-                        rotate: 3,
-                        scale: [1, 1.02, 1, 1.02, 1],
-                    }}
-                    transition={{
-                        opacity: { duration: 0.8, delay: 1.2 },
-                        x: { duration: 9, repeat: Infinity, ease: "easeInOut" },
-                        y: { duration: 9, repeat: Infinity, ease: "easeInOut" },
-                        scale: { duration: 5, repeat: Infinity, ease: "easeInOut" },
-                        rotate: { duration: 0.8, delay: 1.2, type: "spring", stiffness: 60 },
-                    }}
-                >
-                    {/* Header do Card */}
-                    <div className="flex items-center justify-between mb-4">
-                        <div className="flex items-center gap-2">
-                            <div className="p-1.5 bg-[#CEFF05] rounded-full text-slate-900 shadow-[0_0_10px_rgba(206,255,5,0.4)]">
-                                <Zap className="w-4 h-4" />
+                {/* Renderização Condicional para Performance Mobile */}
+                {!isMobile && (
+                    <>
+                        {/* Satélite Esquerdo: O Risco (Storytelling: O Problema) */}
+                        <motion.div
+                            className="hidden lg:block absolute left-[5%] top-[40%] xl:top-[45%] z-20 w-64 p-4 rounded-2xl bg-white/80 border border-red-100 shadow-xl backdrop-blur-md"
+                            initial={{ opacity: 0, x: -100, rotate: -10 }}
+                            animate={{
+                                opacity: 1,
+                                x: [0, 5, 0, -5, 0],
+                                y: [0, -5, 0, 5, 0],
+                                rotate: -3,
+                                scale: [1, 1.02, 1, 1.02, 1],
+                            }}
+                            transition={{
+                                opacity: { duration: 0.8, delay: 0.5 },
+                                x: { duration: 8, repeat: Infinity, ease: "easeInOut" },
+                                y: { duration: 8, repeat: Infinity, ease: "easeInOut" },
+                                scale: { duration: 4, repeat: Infinity, ease: "easeInOut" },
+                                rotate: { duration: 0.8, delay: 0.5, type: "spring", stiffness: 50 },
+                            }}
+                        >
+                            {/* Header do Card */}
+                            <div className="flex items-center gap-3 mb-3">
+                                <div className="p-2 bg-red-100 rounded-lg text-red-600 shadow-sm">
+                                    <ShieldAlert className="w-5 h-5" />
+                                </div>
+                                <div>
+                                    <p className="text-[10px] font-bold uppercase text-slate-500 tracking-wider">Alerta Crítico</p>
+                                    <p className="text-xs font-bold text-slate-900">Cliente #4922</p>
+                                </div>
                             </div>
-                            <span className="text-[10px] font-bold uppercase text-[#CEFF05] tracking-widest">Ação Automática</span>
-                        </div>
-                        {/* Status Indicator */}
-                        <div className="flex items-center gap-1.5">
-                            <span className="relative flex h-2 w-2">
-                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                                <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-                            </span>
-                            <span className="text-[10px] font-bold text-green-500">Ativo</span>
-                        </div>
-                    </div>
-                    {/* Dado de Valor */}
-                    <div className="space-y-1">
-                        <p className="text-xs text-slate-400 font-medium">Receita Retida (Mês):</p>
-                        <p className="text-3xl font-mono font-bold text-white tracking-tight">
-                            R$ 14.250<span className="text-slate-500 text-lg">,00</span>
-                        </p>
-                    </div>
-                </motion.div>
+                            {/* Dado Crítico */}
+                            <div className="flex justify-between items-center text-xs bg-red-50 p-2 rounded-lg border border-red-100">
+                                <span className="text-slate-600 font-medium">Risco de Churn:</span>
+                                <span className="text-red-600 font-black text-sm">94%</span>
+                            </div>
+                        </motion.div>
 
-                {/* Satélite Esquerdo Inferior: Credit Risk (Storytelling: Outro Problema) */}
-                <motion.div
-                    className="hidden lg:block absolute left-[8%] top-[60%] xl:top-[65%] z-20 w-64 p-4 rounded-2xl bg-white/80 border border-orange-100 shadow-xl backdrop-blur-md"
-                    initial={{ opacity: 0, y: 50, rotate: 5 }}
-                    animate={{
-                        opacity: 1,
-                        y: 0,
-                        rotate: 2,
-                    }}
-                    transition={{ duration: 0.8, delay: 0.9, type: "spring", stiffness: 50 }}
-                    whileHover={{ y: -5, transition: { duration: 0.3 } }}
-                >
-                    {/* Header do Card */}
-                    <div className="flex items-center gap-3 mb-3">
-                        <div className="p-2 bg-orange-100 rounded-lg text-orange-600 shadow-sm">
-                            <ShieldAlert className="w-5 h-5" />
-                        </div>
-                        <div>
-                            <p className="text-[10px] font-bold uppercase text-slate-500 tracking-wider">Risco de Crédito</p>
-                            <p className="text-xs font-bold text-slate-900">Empresa #7834</p>
-                        </div>
-                    </div>
-                    {/* Dado Crítico */}
-                    <div className="space-y-1.5">
-                        <div className="flex justify-between items-center text-xs bg-orange-50 p-2 rounded-lg border border-orange-100">
-                            <span className="text-slate-600 font-medium">Score de Crédito:</span>
-                            <span className="text-orange-600 font-black text-sm">320</span>
-                        </div>
-                        <div className="flex justify-between items-center text-[10px] text-slate-500">
-                            <span>Prob. Inadimplência:</span>
-                            <span className="font-bold text-orange-600">78%</span>
-                        </div>
-                    </div>
-                </motion.div>
+                        {/* Satélite Direito: A Solução (Storytelling: A Resolução) */}
+                        <motion.div
+                            className="hidden lg:block absolute right-[5%] top-[50%] xl:top-[55%] z-20 w-72 p-5 rounded-3xl bg-[#0B0F19]/95 border border-[#CEFF05]/30 shadow-2xl shadow-[#CEFF05]/10 backdrop-blur-md"
+                            initial={{ opacity: 0, x: 100, rotate: 10 }}
+                            animate={{
+                                opacity: 1,
+                                x: [0, -6, 0, 6, 0],
+                                y: [0, 6, 0, -6, 0],
+                                rotate: 3,
+                                scale: [1, 1.02, 1, 1.02, 1],
+                            }}
+                            transition={{
+                                opacity: { duration: 0.8, delay: 1.2 },
+                                x: { duration: 9, repeat: Infinity, ease: "easeInOut" },
+                                y: { duration: 9, repeat: Infinity, ease: "easeInOut" },
+                                scale: { duration: 5, repeat: Infinity, ease: "easeInOut" },
+                                rotate: { duration: 0.8, delay: 1.2, type: "spring", stiffness: 60 },
+                            }}
+                        >
+                            {/* Header do Card */}
+                            <div className="flex items-center justify-between mb-4">
+                                <div className="flex items-center gap-2">
+                                    <div className="p-1.5 bg-[#CEFF05] rounded-full text-slate-900 shadow-[0_0_10px_rgba(206,255,5,0.4)]">
+                                        <Zap className="w-4 h-4" />
+                                    </div>
+                                    <span className="text-[10px] font-bold uppercase text-[#CEFF05] tracking-widest">Ação Automática</span>
+                                </div>
+                                {/* Status Indicator */}
+                                <div className="flex items-center gap-1.5">
+                                    <span className="relative flex h-2 w-2">
+                                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                                        <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                                    </span>
+                                    <span className="text-[10px] font-bold text-green-500">Ativo</span>
+                                </div>
+                            </div>
+                            {/* Dado de Valor */}
+                            <div className="space-y-1">
+                                <p className="text-xs text-slate-400 font-medium">Receita Retida (Mês):</p>
+                                <p className="text-3xl font-mono font-bold text-white tracking-tight">
+                                    R$ 14.250<span className="text-slate-500 text-lg">,00</span>
+                                </p>
+                            </div>
+                        </motion.div>
+
+                        {/* Satélite Esquerdo Inferior: Credit Risk (Storytelling: Outro Problema) */}
+                        <motion.div
+                            className="hidden lg:block absolute left-[8%] top-[60%] xl:top-[65%] z-20 w-64 p-4 rounded-2xl bg-white/80 border border-orange-100 shadow-xl backdrop-blur-md"
+                            initial={{ opacity: 0, y: 50, rotate: 5 }}
+                            animate={{
+                                opacity: 1,
+                                y: 0,
+                                rotate: 2,
+                            }}
+                            transition={{ duration: 0.8, delay: 0.9, type: "spring", stiffness: 50 }}
+                            whileHover={{ y: -5, transition: { duration: 0.3 } }}
+                        >
+                            {/* Header do Card */}
+                            <div className="flex items-center gap-3 mb-3">
+                                <div className="p-2 bg-orange-100 rounded-lg text-orange-600 shadow-sm">
+                                    <ShieldAlert className="w-5 h-5" />
+                                </div>
+                                <div>
+                                    <p className="text-[10px] font-bold uppercase text-slate-500 tracking-wider">Risco de Crédito</p>
+                                    <p className="text-xs font-bold text-slate-900">Empresa #7834</p>
+                                </div>
+                            </div>
+                            {/* Dado Crítico */}
+                            <div className="space-y-1.5">
+                                <div className="flex justify-between items-center text-xs bg-orange-50 p-2 rounded-lg border border-orange-100">
+                                    <span className="text-slate-600 font-medium">Score de Crédito:</span>
+                                    <span className="text-orange-600 font-black text-sm">320</span>
+                                </div>
+                                <div className="flex justify-between items-center text-[10px] text-slate-500">
+                                    <span>Prob. Inadimplência:</span>
+                                    <span className="font-bold text-orange-600">78%</span>
+                                </div>
+                            </div>
+                        </motion.div>
+                    </>
+                )}
 
 
                 {/* --- CONTEÚDO CENTRAL (Texto & CTA) --- */}
@@ -277,7 +283,7 @@ export default function GoogleAdsLandingPage() {
 
                     {/* 2. Título Principal (H1) */}
                     <motion.h1
-                        className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-slate-900 mb-8 leading-[1.1] tracking-tight"
+                        className="text-[clamp(2.5rem,8vw,4.5rem)] font-extrabold text-slate-900 mb-8 leading-[1.1] tracking-tight"
                         initial={{ opacity: 0, scale: 0.95 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 0.8, delay: 0.2 }}
@@ -307,7 +313,7 @@ export default function GoogleAdsLandingPage() {
                         <Button
                             onClick={scrollToForm}
                             size="lg"
-                            className="bg-[#CEFF05] text-slate-950 hover:bg-[#CEFF05]/90 text-lg px-8 py-7 h-auto rounded-full font-bold shadow-xl shadow-[#CEFF05]/20 hover:scale-105 transition-all w-full sm:w-auto"
+                            className="bg-[#CEFF05] text-slate-950 hover:bg-[#CEFF05]/90 text-lg px-8 py-6 h-auto min-h-[56px] rounded-full font-bold shadow-xl shadow-[#CEFF05]/20 hover:scale-105 transition-all w-full sm:w-auto"
                         >
                             Simular Economia Agora
                             <ArrowRight className="ml-2 h-5 w-5" />
@@ -356,12 +362,12 @@ export default function GoogleAdsLandingPage() {
             </section>
 
             {/* 4. Social Proof & Benchmarks (Argumentos Lógicos) */}
-            <section className="py-24 bg-slate-900 text-white">
-                <div className="container mx-auto px-4 max-w-6xl">
-                    <div className="grid md:grid-cols-2 gap-16 items-center">
+            <section className="py-16 md:py-24 bg-slate-900 text-white">
+                <div className="container mx-auto px-4 lg:px-6 max-w-6xl">
+                    <div className="grid md:grid-cols-2 gap-12 lg:gap-16 items-start md:items-center">
                         <div className="space-y-6">
                             <Badge variant="outline" className="border-[#CEFF05] text-[#CEFF05] uppercase tracking-widest">Resultados Comprovados</Badge>
-                            <h2 className="text-3xl md:text-5xl font-bold leading-tight">
+                            <h2 className="text-[clamp(2rem,4vw,3.5rem)] font-bold leading-tight">
                                 Ciência validada em <br />
                                 <span className="text-[#CEFF05]">Cenários de Estresse.</span>
                             </h2>
@@ -383,8 +389,8 @@ export default function GoogleAdsLandingPage() {
                         </div>
 
                         <div className="grid grid-cols-1 gap-6">
-                            <div className="bg-white/5 border border-white/10 p-8 rounded-3xl flex items-center gap-6">
-                                <div className="h-16 w-16 bg-[#CEFF05] rounded-full flex items-center justify-center text-slate-900">
+                            <div className="bg-white/5 border border-white/10 p-6 md:p-8 rounded-3xl flex items-center gap-6">
+                                <div className="h-16 w-16 bg-[#CEFF05] rounded-full flex items-center justify-center text-slate-900 shrink-0">
                                     <Activity className="h-8 w-8" />
                                 </div>
                                 <div>
@@ -392,8 +398,8 @@ export default function GoogleAdsLandingPage() {
                                     <div className="text-sm text-slate-400 uppercase tracking-wider font-bold">Recuperação de Crédito</div>
                                 </div>
                             </div>
-                            <div className="bg-white/5 border border-white/10 p-8 rounded-3xl flex items-center gap-6">
-                                <div className="h-16 w-16 bg-primary rounded-full flex items-center justify-center text-white">
+                            <div className="bg-white/5 border border-white/10 p-6 md:p-8 rounded-3xl flex items-center gap-6">
+                                <div className="h-16 w-16 bg-primary rounded-full flex items-center justify-center text-white shrink-0">
                                     <UserMinus className="h-8 w-8" />
                                 </div>
                                 <div>
@@ -410,7 +416,7 @@ export default function GoogleAdsLandingPage() {
             <section className="py-16 bg-slate-50">
                 <div className="container mx-auto px-4 max-w-6xl">
                     <div className="text-center mb-12">
-                        <h2 className="text-3xl font-bold text-slate-900">O Motor de Inteligência Talos</h2>
+                        <h2 className="text-[clamp(1.75rem,3.5vw,2.5rem)] font-bold text-slate-900">O Motor de Inteligência Talos</h2>
                         <p className="text-slate-500 mt-3 max-w-2xl mx-auto">
                             Uma suíte completa para proteger e expandir sua receita recorrente.
                         </p>

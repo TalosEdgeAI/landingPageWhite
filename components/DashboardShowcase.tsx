@@ -14,6 +14,7 @@ import {
     ChevronDown,
     ChevronUp
 } from "lucide-react"
+import { useIsMobile } from "@/hooks/use-mobile"
 
 // Definição dos Dados de Cada Modelo
 const tabs = [
@@ -168,6 +169,7 @@ const tabs = [
 
 export default function DashboardShowcase() {
     const [activeTab, setActiveTab] = useState(tabs[0])
+    const isMobile = useIsMobile()
 
     return (
         <section className="pb-24 pt-0 bg-slate-50 overflow-hidden">
@@ -175,10 +177,10 @@ export default function DashboardShowcase() {
 
                 {/* Cabeçalho da Seção */}
                 <div className="text-center mb-16">
-                    <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+                    <h2 className="text-[clamp(2rem,4vw,3rem)] font-bold text-slate-900 mb-4 leading-tight">
                         Visibilidade Total, <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-emerald-600">Entregue na sua Mão.</span>
                     </h2>
-                    <p className="text-slate-500 max-w-2xl mx-auto text-lg">
+                    <p className="text-slate-500 max-w-2xl mx-auto text-base md:text-lg">
                         Nossa IA processa milhões de dados e entrega o que importa: relatórios executivos e dashboards acionáveis para cada pilar financeiro.
                     </p>
                 </div>
@@ -221,47 +223,49 @@ export default function DashboardShowcase() {
                         ))}
 
                         {/* --- INÍCIO: IMPLEMENTAÇÃO DO BOTÃO FLUTUANTE --- */}
-                        <motion.div
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 1 }}
-                            className="relative mt-8 pl-6"
-                        >
-                            <motion.button
-                                className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-primary/30 rounded-full shadow-sm text-xs font-bold text-slate-700 hover:bg-slate-50 transition-colors relative z-10 cursor-default"
-                                animate={{
-                                    y: ["0%", "-8%", "0%"],
-                                    boxShadow: ["0 2px 5px rgba(0,0,0,0.05)", "0 5px 15px rgba(206,255,5,0.2)", "0 2px 5px rgba(0,0,0,0.05)"]
-                                }}
-                                transition={{
-                                    duration: 2,
-                                    repeat: Infinity,
-                                    ease: "easeInOut"
-                                }}
+                        {!isMobile && (
+                            <motion.div
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 1 }}
+                                className="relative mt-8 pl-6"
                             >
-                                <span className="relative flex h-2 w-2">
-                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                                    <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
-                                </span>
-                                Clique nos exemplos de empresa ao lado para ver a análise.
-                            </motion.button>
+                                <motion.button
+                                    className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-primary/30 rounded-full shadow-sm text-xs font-bold text-slate-700 hover:bg-slate-50 transition-colors relative z-10 cursor-default"
+                                    animate={{
+                                        y: ["0%", "-8%", "0%"],
+                                        boxShadow: ["0 2px 5px rgba(0,0,0,0.05)", "0 5px 15px rgba(206,255,5,0.2)", "0 2px 5px rgba(0,0,0,0.05)"]
+                                    }}
+                                    transition={{
+                                        duration: 2,
+                                        repeat: Infinity,
+                                        ease: "easeInOut"
+                                    }}
+                                >
+                                    <span className="relative flex h-2 w-2">
+                                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                                        <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+                                    </span>
+                                    Clique nos exemplos de empresa ao lado para ver a análise.
+                                </motion.button>
 
-                            <svg className="absolute top-full left-2/3 w-16 h-16 text-slate-400/60 pointer-events-none transform -translate-y-2 -translate-x-8" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="2">
-                                <path d="M20,10 Q20,60 80,40" markerEnd="url(#arrowhead)" />
-                                <defs>
-                                    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-                                        <polygon points="0 0, 10 3.5, 0 7" fill="currentColor" />
-                                    </marker>
-                                </defs>
-                            </svg>
-                        </motion.div>
+                                <svg className="absolute top-full left-2/3 w-16 h-16 text-slate-400/60 pointer-events-none transform -translate-y-2 -translate-x-8" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="2">
+                                    <path d="M20,10 Q20,60 80,40" markerEnd="url(#arrowhead)" />
+                                    <defs>
+                                        <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                                            <polygon points="0 0, 10 3.5, 0 7" fill="currentColor" />
+                                        </marker>
+                                    </defs>
+                                </svg>
+                            </motion.div>
+                        )}
                         {/* --- FIM: IMPLEMENTAÇÃO DO BOTÃO FLUTUANTE --- */}
 
                     </div>
 
                     {/* Lado Direito: O Dashboard (Visualização) */}
                     <div className="lg:w-2/3">
-                        <div className={`relative bg-[#0B0F19] rounded-[2rem] border border-slate-800 shadow-2xl p-4 md:p-8 aspect-[4/3] md:aspect-auto flex flex-col overflow-hidden`}>
+                        <div className={`relative bg-[#0B0F19] rounded-[2rem] border border-slate-800 shadow-2xl p-4 md:p-8 min-h-[400px] md:aspect-auto flex flex-col overflow-hidden`}>
 
                             {/* Barra de Ferramentas Fake */}
                             <div className="flex items-center justify-between mb-8 px-2">
@@ -348,8 +352,8 @@ export default function DashboardShowcase() {
                     </div>
 
                 </div>
-            </div>
-        </section>
+            </div >
+        </section >
     )
 }
 

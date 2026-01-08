@@ -91,18 +91,20 @@
 
   body {
     @apply bg-background text-foreground;
+    overflow-x: hidden;
   }
 }
 
 .container {
-  @apply mx-auto px-8 sm:px-16 md:px-24 lg:px-32;
+  @apply mx-auto px-4 sm:px-8 md:px-16 lg:px-24 xl:px-32;
   max-width: 1536px;
 }
 
 .page-frame {
-  @apply mx-auto bg-white shadow-2xl border-x border-border min-h-screen relative overflow-hidden;
+  @apply mx-auto bg-white shadow-2xl border-x-0 md:border-x border-border min-h-screen relative overflow-hidden;
   max-width: 1440px;
 }
+
 /* Atmospheric Neural Background Implementation */
 .hero-neural {
   @apply relative min-h-[80vh] flex items-center justify-center overflow-hidden bg-[var(--bg-deep)] text-white;
@@ -116,7 +118,7 @@
   width: 150%;
   height: 150%;
   transform: translate(-50%, -50%);
-  background-image: 
+  background-image:
     radial-gradient(circle at 20% 30%, var(--glow-tech) 0%, transparent 50%),
     radial-gradient(circle at 80% 70%, var(--glow-secondary) 0%, transparent 50%),
     radial-gradient(circle at 50% 50%, var(--glow-tech) 0%, transparent 60%);
@@ -124,7 +126,7 @@
   opacity: 0.8;
   animation: neuralFlow 25s ease-in-out infinite alternate;
   z-index: 0;
-  filter: blur(80px); 
+  filter: blur(80px);
 }
 
 .hero-content-neural {
@@ -136,9 +138,11 @@
     background-position: 0% 0%;
     transform: translate(-50%, -50%) scale(1);
   }
+
   50% {
     transform: translate(-48%, -52%) scale(1.1);
   }
+
   100% {
     background-position: 100% 100%;
     transform: translate(-50%, -50%) scale(1);

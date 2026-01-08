@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion"
 import { TrendingUp, ShieldCheck, AlertTriangle, Activity, Target, Shield } from "lucide-react"
+import { useIsMobile } from "@/hooks/use-mobile"
 
 export default function FinancialImpactChart() {
     // Configuração das Curvas (SVG Paths)
@@ -19,8 +20,10 @@ export default function FinancialImpactChart() {
     // Desenha a linha verde, desce até a vermelha, volta pela vermelha até o início
     const pathGap = `M 250 ${startY} C 400 ${startY}, 500 150, ${endX} 140 L ${endX} 400 C 500 350, 400 ${startY}, 250 ${startY} Z`
 
+    const isMobile = useIsMobile()
+
     return (
-        <div className="w-full max-w-6xl mx-auto bg-[#0B0F19] rounded-3xl border border-slate-800 shadow-2xl overflow-hidden flex flex-col lg:flex-row">
+        <div className="w-full max-w-6xl mx-auto bg-[#0B0F19] rounded-3xl border border-slate-800 shadow-2xl overflow-hidden flex flex-col lg:flex-row gap-8 lg:gap-0">
 
             {/* --- COLUNA ESQUERDA: O GRÁFICO (70%) --- */}
             <div className="lg:w-[70%] p-6 md:p-10 relative">
@@ -32,8 +35,8 @@ export default function FinancialImpactChart() {
                 </div>
 
                 {/* Container SVG */}
-                <div className="relative w-full h-[400px]">
-                    <svg viewBox="0 0 800 450" className="w-full h-full overflow-visible">
+                <div className="relative w-full flex flex-col lg:block h-auto lg:h-[400px]">
+                    <svg viewBox="0 0 800 450" className="w-full h-[250px] lg:h-full overflow-visible shrink-0 order-2">
                         <defs>
                             {/* Gradiente do Gap de Perda */}
                             <linearGradient id="gradientGap" x1="0" y1="0" x2="0" y2="1">
@@ -104,45 +107,45 @@ export default function FinancialImpactChart() {
 
                     {/* Card Talos (O Herói) */}
                     <motion.div
-                        className="absolute top-0 right-0 bg-[#0B0F19]/90 border border-[#CEFF05] p-4 rounded-xl shadow-[0_0_30px_rgba(206,255,5,0.15)] backdrop-blur-md w-64"
-                        initial={{ opacity: 0, x: 20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 1.8 }}
+                        className="relative mt-4 lg:absolute lg:top-0 lg:right-0 bg-[#0B0F19]/90 border border-[#CEFF05] p-3 lg:p-4 rounded-xl shadow-[0_0_30px_rgba(206,255,5,0.15)] backdrop-blur-md w-[90%] max-w-sm mx-auto lg:w-64 order-1"
+                        initial={isMobile ? { opacity: 0, y: 10 } : { opacity: 0, x: 20 }}
+                        whileInView={isMobile ? { opacity: 1, y: 0 } : { opacity: 1, x: 0 }}
+                        transition={{ delay: isMobile ? 0.2 : 1.8 }}
                     >
-                        <div className="flex items-center gap-2 mb-2 border-b border-white/10 pb-2">
+                        <div className="flex items-center gap-2 mb-1 lg:mb-2 border-b border-white/10 pb-2">
                             <ShieldCheck className="text-[#CEFF05] h-4 w-4" />
-                            <span className="text-[#CEFF05] font-bold text-xs uppercase tracking-widest">~82% Redução de Perdas</span>
+                            <span className="text-[#CEFF05] font-bold text-[10px] lg:text-xs uppercase tracking-widest">~82% Redução de Perdas</span>
                         </div>
                         <div className="space-y-1">
-                            <div className="flex justify-between text-xs text-slate-400">
+                            <div className="flex justify-between text-[10px] lg:text-xs text-slate-400">
                                 <span>Inadimplência Mitigada</span>
                             </div>
                             <div className="flex justify-between items-end">
-                                <span className="text-slate-500 text-[12px]">Perda Residual Estimada:</span>
-                                <span className="text-white font-mono font-bold">-R$ 36k</span>
+                                <span className="text-slate-500 text-[10px] lg:text-[12px]">Perda Residual Estimada:</span>
+                                <span className="text-white font-mono font-bold text-sm">-R$ 36k</span>
                             </div>
                         </div>
                     </motion.div>
 
                     {/* Card Legado (O Vilão) */}
                     <motion.div
-                        className="absolute bottom-[8%] right-[50%] bg-red-950/80 border border-red-500/50 p-4 rounded-xl backdrop-blur-sm w-56"
+                        className="relative mt-4 lg:absolute lg:bottom-[8%] lg:right-[50%] bg-red-950/80 border border-red-500/50 p-3 lg:p-4 rounded-xl backdrop-blur-sm w-[90%] max-w-sm mx-auto lg:w-56 order-3"
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 2 }}
+                        transition={{ delay: isMobile ? 0.4 : 2 }}
                     >
                         <div className="flex items-center gap-2 mb-1">
                             <AlertTriangle className="text-red-500 h-4 w-4" />
-                            <span className="text-red-500 font-bold text-xs uppercase">Perda Realizada</span>
+                            <span className="text-red-500 font-bold text-[10px] lg:text-xs uppercase">Perda Realizada</span>
                         </div>
-                        <div className="text-white font-mono text-2xl font-bold">-R$ 200k</div>
-                        <div className="text-red-200/50 text-[12px] leading-tight mt-1">
+                        <div className="text-white font-mono text-lg lg:text-2xl font-bold">-R$ 200k</div>
+                        <div className="text-red-200/50 text-[10px] lg:text-[12px] leading-tight mt-1">
                             Inadimplência consolidada. Ação tardia.
                         </div>
                     </motion.div>
 
-                    {/* Annotation: Início */}
-                    <motion.div className="absolute top-[35%] left-[28%] w-40"
+                    {/* Annotation: Início (Apenas Desktop para evitar poluição visual no mobile) */}
+                    <motion.div className="hidden lg:block absolute top-[35%] left-[28%] w-40"
                         initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ delay: 1 }}
                     >
                         <p className="text-[#CEFF05] text-[10px] font-bold mb-1">↑ IA Identifica Risco & Inicia Ação Preventiva (Suave)</p>
@@ -154,7 +157,7 @@ export default function FinancialImpactChart() {
             </div>
 
             {/* --- COLUNA DIREITA: KPIs ESTRATÉGICOS (30%) --- */}
-            <div className="lg:w-[30%] bg-[#111625] border-l border-slate-800 p-8 flex flex-col justify-between relative">
+            <div className="lg:w-[30%] bg-[#111625] border-t lg:border-t-0 lg:border-l border-slate-800 p-8 flex flex-col justify-between relative">
                 <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#CEFF05] to-transparent opacity-50" />
 
                 <div className="mb-6">
