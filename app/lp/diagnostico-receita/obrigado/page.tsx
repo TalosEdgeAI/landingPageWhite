@@ -10,9 +10,10 @@ export default function ThankYouPage() {
     // Disparar evento de conversão do Google Ads quando a página carrega
     useEffect(() => {
         // Google Ads Conversion Tracking
+        // NOTA: Substitua 'LABEL_CONVERSAO' pelo rótulo de conversão do Google Ads
         if (typeof window !== 'undefined' && (window as any).gtag) {
             (window as any).gtag('event', 'conversion', {
-                'send_to': 'AW-SEU_ID_AQUI/LABEL_CONVERSAO_AQUI'
+                'send_to': 'AW-17848976773/LABEL_CONVERSAO'
             });
         }
 
