@@ -41,6 +41,12 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select"
+import {
+    Accordion,
+    AccordionContent,
+    AccordionItem,
+    AccordionTrigger,
+} from "@/components/ui/accordion"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { cn } from "@/lib/utils"
 import { useIsMobile } from "@/hooks/use-mobile"
@@ -484,6 +490,64 @@ export default function GoogleAdsLandingPage() {
             {/* Novo: Dashboard Showcase (Visibilidade Total) */}
             <DashboardShowcase />
 
+            {/* 5.5 FAQ Section (Matadora de Objeções Financeiras) */}
+            <section className="py-20 bg-slate-50 border-t border-slate-200">
+                <div className="container mx-auto px-4 max-w-3xl">
+                    <div className="text-center mb-12">
+                        <h2 className="text-3xl font-bold text-slate-900 mb-4">Perguntas Frequentes</h2>
+                        <p className="text-slate-500">
+                            Entenda como garantimos segurança jurídica e técnica para seus dados financeiros.
+                        </p>
+                    </div>
+
+                    <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-6 md:p-8">
+                        <Accordion type="single" collapsible className="w-full">
+
+                            {/* Pergunta 1: Segurança (Crítica) */}
+                            <AccordionItem value="item-1" className="border-b-slate-100">
+                                <AccordionTrigger className="text-base md:text-lg font-bold text-slate-800 hover:text-primary hover:no-underline px-2 text-left">
+                                    Como a Talos garante a segurança dos meus dados sensíveis?
+                                </AccordionTrigger>
+                                <AccordionContent className="text-slate-600 leading-relaxed px-2 text-base">
+                                    Segurança é nossa prioridade zero. Operamos sob rigoroso <strong>sigilo (NDA)</strong> assinado antes do início. Seus dados são processados em ambiente isolado, com criptografia de ponta a ponta e anonimização de dados pessoais (LGPD). Nossos modelos leem padrões comportamentais, sem expor a identidade final do seu cliente.
+                                </AccordionContent>
+                            </AccordionItem>
+
+                            {/* Pergunta 2: Maturidade de Dados */}
+                            <AccordionItem value="item-2" className="border-b-slate-100">
+                                <AccordionTrigger className="text-base md:text-lg font-bold text-slate-800 hover:text-primary hover:no-underline px-2 text-left">
+                                    Meus dados não estão organizados. O diagnóstico funciona?
+                                </AccordionTrigger>
+                                <AccordionContent className="text-slate-600 leading-relaxed px-2 text-base">
+                                    <strong>Sim.</strong> Parte do valor do Diagnóstico Talos é justamente a auditoria e higienização da sua base. Nossos algoritmos conseguem ingerir dados de planilhas diversas, ERPs legados ou bancos de dados desestruturados e encontrar padrões de risco onde o olho humano só vê caos.
+                                </AccordionContent>
+                            </AccordionItem>
+
+                            {/* Pergunta 3: O Entregável */}
+                            <AccordionItem value="item-3" className="border-b-slate-100">
+                                <AccordionTrigger className="text-base md:text-lg font-bold text-slate-800 hover:text-primary hover:no-underline px-2 text-left">
+                                    O que recebo ao final do diagnóstico?
+                                </AccordionTrigger>
+                                <AccordionContent className="text-slate-600 leading-relaxed px-2 text-base">
+                                    Você não recebe apenas um relatório teórico. Entregamos uma <strong>"Save List"</strong>: uma lista priorizada dos clientes com maior risco imediato de churn ou inadimplência, junto com uma projeção matemática de quanto dinheiro pode ser recuperado nos próximos 90 dias (ROI Estimado).
+                                </AccordionContent>
+                            </AccordionItem>
+
+                            {/* Pergunta 4: Integração */}
+                            <AccordionItem value="item-4" className="border-b-0">
+                                <AccordionTrigger className="text-base md:text-lg font-bold text-slate-800 hover:text-primary hover:no-underline px-2 text-left">
+                                    Preciso trocar meu ERP ou CRM atual?
+                                </AccordionTrigger>
+                                <AccordionContent className="text-slate-600 leading-relaxed px-2 text-base">
+                                    <strong>Não.</strong> A Talos atua como uma camada de inteligência que se conecta ao seu sistema atual (seja ele SAP, Totvs, Salesforce ou proprietário). Nós lemos os dados, processamos a inteligência e devolvemos os scores de risco e alertas diretamente onde sua equipe já trabalha.
+                                </AccordionContent>
+                            </AccordionItem>
+
+                        </Accordion>
+                    </div>
+                </div>
+            </section>
+
             {/* 6. FORMULÁRIO DE CONVERSÃO (O Grande Final) */}
             <section id="diagnostico-form" className="py-24 bg-white relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-1/2 h-full bg-slate-50 skew-x-12 translate-x-32 hidden lg:block" />
@@ -668,6 +732,23 @@ export default function GoogleAdsLandingPage() {
                     Talos Intelligence &copy; 2025
                 </p>
             </footer>
+
+            {/* Sticky CTA Mobile */}
+            {isMobile && (
+                <motion.div
+                    initial={{ y: 100 }}
+                    animate={{ y: 0 }}
+                    className="fixed bottom-0 left-0 right-0 p-4 bg-white border-t border-slate-200 z-50 flex items-center justify-between shadow-[0_-5px_20px_rgba(0,0,0,0.05)]"
+                >
+                    <div className="flex flex-col">
+                        <span className="text-xs font-bold text-slate-500 uppercase">Pare de perder tempo</span>
+                        <span className="text-sm font-bold text-slate-900">Automatize hoje</span>
+                    </div>
+                    <Button onClick={scrollToForm} size="sm" className="bg-[#CEFF05] text-slate-900 font-bold hover:bg-[#CEFF05]/90">
+                        Falar com Especialista
+                    </Button>
+                </motion.div>
+            )}
 
         </div>
     )
