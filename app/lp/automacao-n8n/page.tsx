@@ -7,20 +7,20 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import {
     CheckCircle2,
-    AlertTriangle, // Trocado de ShieldAlert para AlertTriangle (mais comum para erros de sistema)
-    Clock, // Novo para tempo
+    AlertTriangle,
+    Clock,
     ArrowRight,
     ShieldCheck,
-    Bot, // Novo para IA
-    Workflow, // Novo para Automação
-    Cpu, // Novo para processamento
+    Bot,
+    Workflow,
+    Cpu,
     Database,
     Zap,
     BarChart3,
     Loader2,
-    FileSpreadsheet, // Para representar planilhas/manual
-    Network, // Para integrações
-    MessageSquare, // Para atendimento
+    FileSpreadsheet,
+    Network,
+    MessageSquare,
     Lock
 } from "lucide-react"
 import Link from "next/link"
@@ -45,18 +45,14 @@ import {
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { useIsMobile } from "@/hooks/use-mobile"
 
-// Reutilizando seus schemas existentes (Assumindo que são genéricos o suficiente, senão criar novos)
 import { contactFormSchema, type ContactFormData } from "@/lib/schemas"
 import { useToast } from "@/hooks/use-toast"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faBuilding } from "@fortawesome/free-regular-svg-icons"
 
-// Componentes visuais (Você pode manter os mesmos ou pedir para criar versões 'Automation' deles)
-// Para este exemplo, usarei placeholders visuais caso os componentes originais sejam muito específicos financeiramente
 import AutomationDashboardShowcase from "@/components/AutomationDashboardShowcase"
 
 import { Suspense } from "react"
-// ...
 
 export default function AutomationLandingPage() {
     return (
@@ -69,7 +65,6 @@ export default function AutomationLandingPage() {
 function AutomationLandingPageContent() {
     const router = useRouter()
     const searchParams = useSearchParams()
-    // ...
     const [isSubmitting, setIsSubmitting] = useState(false)
     const { toast } = useToast()
     const isMobile = useIsMobile()
@@ -89,8 +84,6 @@ function AutomationLandingPageContent() {
     async function onSubmit(values: ContactFormData) {
         setIsSubmitting(true)
         try {
-            // Ajustar o endpoint ou adicionar um campo 'source' para saber que veio da LP de Automação
-            // Ajustar o endpoint ou adicionar um campo 'source' para saber que veio da LP de Automação
             const trackingData = {
                 utm_source: searchParams.get("utm_source"),
                 utm_medium: searchParams.get("utm_medium"),
@@ -327,6 +320,66 @@ function AutomationLandingPageContent() {
                             <span>Integração com +1000 Apps</span>
                         </div>
                     </motion.div>
+
+                    {/* --- LOGO MARQUEE --- */}
+                    <motion.div
+                        className="mt-16 w-full max-w-5xl mx-auto overflow-hidden relative"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 1, delay: 0.8 }}
+                    >
+                        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-slate-50 via-slate-50/80 to-transparent z-10" />
+                        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-slate-50 via-slate-50/80 to-transparent z-10" />
+
+                        <div className="flex w-full">
+                            <motion.div
+                                className="flex gap-16 items-center whitespace-nowrap px-8"
+                                animate={{ x: ["0%", "-50%"] }}
+                                transition={{ repeat: Infinity, ease: "linear", duration: 40 }}
+                                style={{ width: "max-content" }}
+                            >
+                                {[
+                                    { name: "Omie", domain: "omie.com.br" },
+                                    { name: "Salesforce", domain: "salesforce.com" },
+                                    { name: "ContaAzul", domain: "contaazul.com" },
+                                    { name: "HubSpot", domain: "hubspot.com" },
+                                    { name: "Totvs", domain: "totvs.com" },
+                                    { name: "Pipedrive", domain: "pipedrive.com" },
+                                    { name: "Bling", domain: "bling.com.br" },
+                                    { name: "RD Station", domain: "rdstation.com" },
+                                    { name: "Zendesk", domain: "zendesk.com" },
+                                    { name: "Slack", domain: "slack.com" },
+                                    { name: "Asana", domain: "asana.com" },
+                                    { name: "Google", domain: "google.com" },
+                                    // Duplicate for infinite loop
+                                    { name: "Omie", domain: "omie.com.br" },
+                                    { name: "Salesforce", domain: "salesforce.com" },
+                                    { name: "ContaAzul", domain: "contaazul.com" },
+                                    { name: "HubSpot", domain: "hubspot.com" },
+                                    { name: "Totvs", domain: "totvs.com" },
+                                    { name: "Pipedrive", domain: "pipedrive.com" },
+                                    { name: "Bling", domain: "bling.com.br" },
+                                    { name: "RD Station", domain: "rdstation.com" },
+                                    { name: "Zendesk", domain: "zendesk.com" },
+                                    { name: "Slack", domain: "slack.com" },
+                                    { name: "Asana", domain: "asana.com" },
+                                    { name: "Google", domain: "google.com" },
+                                ].map((tool, index) => (
+                                    <div key={index} className="flex flex-row items-center gap-4 px-6 py-3 rounded-xl bg-white/60 border border-slate-100 shadow-sm hover:shadow-md hover:bg-white transition-all duration-300 cursor-pointer group whitespace-nowrap min-w-max">
+                                        <img
+                                            src={`https://unavatar.io/${tool.domain}?fallback=${`https://www.google.com/s2/favicons?domain=${tool.domain}&sz=128`}`}
+                                            alt={`${tool.name} logo`}
+                                            className="h-6 w-6 object-contain grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300 shrink-0"
+                                            onError={(e) => {
+                                                e.currentTarget.style.display = 'none';
+                                            }}
+                                        />
+                                        <span className="text-sm font-bold text-slate-500 group-hover:text-slate-900 transition-colors">{tool.name}</span>
+                                    </div>
+                                ))}
+                            </motion.div>
+                        </div>
+                    </motion.div>
                 </div>
             </section>
 
@@ -338,8 +391,6 @@ function AutomationLandingPageContent() {
                         <h3 className="text-3xl md:text-4xl font-bold text-slate-900">Por que escalar com pessoas é caro e lento.</h3>
                     </div>
 
-                    {/* Placeholder para um gráfico visual de "Erro Humano vs Volume" ou similar */}
-                    {/* Se você não tiver o componente Chart pronto para isso, use um visual estático ou texto impactante */}
                     <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
                         <div className="p-8 bg-slate-50 rounded-2xl border border-slate-100">
                             <Clock className="w-12 h-12 mx-auto text-slate-400 mb-4" />
@@ -359,6 +410,11 @@ function AutomationLandingPageContent() {
                             <h4 className="text-4xl font-black text-slate-900 mb-2">24/7</h4>
                             <p className="text-sm text-slate-500">É o tempo que sua operação <strong>deveria</strong> estar rodando.</p>
                         </div>
+                    </div>
+
+                    {/* --- ROI CALCULATOR --- */}
+                    <div className="mt-20 max-w-3xl mx-auto">
+                        <ROICalculator />
                     </div>
 
                     <div className="mt-12 flex justify-center">
@@ -682,6 +738,76 @@ function AutomationLandingPageContent() {
                 </p>
             </footer>
 
+        </div>
+    )
+}
+
+function ROICalculator() {
+    const [hours, setHours] = useState(2)
+    const [rate, setRate] = useState(50)
+
+    // Calculo: Horas * Custo * 252 dias úteis (aprox)
+    const yearlyLoss = hours * rate * 252
+
+    return (
+        <div className="bg-slate-900 rounded-3xl p-8 md:p-12 shadow-2xl border border-slate-800 relative overflow-hidden text-center md:text-left">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-[#CEFF05] blur-[100px] opacity-10 pointer-events-none" />
+
+            <div className="grid md:grid-cols-2 gap-12 items-center relative z-10">
+                <div className="space-y-8">
+                    <div>
+                        <h4 className="text-2xl font-bold text-white mb-2">Calculadora de Desperdício</h4>
+                        <p className="text-slate-400 text-sm">Descubra quanto sua empresa perde por ano com tarefas manuais.</p>
+                    </div>
+
+                    <div className="space-y-6">
+                        <div className="space-y-2">
+                            <div className="flex justify-between">
+                                <label className="text-xs font-bold uppercase text-[#CEFF05] tracking-widest">Horas Manuais / Dia</label>
+                                <span className="text-white font-mono font-bold">{hours}h</span>
+                            </div>
+                            <input
+                                type="range"
+                                min="1" max="24" step="1"
+                                value={hours}
+                                onChange={(e) => setHours(Number(e.target.value))}
+                                className="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-[#CEFF05]"
+                            />
+                            <p className="text-xs text-slate-500">Tempo total da equipe gasto em tarefas repetitivas.</p>
+                        </div>
+
+                        <div className="space-y-2">
+                            <div className="flex justify-between">
+                                <label className="text-xs font-bold uppercase text-[#CEFF05] tracking-widest">Custo Médio / Hora</label>
+                                <span className="text-white font-mono font-bold">R$ {rate}</span>
+                            </div>
+                            <input
+                                type="range"
+                                min="20" max="200" step="5"
+                                value={rate}
+                                onChange={(e) => setRate(Number(e.target.value))}
+                                className="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-[#CEFF05]"
+                            />
+                            <p className="text-xs text-slate-500">Salário médio + encargos da equipe envolvida.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="bg-slate-800/50 rounded-2xl p-8 border border-white/5 flex flex-col items-center justify-center text-center space-y-2">
+                    <span className="text-slate-400 text-sm font-medium uppercase tracking-wider">Você perde aproximadamente</span>
+                    <div className="text-5xl md:text-6xl font-black text-red-500 tracking-tighter">
+                        {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 }).format(yearlyLoss)}
+                    </div>
+                    <span className="text-slate-500 text-sm">por ano em produtividade.</span>
+
+                    <div className="pt-6 w-full">
+                        <div className="h-px w-full bg-white/10 mb-6" />
+                        <p className="text-white/80 text-sm leading-relaxed">
+                            Com <strong className="text-[#CEFF05]">Talos Automation</strong>, você recupera esse capital e reinveste em crescimento.
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }
