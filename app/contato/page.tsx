@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, Suspense } from "react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { CheckCircle2, Loader2, ShieldCheck, Mail, Building2, User, DollarSign, Target, HeartHandshake, Phone } from "lucide-react"
@@ -27,7 +27,7 @@ import { useRouter, useSearchParams } from "next/navigation"
 import { useToast } from "@/hooks/use-toast"
 import Link from "next/link"
 
-export default function ContatoPage() {
+function ContatoContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -368,5 +368,13 @@ export default function ContatoPage() {
         </div>
       </div>
     </div>
+  )
+}
+
+export default function ContatoPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><Loader2 className="w-8 h-8 animate-spin" /></div>}>
+      <ContatoContent />
+    </Suspense>
   )
 }
