@@ -1,8 +1,8 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
-import { motion } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import {
@@ -42,6 +42,12 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select"
+import {
+    Accordion,
+    AccordionContent,
+    AccordionItem,
+    AccordionTrigger,
+} from "@/components/ui/accordion"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { useIsMobile } from "@/hooks/use-mobile"
 
@@ -551,6 +557,58 @@ function AutomationLandingPageContent() {
             {/* Showcase Visual - Reutilizando ou adaptando */}
             <AutomationDashboardShowcase />
 
+            {/* 5.5 FAQ Section (Matadora de Objeções) */}
+            <section className="py-20 bg-slate-50 border-t border-slate-200">
+                <div className="container mx-auto px-4 max-w-3xl">
+                    <div className="text-center mb-12">
+                        <h2 className="text-3xl font-bold text-slate-900 mb-4">Dúvidas Frequentes</h2>
+                        <p className="text-slate-500">
+                            Elimine barreiras e entenda como operamos com transparência e segurança.
+                        </p>
+                    </div>
+
+                    <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-6 md:p-8">
+                        <Accordion type="single" collapsible className="w-full">
+                            <AccordionItem value="item-1" className="border-b-slate-100">
+                                <AccordionTrigger className="text-base md:text-lg font-bold text-slate-800 hover:text-primary hover:no-underline px-2">
+                                    Preciso de programadores na minha equipe?
+                                </AccordionTrigger>
+                                <AccordionContent className="text-slate-600 leading-relaxed px-2 text-base">
+                                    <strong>Não.</strong> A Talos gerencia toda a infraestrutura e manutenção dos fluxos. Sua equipe apenas utiliza as automações, sem precisar entender de código ou contratar desenvolvedores.
+                                </AccordionContent>
+                            </AccordionItem>
+
+                            <AccordionItem value="item-2" className="border-b-slate-100">
+                                <AccordionTrigger className="text-base md:text-lg font-bold text-slate-800 hover:text-primary hover:no-underline px-2">
+                                    E se a API do meu ERP mudar?
+                                </AccordionTrigger>
+                                <AccordionContent className="text-slate-600 leading-relaxed px-2 text-base">
+                                    <strong>Nós monitoramos e corrigimos.</strong> Temos sistemas de alerta 24/7. Se uma API atualizar ou quebrar, nossos alertas disparam e corrigimos a integração imediatamente, garantindo a continuidade da sua operação.
+                                </AccordionContent>
+                            </AccordionItem>
+
+                            <AccordionItem value="item-3" className="border-b-slate-100">
+                                <AccordionTrigger className="text-base md:text-lg font-bold text-slate-800 hover:text-primary hover:no-underline px-2">
+                                    Meus dados ficam salvos com vocês?
+                                </AccordionTrigger>
+                                <AccordionContent className="text-slate-600 leading-relaxed px-2 text-base">
+                                    <strong>Não.</strong> Toda a automação roda em infraestrutura isolada e segura. Seus dados trafegam de ponta a ponta (ex: do seu CRM para seu ERP) sem serem armazenados em nossos servidores, garantindo conformidade total com a LGPD e segurança da informação.
+                                </AccordionContent>
+                            </AccordionItem>
+
+                            <AccordionItem value="item-4" className="border-b-0">
+                                <AccordionTrigger className="text-base md:text-lg font-bold text-slate-800 hover:text-primary hover:no-underline px-2">
+                                    Vocês oferecem suporte?
+                                </AccordionTrigger>
+                                <AccordionContent className="text-slate-600 leading-relaxed px-2 text-base">
+                                    <strong>Sim.</strong> O suporte da Talos já está incluso no projeto. Nossa equipe técnica acompanha o desempenho das automações e oferece atendimento rápido para qualquer dúvida ou ajuste necessário, garantindo que sua operação nunca pare.
+                                </AccordionContent>
+                            </AccordionItem>
+                        </Accordion>
+                    </div>
+                </div>
+            </section>
+
             {/* 6. FORMULÁRIO DE CONVERSÃO */}
             <section id="consultoria-form" className="py-24 bg-white relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-1/2 h-full bg-slate-50 skew-x-12 translate-x-32 hidden lg:block" />
@@ -738,6 +796,8 @@ function AutomationLandingPageContent() {
                 </p>
             </footer>
 
+            <StickyMobileCTA onClick={scrollToForm} />
+
         </div>
     )
 }
@@ -798,7 +858,7 @@ function ROICalculator() {
                     <div className="text-5xl md:text-6xl font-black text-red-500 tracking-tighter">
                         {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 }).format(yearlyLoss)}
                     </div>
-                    <span className="text-slate-500 text-sm">por ano em produtividade.</span>
+                    <span className="text-slate-400 text-sm font-medium uppercase tracking-wider">por ano em tarefas manuais.</span>
 
                     <div className="pt-6 w-full">
                         <div className="h-px w-full bg-white/10 mb-6" />
@@ -809,5 +869,45 @@ function ROICalculator() {
                 </div>
             </div>
         </div>
+    )
+}
+
+function StickyMobileCTA({ onClick }: { onClick: () => void }) {
+    const [isVisible, setIsVisible] = useState(false)
+
+    useEffect(() => {
+        const handleScroll = () => {
+            // Show after scrolling past 600px (approx first fold)
+            if (window.scrollY > 600) {
+                setIsVisible(true)
+            } else {
+                setIsVisible(false)
+            }
+        }
+
+        window.addEventListener("scroll", handleScroll)
+        return () => window.removeEventListener("scroll", handleScroll)
+    }, [])
+
+    return (
+        <AnimatePresence>
+            {isVisible && (
+                <motion.div
+                    initial={{ y: 100, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    exit={{ y: 100, opacity: 0 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                    className="fixed bottom-4 left-4 right-4 z-50 md:hidden"
+                >
+                    <Button
+                        onClick={onClick}
+                        className="w-full bg-[#CEFF05] text-slate-900 border-2 border-slate-900 shadow-[4px_4px_0px_0px_rgba(15,23,42,1)] rounded-xl py-6 font-bold text-lg hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(15,23,42,1)] transition-all"
+                    >
+                        Agendar Consultoria
+                        <ArrowRight className="ml-2 h-5 w-5" />
+                    </Button>
+                </motion.div>
+            )}
+        </AnimatePresence>
     )
 }
