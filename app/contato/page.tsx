@@ -23,11 +23,13 @@ import {
 } from "@/components/ui/select"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { contactFormSchema, type ContactFormData } from "@/lib/schemas"
-import { submitContactForm } from "@/app/actions/contact"
+import { useRouter, useSearchParams } from "next/navigation"
 import { useToast } from "@/hooks/use-toast"
 import Link from "next/link"
 
 export default function ContatoPage() {
+  const router = useRouter()
+  const searchParams = useSearchParams()
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
   const { toast } = useToast()
@@ -48,18 +50,41 @@ export default function ContatoPage() {
   async function onSubmit(values: ContactFormData) {
     setIsSubmitting(true)
     try {
-      const result = await submitContactForm(values)
-      if (result.success) {
+      const trackingData = {
+        utm_source: searchParams.get("utm_source"),
+        utm_medium: searchParams.get("utm_medium"),
+        utm_campaign: searchParams.get("utm_campaign"),
+        oferta_origem: searchParams.get("oferta"),
+      }
+
+      const payload = {
+        ...values,
+        source: "contato-site-principal",
+        tracking: trackingData
+      }
+
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+
+      const result = await response.json()
+
+      if (response.ok && result.success) {
         setIsSuccess(true)
         toast({
           title: "Sinal recebido.",
           description: "Nossos especialistas analisarão seus dados e entrarão em contato.",
         })
+        // Opcional: Redirecionar se desejar, mas o código original usava um estado de sucesso visual na mesma página.
+        // Para manter "espelhado" na lógica de envio, usamos o fetch.
+        // Para manter "design atual", usamos a renderização condicional existente.
       } else {
         toast({
           variant: "destructive",
           title: "Erro ao enviar",
-          description: result.message,
+          description: result.error || "Tente novamente.",
         })
       }
     } catch (error) {
